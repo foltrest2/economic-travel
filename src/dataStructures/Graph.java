@@ -16,8 +16,19 @@ public class Graph {
 	}
 	
 	public boolean addVertex(String name) {
-		
-		return false;
+		if (vertices.contains(name)) {
+			return false;
+		}
+		else {
+			vertices.put(name, new Vertex(name));
+			return true;
+		}
+	}
+	
+	public void addEdge(Vertex v1, Vertex v2, int time, int cost, int [] transport) {
+		Edge e = new Edge(v1, v2, time, cost, transport);
+		edges.put(e.hashCode(), e);
+		v1.addConnection(v1, v2, e);
 	}
 
 	public HashTable<Integer, Edge> getEdges() {
