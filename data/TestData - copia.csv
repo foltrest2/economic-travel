@@ -1,0 +1,22 @@
+﻿NameV1;NameV2;Time;Cost;Mio;Taxi;App;;;;;;;;;;;;;
+El Bochinche;Torre de Cali;18;8056;0;1;0;;;;;;;;;;;;;
+Torre de Cali;Zoologico;6;8188;1;0;1;;;;;;;;;;;;;
+El Bochinche;La 14;21;5747;0;0;1;;;;;;;;;;;;;
+Intercontinental;Portada al mar;14;8139;0;1;1;;;;;;;;;;;;;
+Torre de Cali;Portada al mar;16;7496;0;1;1;;;;;;;;;;;;;
+La 14;Chipichape;10;6577;1;0;0;;;;;;;;;;;;;
+Pacific mall;Chipichape;16;8240;0;1;0;;;;;;;;;;;;;
+Platillos voladores;La 14;16;8885;1;0;0;;;;;;;;;;;;;
+Intercontinental;El centro;17;6294;1;1;1;;;;;;;;;;;;;
+El centro;Zoologico;17;6294;0;1;1;;;;;;;;;;;;;
+;;;;;;;;;;v1;v2;v3;v4;v5;v6;v7;v8;v9;v10
+;;;;;;;;Portada al mar;v1;0;;;;;;;;;
+;;;;;;;;Pacific mall;v2;;0;;;;;;;;16
+;;;;;;;;Platillos voladores;v3;;;0;;16;;;;;
+;;;;;;;;Torre de Cali;v4;16;;;0;;;6;;;
+;;;;;;;;La 14;v5;;;;;0;;;;;10
+;;;;;;;;Centro;v6;;;;;;0;17;;;
+;;;;;;;;Zoologico;v7;;;;;;;0;;;
+;;;;;;;;El Bochinche;v8;;;;18;21;;;0;;
+;;;;;;;;Intercontinental;v9;14;;;;;17;;;0;
+;;;;;;;;Chipichape;v10;;;;;;;;;;0
