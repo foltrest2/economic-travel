@@ -39,6 +39,42 @@ public class Graph {
 		return m;
 	}
 
+	public int[][] floydWarshall(int graph[][], int size) {
+		int result[][] = new int[size][size];
+		for (int i = 0; i < result.length; i++) {
+			for (int j = 0; j < result.length; j++) {
+				result[i][j] = 99999;
+			}
+		}
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (graph[i][j] == 0) {
+					if (i == j) {
+						result[i][j] = 0;
+					}
+				}else {
+					result[i][j] = graph[i][j];
+				}
+			}
+		}
+		for (int k = 0; k < size; k++) {
+			for (int i = 0; i < size; i++) {
+				for (int j = 0; j < size; j++) {
+					if (result[i][k] + result[k][j] < result[i][j])
+						result[i][j] = result[i][k] + result[k][j];
+				}
+			}
+		}
+		for (int i = 0; i < result.length; i++) {
+			for (int j = 0; j < result.length; j++) {
+				if(result[i][j] == 99999) {
+					result[i][j] = 0;
+				}
+			}
+		}
+		return result;
+	}
+
 	public boolean addVertex(String name, int indicator) {
 		if (vertices.containsKey(name)) {
 			return false;

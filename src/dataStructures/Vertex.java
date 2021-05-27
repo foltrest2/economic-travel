@@ -27,12 +27,8 @@ public class Vertex {
 		return e;
 	}
 
-	public boolean addNeighbour(String name) {
-		return (neighbours.contains(new Vertex(name, indicator))) ? neighbours.add(new Vertex(name, indicator)) : false;
-	}
-
-	public boolean deleteNeighbour(String name) {
-		return (neighbours.contains(new Vertex(name, indicator))) ? neighbours.remove(new Vertex(name, indicator)) : false;
+	public boolean addNeighbour(Vertex v) {
+		return !(neighbours.contains(v)) ? neighbours.add(v) : false;
 	}
 
 	public boolean addConnection(Vertex v1, Vertex v2, Edge e) {
@@ -40,12 +36,14 @@ public class Vertex {
 			return false;
 		}
 		else {
-			v1.addNeighbour(v2.name);
-			v2.addNeighbour(v1.name);
+			v1.addNeighbour(v2);
+			v2.addNeighbour(v1);
+			v1.edges.add(e);
+			v2.edges.add(e);
 			return true;
 		}
 	}
-
+	
 	public String getName() {
 		return name;
 	}
