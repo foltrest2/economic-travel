@@ -28,7 +28,7 @@ public class Vertex {
 	}
 
 	public boolean addNeighbour(String name) {
-		return (neighbours.contains(new Vertex(name, indicator))) ? neighbours.add(new Vertex(name, indicator)) : false;
+		return !(neighbours.contains(new Vertex(name, indicator))) ? neighbours.add(new Vertex(name, indicator)) : false;
 	}
 
 	public boolean deleteNeighbour(String name) {
