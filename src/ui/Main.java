@@ -13,7 +13,7 @@ public class Main {
 			tg.importData();
 			tg.printMatrix();
 			System.out.println();
-			tg.floydWarshal();
+			tg.floydWarshall();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (EmptyQueueException e) {

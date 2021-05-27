@@ -86,7 +86,7 @@ public class TravelGuide {
 		}
 	}
 	
-	public void floydWarshal() throws EmptyQueueException {
+	public void floydWarshall() throws EmptyQueueException {
 		int [][] m = cali.floydWarshall(cali.VertexToMatrixTime(), cali.VertexToMatrixTime().length);
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m.length; j++) {
