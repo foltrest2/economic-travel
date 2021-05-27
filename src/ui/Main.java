@@ -12,6 +12,8 @@ public class Main {
 		 try {
 			tg.importData();
 			tg.printMatrix();
+			System.out.println();
+			tg.floydWarshal();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (EmptyQueueException e) {
