@@ -12,8 +12,9 @@ import exceptions.EmptyQueueException;
 public class TravelGuide {
 	
 	private final static String SEPARATOR = ",";
-	public final static String SAVE_PATH_FILE = "data/TestData.csv";
-
+//	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
+	public final static String SAVE_PATH_FILE = "data/CaliGraphMap.csv";
+	
 	private Graph cali;
 
 	public TravelGuide() {
@@ -94,5 +95,9 @@ public class TravelGuide {
 			}
 			System.out.println("\n");
 		}
+	}
+	
+	public void primMST() throws EmptyQueueException {
+		System.out.println(cali.primMST(cali.VertexToMatrixTime(), cali.VertexToMatrixTime().length));	
 	}
 }
