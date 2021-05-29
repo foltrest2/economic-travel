@@ -6,12 +6,15 @@ public class Vertex {
 
 	private String name;
 	private int indicator;
+	private String color;
+//	private Vertex predecessor;
 	private ArrayList<Vertex> neighbours;
 	private ArrayList<Edge> edges;
 
 	public Vertex(String name, int indicator) {
 		this.name = name;
 		this.indicator = indicator;
+		this.color = "White";
 		neighbours = new ArrayList<>();
 		edges = new ArrayList<>();
 	}
@@ -51,13 +54,20 @@ public class Vertex {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public int getIndicator() {
 		return indicator;
 	}
 
 	public void setIndicator(int indicator) {
 		this.indicator = indicator;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public ArrayList<Vertex> getNeighbours() {

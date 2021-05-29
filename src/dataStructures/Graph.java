@@ -1,5 +1,6 @@
 package dataStructures;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import exceptions.EmptyQueueException;
@@ -32,6 +33,31 @@ public class Graph {
 					Edge e = v.searchEdge(v, v.getNeighbours().get(j));
 					if (e != null) {
 						m[v.getIndicator()][v.getNeighbours().get(j).getIndicator()] = e.getTime();
+					}
+				}
+			}
+		}
+		return m;
+	}
+	
+	public int [][] VertexToMatrixCost() throws EmptyQueueException{
+		int [][] m = new int [vertices.size()][vertices.size()];
+		Queue<String> q = new Queue<>();
+		for (String v : vertices.keySet()) {
+			q.enqueue(v);
+		}
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m.length; j++) {
+				m[i][j] = 0;
+			}
+		}
+		for (int i = 0; i < vertices.size(); i++) {
+			Vertex v = vertices.get(q.dequeue());
+			for (int j = 0; j < vertices.size(); j++) {	
+				if (j < v.getNeighbours().size()) {
+					Edge e = v.searchEdge(v, v.getNeighbours().get(j));
+					if (e != null) {
+						m[v.getIndicator()][v.getNeighbours().get(j).getIndicator()] = e.getCost();
 					}
 				}
 			}
@@ -75,6 +101,10 @@ public class Graph {
 		return result;
 	}
 
+	public ArrayList<Edge> prim(int [][] graph){
+		return null;
+	}
+	
 	public boolean addVertex(String name, int indicator) {
 		if (vertices.containsKey(name)) {
 			return false;
