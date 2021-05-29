@@ -75,6 +75,62 @@ public class Graph {
 		return result;
 	}
 
+
+	public int minKey(int key[], Boolean mstSet[], int size){
+
+		int min = Integer.MAX_VALUE, min_index = -1;
+
+		for (int v = 0; v < size; v++) {
+			if (mstSet[v] == false && key[v] < min) {
+				min = key[v];
+				min_index = v;
+			}
+		}
+		return min_index;
+	}
+
+	public String printMST(int parent[], int graph[][], int size){
+		String info = "";
+		info += "Edge \tWeight"+"\n";
+		for (int i = 1; i < size; i++) {
+			//System.out.println(parent[i] + " - " + i + "\t" + graph[i][parent[i]]);
+			info += parent[i] + " - " + i + "\t" + graph[i][parent[i]]+"\n";	
+		}
+		return info;
+	}
+
+
+	public String primMST(int graph[][], int size) {
+		int parent[] = new int[size];
+		int key[] = new int[size];
+
+		Boolean mstSet[] = new Boolean[size];
+
+		for (int i = 0; i < size; i++) {
+			key[i] = Integer.MAX_VALUE;
+			mstSet[i] = false;
+		}
+
+		key[0] = 0; 
+		parent[0] = -1; 
+
+
+		for (int count = 0; count < size - 1; count++) {
+
+			int u = minKey(key, mstSet, size);
+
+			mstSet[u] = true;
+			
+			for (int v = 0; v < size; v++) {
+				if (graph[u][v] != 0 && mstSet[v] == false && graph[u][v] < key[v]) {
+					parent[v] = u;
+					key[v] = graph[u][v];
+				}
+			}
+		}
+		return printMST(parent, graph, size);
+	}
+
 	public boolean addVertex(String name, int indicator) {
 		if (vertices.containsKey(name)) {
 			return false;
