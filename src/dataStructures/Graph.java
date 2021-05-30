@@ -2,6 +2,7 @@ package dataStructures;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 import exceptions.EmptyQueueException;
 
@@ -21,10 +22,8 @@ public class Graph {
 		for (String v : vertices.keySet()) {
 			q.enqueue(v);
 		}
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				m[i][j] = 0;
-			}
+		for (int[] column : m) {
+			Arrays.fill(column, 0);
 		}
 		for (int i = 0; i < vertices.size(); i++) {
 			Vertex v = vertices.get(q.dequeue());
@@ -33,6 +32,29 @@ public class Graph {
 					Edge e = v.searchEdge(v, v.getNeighbours().get(j));
 					if (e != null) {
 						m[v.getIndicator()][v.getNeighbours().get(j).getIndicator()] = e.getTime();
+					}
+				}
+			}
+		}
+		return m;
+	}
+
+	public int [][] VertexToMatrixCost() throws EmptyQueueException{
+		int [][] m = new int [vertices.size()][vertices.size()];
+		Queue<String> q = new Queue<>();
+		for (String v : vertices.keySet()) {
+			q.enqueue(v);
+		}
+		for (int[] column : m) {
+			Arrays.fill(column, 0);
+		}
+		for (int i = 0; i < vertices.size(); i++) {
+			Vertex v = vertices.get(q.dequeue());
+			for (int j = 0; j < vertices.size(); j++) {	
+				if (j < v.getNeighbours().size()) {
+					Edge e = v.searchEdge(v, v.getNeighbours().get(j));
+					if (e != null) {
+						m[v.getIndicator()][v.getNeighbours().get(j).getIndicator()] = e.getCost();
 					}
 				}
 			}
@@ -76,82 +98,52 @@ public class Graph {
 		return result;
 	}
 
-	public int minKey(int key[], Boolean mstSet[], int size){
-
-		int min = Integer.MAX_VALUE, min_index = -1;
-
-		for (int v = 0; v < size; v++) {
-			if (mstSet[v] == false && key[v] < min) {
-				min = key[v];
-				min_index = v;
-			}
+	public int[][] primForTime(){
+		PriorityQueue<Vertex> q = new PriorityQueue<>();
+		for (String v : vertices.keySet()) {
+			vertices.get(v).setColor("White");
+			vertices.get(v).setMinimum(Integer.MAX_VALUE);
+			q.add(vertices.get(v));
 		}
-		return min_index;
-	}
-
-	public String printMST(int parent[], int graph[][], int size){
-		String info = "";
-		int primMatrix[][] = new int[size][size];
-		for (int i = 0; i < primMatrix.length; i++) {
-			for (int j = 0; j < primMatrix.length; j++) {
-				primMatrix[i][j] = 0;
-			}
-		}
-		
-		info += "Edge \tWeight"+"\n";
-		for (int i = 1; i < size; i++) {
-			info += parent[i] + " - " + i + "\t" + graph[i][parent[i]]+"\n";
-		}
-		
-		info += "\n";
-		
-		for (int i = 0; i < primMatrix.length-1; i++) {
-				primMatrix[parent[i+1]][i+1] = graph[i+1][parent[i+1]];
-				primMatrix[i+1][parent[i+1]] = graph[i+1][parent[i+1]];
-			}
-		
-		
-		for (int i = 0; i < primMatrix.length; i++) {
-			for (int j = 0; j < primMatrix.length; j++) {
-				info += primMatrix[i][j] + " ";
-			}
-			info += "\n";
-		}
-
-		
-		return info;
-	}
-
-	public String primMST(int graph[][], int size) {
-		int parent[] = new int[size];
-		int key[] = new int[size];
-
-		Boolean mstSet[] = new Boolean[size];
-
-		//Llenamos los arreglos por defecto
-		Arrays.fill(key, Integer.MAX_VALUE);
-		Arrays.fill(mstSet, false);
-
-		//Se escoge el primer vertice y se le establece un valor de cero 
-		key[0] = 0; 
-		parent[0] = -1; 
-
-		for (int count = 0; count < size - 1; count++) {
-
-			//Se coge el vertice con menor peso y que no está añadido al MstSet
-			int u = minKey(key, mstSet, size);
-
-			//Se añade ese vertice al arreglo de descubiertos
-			mstSet[u] = true;
-			
-			for (int v = 0; v < size; v++) {
-				if (graph[u][v] != 0 && mstSet[v] == false && graph[u][v] < key[v]) {
-					parent[v] = u;
-					key[v] = graph[u][v];
+		q.peek().setMinimum(0);
+		int[][] m = new int [vertices.size()][vertices.size()];
+		while (!q.isEmpty()) {
+			Vertex u = q.poll();
+			for (Vertex v : u.getNeighbours()) {
+				Edge e = u.searchEdge(u, v);
+				if (v.getColor().equalsIgnoreCase("White") && e.getTime() < v.getMinimum()) {
+					v.setMinimum(e.getTime());
+					m[u.getIndicator()][v.getIndicator()] = e.getTime();
+					e.setUseThisWay(true);
 				}
 			}
+			u.setColor("Black");
 		}
-		return printMST(parent, graph, size);
+		return m;
+	}
+	
+	public int[][] primForCost(){
+		PriorityQueue<Vertex> q = new PriorityQueue<>();
+		for (String v : vertices.keySet()) {
+			vertices.get(v).setColor("White");
+			vertices.get(v).setMinimum(Integer.MAX_VALUE);
+			q.add(vertices.get(v));
+		}
+		q.peek().setMinimum(0);
+		int[][] m = new int [vertices.size()][vertices.size()];
+		while (!q.isEmpty()) {
+			Vertex u = q.poll();
+			for (Vertex v : u.getNeighbours()) {
+				Edge e = u.searchEdge(u, v);
+				if (v.getColor().equalsIgnoreCase("White") && e.getCost() < v.getMinimum()) {
+					v.setMinimum(e.getCost());
+					m[u.getIndicator()][v.getIndicator()] = e.getCost();
+					e.setUseThisWay(true);
+				}
+			}
+			u.setColor("Black");
+		}	
+		return m;
 	}
 
 	public boolean addVertex(String name, int indicator) {

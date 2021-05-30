@@ -2,16 +2,19 @@ package dataStructures;
 
 import java.util.ArrayList;
 
-public class Vertex {
+public class Vertex implements Comparable<Vertex>{
 
 	private String name;
 	private int indicator;
+	private String color;
+	private int minimum;
 	private ArrayList<Vertex> neighbours;
 	private ArrayList<Edge> edges;
 
 	public Vertex(String name, int indicator) {
 		this.name = name;
 		this.indicator = indicator;
+		this.color = "White";
 		neighbours = new ArrayList<>();
 		edges = new ArrayList<>();
 	}
@@ -51,13 +54,28 @@ public class Vertex {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public int getIndicator() {
 		return indicator;
 	}
 
 	public void setIndicator(int indicator) {
 		this.indicator = indicator;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public int getMinimum() {
+		return minimum;
+	}
+
+	public void setMinimum(int minimum) {
+		this.minimum = minimum;
 	}
 
 	public ArrayList<Vertex> getNeighbours() {
@@ -74,6 +92,11 @@ public class Vertex {
 
 	public void setEdges(ArrayList<Edge> edges) {
 		this.edges = edges;
+	}
+
+	@Override
+	public int compareTo(Vertex v) {
+		return new Integer(minimum).compareTo(v.minimum);
 	}
 
 }

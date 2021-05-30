@@ -97,7 +97,13 @@ public class TravelGuide {
 		}
 	}
 	
-	public void primMST() throws EmptyQueueException {
-		System.out.println(cali.primMST(cali.VertexToMatrixTime(), cali.VertexToMatrixTime().length));	
+	public void prim() {
+		int [][] m = cali.primForTime();
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m.length; j++) {
+				System.out.print(m[i][j] + " ");
+			}
+			System.out.println("\n");
+		}
 	}
 }

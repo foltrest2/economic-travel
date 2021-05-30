@@ -14,8 +14,9 @@ public class Main {
 			tg.printMatrix();
 			System.out.println();
 			tg.floydWarshall();
-//			System.out.println();
-//			tg.primMST();
+			System.out.println();
+			tg.prim();
+			System.out.println();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (EmptyQueueException e) {

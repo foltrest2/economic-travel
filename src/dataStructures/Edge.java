@@ -5,6 +5,7 @@ public class Edge {
 	private int time;
 	private int cost;
 	private int[] transport;
+	private boolean useThisWay;
 	private Vertex v1;
 	private Vertex v2;
 	
@@ -54,6 +55,14 @@ public class Edge {
 
 	public void setTransport(int[] transport) {
 		this.transport = transport;
+	}
+
+	public boolean isUseThisWay() {
+		return useThisWay;
+	}
+
+	public void setUseThisWay(boolean useThis) {
+		this.useThisWay = useThis;
 	}
 	
 }
