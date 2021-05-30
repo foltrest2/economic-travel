@@ -1,5 +1,6 @@
 package dataStructures;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import exceptions.EmptyQueueException;
@@ -75,7 +76,6 @@ public class Graph {
 		return result;
 	}
 
-
 	public int minKey(int key[], Boolean mstSet[], int size){
 
 		int min = Integer.MAX_VALUE, min_index = -1;
@@ -91,14 +91,36 @@ public class Graph {
 
 	public String printMST(int parent[], int graph[][], int size){
 		String info = "";
+		int primMatrix[][] = new int[size][size];
+		for (int i = 0; i < primMatrix.length; i++) {
+			for (int j = 0; j < primMatrix.length; j++) {
+				primMatrix[i][j] = 0;
+			}
+		}
+		
 		info += "Edge \tWeight"+"\n";
 		for (int i = 1; i < size; i++) {
-			//System.out.println(parent[i] + " - " + i + "\t" + graph[i][parent[i]]);
-			info += parent[i] + " - " + i + "\t" + graph[i][parent[i]]+"\n";	
+			info += parent[i] + " - " + i + "\t" + graph[i][parent[i]]+"\n";
 		}
+		
+		info += "\n";
+		
+		for (int i = 0; i < primMatrix.length-1; i++) {
+				primMatrix[parent[i+1]][i+1] = graph[i+1][parent[i+1]];
+				primMatrix[i+1][parent[i+1]] = graph[i+1][parent[i+1]];
+			}
+		
+		
+		for (int i = 0; i < primMatrix.length; i++) {
+			for (int j = 0; j < primMatrix.length; j++) {
+				info += primMatrix[i][j] + " ";
+			}
+			info += "\n";
+		}
+
+		
 		return info;
 	}
-
 
 	public String primMST(int graph[][], int size) {
 		int parent[] = new int[size];
@@ -106,19 +128,20 @@ public class Graph {
 
 		Boolean mstSet[] = new Boolean[size];
 
-		for (int i = 0; i < size; i++) {
-			key[i] = Integer.MAX_VALUE;
-			mstSet[i] = false;
-		}
+		//Llenamos los arreglos por defecto
+		Arrays.fill(key, Integer.MAX_VALUE);
+		Arrays.fill(mstSet, false);
 
+		//Se escoge el primer vertice y se le establece un valor de cero 
 		key[0] = 0; 
 		parent[0] = -1; 
 
-
 		for (int count = 0; count < size - 1; count++) {
 
+			//Se coge el vertice con menor peso y que no está añadido al MstSet
 			int u = minKey(key, mstSet, size);
 
+			//Se añade ese vertice al arreglo de descubiertos
 			mstSet[u] = true;
 			
 			for (int v = 0; v < size; v++) {

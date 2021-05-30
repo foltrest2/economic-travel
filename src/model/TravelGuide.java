@@ -12,8 +12,8 @@ import exceptions.EmptyQueueException;
 public class TravelGuide {
 	
 	private final static String SEPARATOR = ",";
-//	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
-	public final static String SAVE_PATH_FILE = "data/CaliGraphMap.csv";
+	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
+//	public final static String SAVE_PATH_FILE = "data/CaliGraphMap.csv";
 	
 	private Graph cali;
 
