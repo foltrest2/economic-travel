@@ -1,7 +1,8 @@
 package dataStructures;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 import exceptions.EmptyQueueException;
 
@@ -21,10 +22,8 @@ public class Graph {
 		for (String v : vertices.keySet()) {
 			q.enqueue(v);
 		}
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				m[i][j] = 0;
-			}
+		for (int[] column : m) {
+			Arrays.fill(column, 0);
 		}
 		for (int i = 0; i < vertices.size(); i++) {
 			Vertex v = vertices.get(q.dequeue());
@@ -39,17 +38,15 @@ public class Graph {
 		}
 		return m;
 	}
-	
+
 	public int [][] VertexToMatrixCost() throws EmptyQueueException{
 		int [][] m = new int [vertices.size()][vertices.size()];
 		Queue<String> q = new Queue<>();
 		for (String v : vertices.keySet()) {
 			q.enqueue(v);
 		}
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				m[i][j] = 0;
-			}
+		for (int[] column : m) {
+			Arrays.fill(column, 0);
 		}
 		for (int i = 0; i < vertices.size(); i++) {
 			Vertex v = vertices.get(q.dequeue());
@@ -101,10 +98,54 @@ public class Graph {
 		return result;
 	}
 
-	public ArrayList<Edge> prim(int [][] graph){
-		return null;
+	public int[][] primForTime(){
+		PriorityQueue<Vertex> q = new PriorityQueue<>();
+		for (String v : vertices.keySet()) {
+			vertices.get(v).setColor("White");
+			vertices.get(v).setMinimum(Integer.MAX_VALUE);
+			q.add(vertices.get(v));
+		}
+		q.peek().setMinimum(0);
+		int[][] m = new int [vertices.size()][vertices.size()];
+		while (!q.isEmpty()) {
+			Vertex u = q.poll();
+			for (Vertex v : u.getNeighbours()) {
+				Edge e = u.searchEdge(u, v);
+				if (v.getColor().equalsIgnoreCase("White") && e.getTime() < v.getMinimum()) {
+					v.setMinimum(e.getTime());
+					m[u.getIndicator()][v.getIndicator()] = e.getTime();
+					e.setUseThisWay(true);
+				}
+			}
+			u.setColor("Black");
+		}
+		return m;
 	}
 	
+	public int[][] primForCost(){
+		PriorityQueue<Vertex> q = new PriorityQueue<>();
+		for (String v : vertices.keySet()) {
+			vertices.get(v).setColor("White");
+			vertices.get(v).setMinimum(Integer.MAX_VALUE);
+			q.add(vertices.get(v));
+		}
+		q.peek().setMinimum(0);
+		int[][] m = new int [vertices.size()][vertices.size()];
+		while (!q.isEmpty()) {
+			Vertex u = q.poll();
+			for (Vertex v : u.getNeighbours()) {
+				Edge e = u.searchEdge(u, v);
+				if (v.getColor().equalsIgnoreCase("White") && e.getCost() < v.getMinimum()) {
+					v.setMinimum(e.getCost());
+					m[u.getIndicator()][v.getIndicator()] = e.getCost();
+					e.setUseThisWay(true);
+				}
+			}
+			u.setColor("Black");
+		}	
+		return m;
+	}
+
 	public boolean addVertex(String name, int indicator) {
 		if (vertices.containsKey(name)) {
 			return false;
