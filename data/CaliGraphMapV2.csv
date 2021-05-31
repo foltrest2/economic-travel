@@ -1,5 +1,5 @@
 ﻿NameV1,NameV2,Time,Cost,Mio,Taxi,App,Pata
-Acuaparque de la caña,El Planetario,10,5400,1,1,1,0
+Acuaparque de la cana,El Planetario,10,5400,1,1,1,0
 Biblioteca Departamental Jorge Garces Borrero,Museo Departamental de Ciencias Naturales,2,1,0,0,0,1
 Bulevar del Rio,CAM,2,1,0,0,0,1
 CAM,Catedral Metropolitana San Pedro,5,5400,1,1,1,1
@@ -9,7 +9,7 @@ Cristo Rey,Zoologico de Cali,20,10000,0,1,0,1
 El Gato del Rio,Museo de Arte Moderno La Tertulia,3,3000,0,0,0,1
 El Planetario,Monumento al deporte,12,9000,1,1,1,0
 Unidad Deportiva Panamericana,Estadio Olimpico Pascual Guerrero,5,5400,1,1,1,1
-Estadio Olimpico Pascual Guerrero,Plaza de Toros Cañaveralejo ,18,8800,1,1,1,1
+Estadio Olimpico Pascual Guerrero,Plaza de Toros Canaveralejo ,18,8800,1,1,1,1
 Gobernacion del Valle,Teatro Municipal,2,1,0,0,0,1
 Hospital Universitario del Valle,Estadio Olimpico Pascual Guerrero,2,1,0,0,0,1
 Hotel Torre de Cali,Iglesia La Ermita,5,5400,1,1,1,1
@@ -21,7 +21,7 @@ Mirador Tres Cruces,Monumento a Maria Mulata,25,12000,1,0,1,1
 Monumento a la Aviacion,Hospital Universitario del Valle,5,5400,1,1,1,1
 Monumento a la Solidaridad Empresarial,Monumento al deporte,5,5400,1,1,1,1
 Monumento a Maria Mulata,Sebastian de Belalcazar,15,8500,1,1,1,0
-Monumento al deporte,Acuaparque de la caña,10,8200,1,1,1,0
+Monumento al deporte,Acuaparque de la cana,10,8200,1,1,1,0
 Museo Arqueologico La Merced,Iglesia San Francisco,10,6000,1,1,1,1
 Museo de Arte Moderno La Tertulia,Sebastian de Belalcazar,3,3000,0,0,0,1
 Museo del Oro Calima,Centro Cultural de Cali,2,1,0,0,0,1
@@ -29,7 +29,7 @@ Museo Departamental de Ciencias Naturales,Loma de la Cruz,5,5400,1,1,1,1
 Parque de la Salud,Centro comercial Jardin Plaza,10,8000,1,1,1,1
 Parque de los Poetas,Bulevar del Rio,2,1,0,0,0,1
 Plaza Caycedo,Catedral Metropolitana San Pedro,2,1,0,0,0,1
-Plaza de Toros Cañaveralejo ,Unidad Deportiva Panamericana,20,10000,1,1,1,0
+Plaza de Toros Canaveralejo ,Unidad Deportiva Panamericana,20,10000,1,1,1,0
 Plazoleta Jairo Varela,CAM,2,1,0,0,0,1
 Sebastian de Belalcazar,Zoologico de Cali,10,6200,1,1,1,0
 Teatro Municipal,Museo del Oro Calima,2,1,0,0,0,1
@@ -48,8 +48,8 @@ Museo Arqueologico La Merced,Centro Cultural de Cali,2,1,0,0,0,1
 Loma de la Cruz,Gobernacion del Valle,12,6500,0,0,0,1
 Biblioteca Departamental Jorge Garces Borrero,Estadio Olimpico Pascual Guerrero,5,5400,1,1,1,1
 Centro comercial Unicentro,Parque de la Salud,10,9500,1,1,1,1
-Plaza de Toros Cañaveralejo ,Centro comercial Unicentro,25,16000,1,1,1,0
-Hotel Torre de Cali,Acuaparque de la caña,10,7000,1,1,1,0
+Plaza de Toros Canaveralejo ,Centro comercial Unicentro,25,16000,1,1,1,0
+Hotel Torre de Cali,Acuaparque de la cana,10,7000,1,1,1,0
 Centro comercial Unicentro,Restaurante Platillos voladores,5,5400,1,1,1,1
 Plazoleta Jairo Varela,Hotel Torre de Cali,5,5400,1,1,1,1
 Restaurante el Bochinche,Museo Departamental de Ciencias Naturales,8,6800,1,1,1,0

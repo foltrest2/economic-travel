@@ -10,10 +10,12 @@ public class Graph {
 
 	private HashMap<Integer,Edge> edges;
 	private HashMap<String, Vertex> vertices;
+	private Edge[][] floydEdges;
 
 	public Graph() {
 		edges = new HashMap<>();
 		vertices = new HashMap<>();
+		floydEdges = new Edge[vertices.size()][vertices.size()];
 	}
 
 	public int [][] VertexToMatrixTime() throws EmptyQueueException{
@@ -37,6 +39,25 @@ public class Graph {
 			}
 		}
 		return m;
+	}
+
+	public Edge [][] EdgesToMatrix() throws EmptyQueueException {
+		Edge [][] ed = new Edge[edges.size()][edges.size()];
+		Queue<Integer> q = new Queue<>();
+		for (Integer v : edges.keySet()) {
+			q.enqueue(v);
+		}
+		for (Edge[] column : ed) {
+			Arrays.fill(column, null);
+		}
+		for (int i = 0; i < edges.size(); i++) {
+			Edge v = edges.get(q.dequeue());
+			for (int j = 0; j < edges.size(); j++) {
+				ed[v.getV1().getIndicator()][v.getV2().getIndicator()] = v;
+				ed[v.getV2().getIndicator()][v.getV1().getIndicator()] = v;
+			}
+		}
+		return ed;
 	}
 
 	public int [][] VertexToMatrixCost() throws EmptyQueueException{
@@ -98,6 +119,50 @@ public class Graph {
 		return result;
 	}
 
+	public Edge[][] floydWarshalledges(Edge graph[][], int size) {
+		Edge result[][] = new Edge[size][size];
+		for (int i = 0; i < result.length; i++) {
+			for (int j = 0; j < result.length; j++) {
+				result[i][j] = new Edge(null, null, 999999999, 0, null);
+			}
+		}
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (graph[i][j] == null) {
+					if (i == j) {
+						result[i][j].setTime(0);
+					}
+				}else {
+					result[i][j] = graph[i][j];
+				}
+			}
+		}
+		for (int k = 0; k < size; k++) {
+			for (int i = 0; i < size; i++) {
+				for (int j = 0; j < size; j++) {
+					if (result[i][k].getTime() + result[k][j].getTime() < result[i][j].getTime()) {
+						if(result[i][k].getV1() != null) {
+							result[i][j].addEdgesToGo(result[i][k]);
+						} 
+						if(result[k][j].getV1() != null) {
+							result[i][j].addEdgesToGo(result[k][j]);
+						} 
+						result[i][j].setTime(result[i][k].getTime()+result[k][j].getTime());
+					}				
+				}
+			}
+		}
+		for (int i = 0; i < result.length; i++) {
+			for (int j = 0; j < result.length; j++) {
+				if(result[i][j].getTime() == 999999999) {
+					result[i][j].setTime(0);
+				}
+			}
+		}
+		floydEdges = result;
+		return result;
+	}
+
 	public int[][] primForTime(){
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
 		for (String v : vertices.keySet()) {
@@ -121,7 +186,7 @@ public class Graph {
 		}
 		return m;
 	}
-	
+
 	public int[][] primForCost(){
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
 		for (String v : vertices.keySet()) {
@@ -175,4 +240,8 @@ public class Graph {
 		return vertices;
 	}
 
+
+	public Edge[][] getFloydEdges() {
+		return floydEdges;
+	}
 }

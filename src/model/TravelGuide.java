@@ -3,6 +3,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import dataStructures.Edge;
 import dataStructures.Graph;
@@ -10,11 +11,11 @@ import dataStructures.Vertex;
 import exceptions.EmptyQueueException;
 
 public class TravelGuide {
-	
+
 	private final static String SEPARATOR = ",";
-	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
-//	public final static String SAVE_PATH_FILE = "data/CaliGraphMap.csv";
-	
+//	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
+	public final static String SAVE_PATH_FILE = "data/CaliGraphMapV2.csv";
+
 	private Graph cali;
 
 	public TravelGuide() {
@@ -76,7 +77,7 @@ public class TravelGuide {
 		}
 		br.close();
 	}
-	
+
 	public void printMatrix() throws EmptyQueueException {
 		int [][] m = cali.VertexToMatrixTime();
 		for (int i = 0; i < m.length; i++) {
@@ -86,7 +87,27 @@ public class TravelGuide {
 			System.out.println("\n");
 		}
 	}
-	
+
+	public void printEdgeMatrix() throws EmptyQueueException {
+		Edge [][] ed = cali.EdgesToMatrix();
+		for (int i = 0; i < ed.length; i++) {
+			for (int j = 0; j < ed.length; j++) {
+				System.out.print(ed[i][j] + " ");
+			}
+			System.out.println("\n");
+		}
+	}
+
+	public void printFloydWarshallEdges() throws EmptyQueueException {
+		Edge [][] ed = cali.floydWarshalledges(cali.EdgesToMatrix(), cali.VertexToMatrixTime().length);
+		for (int i = 0; i < ed.length; i++) {
+			for (int j = 0; j < ed.length; j++) {
+				System.out.print(ed[i][j] + " ");
+			}
+			System.out.println("\n");
+		}
+	}
+
 	public void floydWarshall() throws EmptyQueueException {
 		int [][] m = cali.floydWarshall(cali.VertexToMatrixTime(), cali.VertexToMatrixTime().length);
 		for (int i = 0; i < m.length; i++) {
@@ -96,7 +117,7 @@ public class TravelGuide {
 			System.out.println("\n");
 		}
 	}
-	
+
 	public void prim() {
 		int [][] m = cali.primForTime();
 		for (int i = 0; i < m.length; i++) {
@@ -105,5 +126,12 @@ public class TravelGuide {
 			}
 			System.out.println("\n");
 		}
+	}
+
+	public String searchEdgesBetweenPlacesFloyd(String name1, String name2){
+		int m = cali.getVertices().get(name1).getIndicator();
+		int n = cali.getVertices().get(name2).getIndicator();
+		Edge xd[][] = cali.getFloydEdges();
+		return xd[m][n].showRoute();
 	}
 }
