@@ -1,5 +1,7 @@
 package model;
 
+import static java.lang.String.format;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,8 +15,8 @@ import exceptions.EmptyQueueException;
 public class TravelGuide {
 
 	private final static String SEPARATOR = ",";
-//	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
-	public final static String SAVE_PATH_FILE = "data/CaliGraphMapV2.csv";
+	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
+//	public final static String SAVE_PATH_FILE = "data/CaliGraphMapV2.csv";
 
 	private Graph cali;
 
@@ -117,7 +119,7 @@ public class TravelGuide {
 			System.out.println("\n");
 		}
 	}
-
+	
 	public void prim() {
 		int [][] m = cali.primForTime();
 		for (int i = 0; i < m.length; i++) {

@@ -101,11 +101,20 @@ public class Graph {
 				}
 			}
 		}
+
+		int[][] next = new int[size][size];
+		for (int i = 0; i < next.length; i++) {
+			for (int j = 0; j < next.length; j++)
+				if (i != j)
+					next[i][j] = j + 1;
+		}
+
 		for (int k = 0; k < size; k++) {
 			for (int i = 0; i < size; i++) {
 				for (int j = 0; j < size; j++) {
 					if (result[i][k] + result[k][j] < result[i][j])
 						result[i][j] = result[i][k] + result[k][j];
+					
 				}
 			}
 		}
@@ -118,7 +127,7 @@ public class Graph {
 		}
 		return result;
 	}
-
+	
 	public Edge[][] floydWarshalledges(Edge graph[][], int size) {
 		Edge result[][] = new Edge[size][size];
 		for (int i = 0; i < result.length; i++) {
@@ -141,13 +150,15 @@ public class Graph {
 			for (int i = 0; i < size; i++) {
 				for (int j = 0; j < size; j++) {
 					if (result[i][k].getTime() + result[k][j].getTime() < result[i][j].getTime()) {
-						if(result[i][k].getV1() != null) {
-							result[i][j].addEdgesToGo(result[i][k]);
-						} 
-						if(result[k][j].getV1() != null) {
-							result[i][j].addEdgesToGo(result[k][j]);
-						} 
+						//						if(result[i][k].getV1() != null) {
+						result[i][j].addEdgesToGo(result[i][k]);
+						//						} 
+						//						if(result[k][j].getV1() != null) {
+						result[i][j].addEdgesToGo(result[k][j]);
+						//						} 
 						result[i][j].setTime(result[i][k].getTime()+result[k][j].getTime());
+						result[i][j].setV1(result[i][k].getV1());
+						result[i][j].setV2(result[k][j].getV2());
 					}				
 				}
 			}
@@ -239,7 +250,6 @@ public class Graph {
 	public HashMap<String, Vertex> getVertices() {
 		return vertices;
 	}
-
 
 	public Edge[][] getFloydEdges() {
 		return floydEdges;
