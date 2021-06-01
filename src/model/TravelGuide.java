@@ -144,7 +144,7 @@ public class TravelGuide {
 
 	public void initialize() throws EmptyQueueException {
 		cali.initialize(cali.getVertices().size(), cali.VertexToMatrixTime());
-		cali.floydWarshallV3(cali.getVertices().size());
+		cali.floydWarshallV2(cali.getVertices().size());
 		cali.verticesToHasMap2();
 	}
 
@@ -164,13 +164,11 @@ public class TravelGuide {
 	public Graph getCali() {
 		return cali;
 	}
-	
 
 	public  String getSavePathFile() {
 		return SAVE_PATH_FILE;
 	}
 	
-
 	public static String getSavePathFileTest() {
 		return SAVE_PATH_FILE_TEST;
 	}

@@ -1,7 +1,6 @@
 package dataStructures;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Vector;
@@ -46,30 +45,8 @@ public class Graph {
 		return m;
 	}
 //tested
-	public int [][] VertexToMatrixCost() throws EmptyQueueException{
-		int [][] m = new int [vertices.size()][vertices.size()];
-		Queue<String> q = new Queue<>();
-		for (String v : vertices.keySet()) {
-			q.enqueue(v);
-		}
-		for (int[] column : m) {
-			Arrays.fill(column, 0);
-		}
-		for (int i = 0; i < vertices.size(); i++) {
-			Vertex v = vertices.get(q.dequeue());
-			for (int j = 0; j < vertices.size(); j++) {	
-				if (j < v.getNeighbours().size()) {
-					Edge e = v.searchEdge(v, v.getNeighbours().get(j));
-					if (e != null) {
-						m[v.getIndicator()][v.getNeighbours().get(j).getIndicator()] = e.getCost();
-					}
-				}
-			}
-		}
-		return m;
-	}
-
 	public Edge [][] edgesToMatrix() throws EmptyQueueException {
+		initializeRoutes();
 		Edge [][] ed = new Edge[vertices.size()][vertices.size()];
 		Queue<Integer> q = new Queue<>();
 		for (Integer v : edges.keySet()) {
@@ -121,61 +98,12 @@ public class Graph {
 		return result;
 	}
 
-	public void initialize(int V, int [][] graph){	
-		for(int i = 0; i < V; i++){
-			for(int j = 0; j < V; j++){
-				if(graph[i][j] == 0 && i != j) {
-					graph[i][j] = INF;
-				}
-			}
-		}	
-
-		for(int i = 0; i < V; i++){
-			for(int j = 0; j < V; j++){
-				dis[i][j] = graph[i][j];
-
-				if (graph[i][j] == INF)
-					Next[i][j] = Integer.MAX_VALUE;
-				else
-					Next[i][j] = j;
-			}
-		}
-	}
-
-	public Vector<String> constructPath(int u, int v) throws EmptyQueueException{
-
-		if (Next[u][v] == Integer.MAX_VALUE)
-			return null;
-
-		Vector<String> path = new Vector<String>();
-
-		path.add(searchDueIndicator(u));
-
-		while (u != v){
-			u = Next[u][v];
-			path.add(searchDueIndicator(u));
-		}
-		return path;
-	}
-
-	public String printPath(Vector<String> path){
-		String info = "";
-		for(int i = 0; i < path.size() - 1; i++) {
-			info += path.get(i) + " -> ";
-		}
-		info += path.get(path.size() - 1) + "\n";
-
-		return info;
-	}
-
-	public void floydWarshallV3(int V){
+	public void floydWarshallV2(int V){
 		for(int k = 0; k < V; k++){
 			for(int i = 0; i < V; i++){
 				for(int j = 0; j < V; j++){
-
 					if (dis[i][k] == INF || dis[k][j] == INF)
 						continue;
-
 					if (dis[i][j] > dis[i][k] +dis[k][j]){
 						dis[i][j] = dis[i][k] + dis[k][j];
 						Next[i][j] = Next[i][k];
@@ -185,20 +113,7 @@ public class Graph {
 		}
 	}
 
-	public void verticesToHasMap2() {
-		for (String v: vertices.keySet()) {		
-			verticesv2.put(vertices.get(v).getIndicator(),vertices.get(v));
-		}
-	}
-
-	public String searchDueIndicator(int indicatorToFind) throws EmptyQueueException {
-		String name = "";	
-		name = verticesv2.get(indicatorToFind).getName();
-		return name;
-	}
-	
 	public Edge[][] floydWarshallEdges() throws EmptyQueueException {
-		initializeRoutes();
 		Edge result[][] = edgesToMatrix();
 		for (int k = 0; k < result.length; k++) {
 			for (int i = 0; i < result.length; i++) {
@@ -305,6 +220,9 @@ public class Graph {
 			Vertex u = q.poll();
 			for (Vertex v : u.getNeighbours()) {
 				Edge e = u.searchEdge(u, v);
+				if (e == null) {
+					continue;
+				}
 				if (v.getColor().equalsIgnoreCase("White") && e.getCost() < v.getMinimum()) {
 					v.setMinimum(e.getCost());
 					m[u.getIndicator()][v.getIndicator()] = e.getCost();
@@ -315,7 +233,61 @@ public class Graph {
 		}	
 		return m;
 	}
+	
+	public Vector<String> constructPath(int u, int v) throws EmptyQueueException{
+		if (Next[u][v] == Integer.MAX_VALUE)
+			return null;
+		Vector<String> path = new Vector<String>();
+		path.add(searchDueIndicator(u));
+		while (u != v){
+			u = Next[u][v];
+			path.add(searchDueIndicator(u));
+		}
+		return path;
+	}
 
+	public String printPath(Vector<String> path){
+		String info = "";
+		for(int i = 0; i < path.size() - 1; i++) {
+			info += path.get(i) + " -> ";
+		}
+		info += path.get(path.size() - 1) + "\n";
+
+		return info;
+	}
+	
+	public void initialize(int V, int [][] graph){	
+		for(int i = 0; i < V; i++){
+			for(int j = 0; j < V; j++){
+				if(graph[i][j] == 0 && i != j) {
+					graph[i][j] = INF;
+				}
+			}
+		}	
+
+		for(int i = 0; i < V; i++){
+			for(int j = 0; j < V; j++){
+				dis[i][j] = graph[i][j];
+
+				if (graph[i][j] == INF)
+					Next[i][j] = Integer.MAX_VALUE;
+				else
+					Next[i][j] = j;
+			}
+		}
+	}
+	
+	public void initializeRoutes() {
+		for (int i = 0; i < vertices.size(); i++) {	
+			routes.add(new ArrayList<ArrayList<Edge>>());	
+		}
+		for (ArrayList<ArrayList<Edge>> x : routes) {
+			for (int i = 0; i < vertices.size(); i++) {
+				x.add(new ArrayList<Edge>());
+			}
+		}
+	}
+	
 	public boolean addVertex(String name, int indicator) {
 		if (vertices.containsKey(name)) {
 			return false;
@@ -326,26 +298,27 @@ public class Graph {
 			return true;
 		}
 	}
-
-	public Vertex searchVertex(String name) {
-		return vertices.get(name);
-	}
-
+	
 	public void addEdge(Vertex v1, Vertex v2, int time, int cost, int [] transport) {
 		Edge e = new Edge(v1, v2, time, cost, transport);
 		edges.put(e.hashCode(), e);
 		v1.addConnection(v1, v2, e);
 	}
+	
+	public void verticesToHasMap2() {
+		for (String v: vertices.keySet()) {		
+			verticesv2.put(vertices.get(v).getIndicator(),vertices.get(v));
+		}
+	}
 
-	public void initializeRoutes() {
-		for (int i = 0; i < vertices.size(); i++) {	
-			routes.add(new ArrayList<ArrayList<Edge>>());	
-		}
-		for (ArrayList<ArrayList<Edge>> x : routes) {
-			for (int i = 0; i < vertices.size(); i++) {
-				x.add(new ArrayList<Edge>());
-			}
-		}
+	public String searchDueIndicator(int indicatorToFind) throws EmptyQueueException {
+		String name = "";	
+		name = verticesv2.get(indicatorToFind).getName();
+		return name;
+	}
+	
+	public Vertex searchVertex(String name) {
+		return vertices.get(name);
 	}
 
 	public HashMap<Integer, Edge> getEdges() {
