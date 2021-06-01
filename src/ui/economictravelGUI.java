@@ -15,7 +15,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeType;
 import model.TravelGuide;
 
 public class economictravelGUI {
@@ -197,10 +200,13 @@ public class economictravelGUI {
 	private static String UNIDADDEPORTIVA = "imagenes\\unidaddeportivapanamericana.png";
 	private static String ZOOLOGICODECALI = "imagenes\\zoologicodecali.jpg";
 	private static String PLATILLOSVOLADORES = "imagenes\\platillosvoladores.jpg";
+	Line m;
+	
 
 	public economictravelGUI(TravelGuide t) {
 
 		t=tg;
+		m = new Line();
 
 	}
 
@@ -210,10 +216,16 @@ public class economictravelGUI {
 		Parent mape = fxmlLoader.load();
 		basePane.setCenter(mape);
 		zoom(map);
-
-
-
-
+		m.setStrokeType(StrokeType.OUTSIDE);
+		m.setFill(Color.BLACK);
+		m.setStroke(Color.GREEN);
+		m.setStrokeWidth(2);
+        m.setStartX(camV.getLayoutX());
+        m.setStartY(camV.getLayoutY());
+        m.setEndX(chipichapeV.getLayoutX());
+        m.setEndY(chipichapeV.getLayoutY());
+        m.setVisible(true);
+        map.getChildren().add(m);
 	}
 
 
@@ -618,8 +630,10 @@ public class economictravelGUI {
 		alert.setHeaderText("Lugar #24");
 		alert.setContentText("Usted seleccionó El Museo Arqueologico La Merced");
 		alert.showAndWait();
+		
 
 	}
+	
 
 	@FXML
 	void clickOnParquedelasalud(MouseEvent event) {
@@ -689,6 +703,7 @@ public class economictravelGUI {
 		alert.setContentText("Usted seleccionó La Plaza Caicedo");
 		alert.showAndWait();
 	}
+	
 
 	@FXML
 	void clickOnPlazadeToros(MouseEvent event) {
