@@ -46,30 +46,8 @@ public class Graph {
 		return m;
 	}
 //tested
-	public int [][] VertexToMatrixCost() throws EmptyQueueException{
-		int [][] m = new int [vertices.size()][vertices.size()];
-		Queue<String> q = new Queue<>();
-		for (String v : vertices.keySet()) {
-			q.enqueue(v);
-		}
-		for (int[] column : m) {
-			Arrays.fill(column, 0);
-		}
-		for (int i = 0; i < vertices.size(); i++) {
-			Vertex v = vertices.get(q.dequeue());
-			for (int j = 0; j < vertices.size(); j++) {	
-				if (j < v.getNeighbours().size()) {
-					Edge e = v.searchEdge(v, v.getNeighbours().get(j));
-					if (e != null) {
-						m[v.getIndicator()][v.getNeighbours().get(j).getIndicator()] = e.getCost();
-					}
-				}
-			}
-		}
-		return m;
-	}
-
 	public Edge [][] edgesToMatrix() throws EmptyQueueException {
+		initializeRoutes();
 		Edge [][] ed = new Edge[vertices.size()][vertices.size()];
 		Queue<Integer> q = new Queue<>();
 		for (Integer v : edges.keySet()) {
@@ -198,7 +176,6 @@ public class Graph {
 	}
 	
 	public Edge[][] floydWarshallEdges() throws EmptyQueueException {
-		initializeRoutes();
 		Edge result[][] = edgesToMatrix();
 		for (int k = 0; k < result.length; k++) {
 			for (int i = 0; i < result.length; i++) {
