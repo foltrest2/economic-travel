@@ -108,13 +108,6 @@ public class TravelGuide {
 			}
 			System.out.println("\n");
 		}
-		m = cali.floydWarshall(cali.VertexToMatrixCost(), cali.VertexToMatrixCost().length);
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
 	}
 	
 	public void printFloydWarshallEdges() throws EmptyQueueException {

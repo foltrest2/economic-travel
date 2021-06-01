@@ -70,21 +70,4 @@ public class Edge {
 		return ""+time;
 	}
 
-//	public String showRoute() {
-//		String info = "";
-//		info += "------------ Route ------------"+"\n";
-//		info += "Go from: \t  \t  To: "+"\n";
-//		if (edgesToGo.isEmpty()) {
-//			info +=  v1.getName()+ "  <---->" + "\t" + "\t" +v2.getName()+"\n";
-//			info += "Both ways duration time: "+time+ " Minutes"+"\n";
-//			info += "** Direct Route! **"+"\n";
-//		} else {
-//			for (int i = 0; i < edgesToGo.size(); i++) {			
-//				info += edgesToGo.get(i).getV1().getName() + "\t"+ "<---->" +"\t"+edgesToGo.get(i).getV2().getName()+"\n";
-//				info += "With duration time: "+edgesToGo.get(i).getTime()+ " Minutes"+"\n";
-//			}
-//			info += "** You must travel several ways! **"+"\n";
-//		}
-//		return info;
-//	}
 }
