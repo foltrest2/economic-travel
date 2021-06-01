@@ -1,0 +1,6 @@
+﻿NameV1;NameV2;Time;Cost;Mio;Taxi;App;;;;;;v0;v1;v2;v3;v4;;;v0;v1;v2;v3;v4
+El Bochinche;Torre de Cali;18;8056;0;1;0;;;;;v0;null;18;null;null;null;;v0;0;18;24;45;38
+Torre de Cali;Zoologico;6;8188;1;0;1;;;;;v1;18;null;6;null;null;;v1;18;0;6;27;20
+Zoologico;La 14;21;5747;0;0;1;;;;;v2;null;6;null;21;14;;v2;24;6;0;21;14
+Zoologico;Portada al mar;14;8139;0;1;1;;;;;v3;null;null;21;null;null;;v3;45;27;21;0;35
+;;;;;;;;;;;v4;null;null;14;null;null;;v4;38;20;14;35;0

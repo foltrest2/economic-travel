@@ -1,7 +1,5 @@
 package dataStructures;
 
-import static java.lang.String.format;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,32 +13,24 @@ public class Graph {
 	private HashMap<Integer,Edge> edges;
 	private HashMap<String, Vertex> vertices;
 	private HashMap<Integer, Vertex> verticesv2;
-	private Edge[][] floydEdges;
-
+	private ArrayList<ArrayList<ArrayList<Edge>>> routes;
 	public static final int MAXN = 200;
-
-	// Infinite value for array
 	private static int INF = (int) 1e7;
-
 	private static int dis[][] = new int[MAXN][MAXN];
 	private static int Next[][] = new int[MAXN][MAXN];
-
 
 	public Graph() {
 		edges = new HashMap<>();
 		vertices = new HashMap<>();
 		verticesv2 = new HashMap<>();
-		floydEdges = new Edge[vertices.size()][vertices.size()];
+		routes = new ArrayList<ArrayList<ArrayList<Edge>>>();
 	}
-
+//tested
 	public int [][] VertexToMatrixTime() throws EmptyQueueException{
 		int [][] m = new int [vertices.size()][vertices.size()];
 		Queue<String> q = new Queue<>();
 		for (String v : vertices.keySet()) {
 			q.enqueue(v);
-		}
-		for (int[] column : m) {
-			Arrays.fill(column, 0);
 		}
 		for (int i = 0; i < vertices.size(); i++) {
 			Vertex v = vertices.get(q.dequeue());
@@ -55,26 +45,7 @@ public class Graph {
 		}
 		return m;
 	}
-
-	public Edge [][] EdgesToMatrix() throws EmptyQueueException {
-		Edge [][] ed = new Edge[edges.size()][edges.size()];
-		Queue<Integer> q = new Queue<>();
-		for (Integer v : edges.keySet()) {
-			q.enqueue(v);
-		}
-		for (Edge[] column : ed) {
-			Arrays.fill(column, null);
-		}
-		for (int i = 0; i < edges.size(); i++) {
-			Edge v = edges.get(q.dequeue());
-			for (int j = 0; j < edges.size(); j++) {
-				ed[v.getV1().getIndicator()][v.getV2().getIndicator()] = v;
-				ed[v.getV2().getIndicator()][v.getV1().getIndicator()] = v;
-			}
-		}
-		return ed;
-	}
-
+//tested
 	public int [][] VertexToMatrixCost() throws EmptyQueueException{
 		int [][] m = new int [vertices.size()][vertices.size()];
 		Queue<String> q = new Queue<>();
@@ -98,11 +69,27 @@ public class Graph {
 		return m;
 	}
 
+	public Edge [][] edgesToMatrix() throws EmptyQueueException {
+		Edge [][] ed = new Edge[vertices.size()][vertices.size()];
+		Queue<Integer> q = new Queue<>();
+		for (Integer v : edges.keySet()) {
+			q.enqueue(v);
+		}
+		while (!q.isEmpty()) {
+			Edge e = edges.get(q.dequeue());
+			ed[e.getV1().getIndicator()][e.getV2().getIndicator()] = e;
+			ed[e.getV2().getIndicator()][e.getV1().getIndicator()] = e;
+			routes.get(e.getV1().getIndicator()).get(e.getV2().getIndicator()).add(e);
+			routes.get(e.getV2().getIndicator()).get(e.getV1().getIndicator()).add(e);
+		}	
+		return ed;
+	}
+
 	public int[][] floydWarshall(int graph[][], int size) {
 		int result[][] = new int[size][size];
 		for (int i = 0; i < result.length; i++) {
 			for (int j = 0; j < result.length; j++) {
-				result[i][j] = 99999;
+				result[i][j] = 999999;
 			}
 		}
 		for (int i = 0; i < size; i++) {
@@ -126,7 +113,7 @@ public class Graph {
 		}
 		for (int i = 0; i < result.length; i++) {
 			for (int j = 0; j < result.length; j++) {
-				if(result[i][j] == 99999) {
+				if(result[i][j] == 999999) {
 					result[i][j] = 0;
 				}
 			}
@@ -209,6 +196,74 @@ public class Graph {
 		name = verticesv2.get(indicatorToFind).getName();
 		return name;
 	}
+	
+	public Edge[][] floydWarshallEdges() throws EmptyQueueException {
+		initializeRoutes();
+		Edge result[][] = edgesToMatrix();
+		for (int k = 0; k < result.length; k++) {
+			for (int i = 0; i < result.length; i++) {
+				for (int j = 0; j < result.length; j++) {
+					if (result[i][k] == null || result[k][j] == null) {
+						continue;
+					}
+					if (result[i][j] == null) {
+						if (i != j) {
+							int transportE1 [] = result[i][k].getTransport();
+							int transportE2 [] = result[k][j].getTransport();
+							int transport [] = {Math.max(transportE1[0], transportE2[0]), Math.max(transportE1[1], transportE2[1]), Math.max(transportE1[2], transportE2[2])};
+							result[i][j] = new Edge(result[i][k].getV1(), result[k][j].getV2(), result[i][k].getTime() + result[k][j].getTime(), result[i][k].getCost() + result[k][j].getCost(), transport);			
+							if (routes.get(i).get(k).isEmpty()) 
+								routes.get(i).get(j).add(result[i][k]);
+							else {
+								routes.get(i).get(j).removeAll(routes.get(i).get(j));
+								routes.get(i).get(j).addAll(routes.get(i).get(k));
+							}
+							if (routes.get(k).get(j).isEmpty()) 
+								routes.get(i).get(j).add(result[k][j]);
+							else {
+								routes.get(i).get(j).addAll(routes.get(k).get(j));
+							}
+						}
+					}				
+					else { 
+						if (result[i][k].getTime() + result[k][j].getTime() < result[i][j].getTime()) {
+							result[i][j].setTime(result[i][k].getTime() + result[k][j].getTime());
+							result[i][j].setV1(result[i][k].getV1());
+							result[i][j].setV2(result[i][k].getV2());
+							if (routes.get(i).get(k).isEmpty()) 
+								routes.get(i).get(j).add(result[i][k]);
+							else {
+								routes.get(i).get(j).removeAll(routes.get(i).get(j));
+								routes.get(i).get(j).addAll(routes.get(i).get(k));
+							}
+							if (routes.get(k).get(j).isEmpty()) 
+								routes.get(i).get(j).add(result[k][j]);
+							else {
+								routes.get(i).get(j).addAll(routes.get(k).get(j));
+							}			
+						}
+						if (result[i][k].getCost() + result[k][j].getCost() < result[i][j].getCost()) {
+							result[i][j].setCost(result[i][k].getCost() + result[k][j].getCost());
+							result[i][j].setV1(result[i][k].getV1());
+							result[i][j].setV2(result[i][k].getV2());
+							if (routes.get(i).get(k).isEmpty()) 
+								routes.get(i).get(j).add(result[i][k]);
+							else {
+								routes.get(i).get(j).removeAll(routes.get(i).get(j));
+								routes.get(i).get(j).addAll(routes.get(i).get(k));
+							}
+							if (routes.get(k).get(j).isEmpty()) 
+								routes.get(i).get(j).add(result[k][j]);
+							else {
+								routes.get(i).get(j).addAll(routes.get(k).get(j));
+							}
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
 
 	public int[][] primForTime(){
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
@@ -223,6 +278,9 @@ public class Graph {
 			Vertex u = q.poll();
 			for (Vertex v : u.getNeighbours()) {
 				Edge e = u.searchEdge(u, v);
+				if (e == null) {
+					continue;
+				}
 				if (v.getColor().equalsIgnoreCase("White") && e.getTime() < v.getMinimum()) {
 					v.setMinimum(e.getTime());
 					m[u.getIndicator()][v.getIndicator()] = e.getTime();
@@ -279,6 +337,17 @@ public class Graph {
 		v1.addConnection(v1, v2, e);
 	}
 
+	public void initializeRoutes() {
+		for (int i = 0; i < vertices.size(); i++) {	
+			routes.add(new ArrayList<ArrayList<Edge>>());	
+		}
+		for (ArrayList<ArrayList<Edge>> x : routes) {
+			for (int i = 0; i < vertices.size(); i++) {
+				x.add(new ArrayList<Edge>());
+			}
+		}
+	}
+
 	public HashMap<Integer, Edge> getEdges() {
 		return edges;
 	}
@@ -287,7 +356,15 @@ public class Graph {
 		return vertices;
 	}
 
-	public Edge[][] getFloydEdges() {
-		return floydEdges;
+	public HashMap<Integer, Vertex> getVerticesv2() {
+		return verticesv2;
+	}
+
+	public ArrayList<ArrayList<ArrayList<Edge>>> getRoutes() {
+		return routes;
+	}
+
+	public ArrayList<ArrayList<ArrayList<Edge>>> getFloydEdges() {
+		return routes;
 	}
 }
