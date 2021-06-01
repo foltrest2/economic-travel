@@ -3,7 +3,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.Vector;
 import dataStructures.Edge;
 import dataStructures.Graph;
 import dataStructures.Vertex;
@@ -11,10 +11,12 @@ import exceptions.EmptyQueueException;
 
 public class TravelGuide {
 
+
 	private final static String SEPARATOR = ",";
 //	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
 //	public final static String SAVE_PATH_FILE = "data/TestDataV2.csv"; 
-	public final static String SAVE_PATH_FILE = "data/CaliGraphMapV2.csv";
+	public final static String SAVE_PATH_FILE = "data/CaliGraphMap.csv";
+	public final static String SAVE_PATH_FILE_TEST = "data/TestDataV2.csv";
 
 	private Graph cali;
 
@@ -26,8 +28,8 @@ public class TravelGuide {
 	 * This method imports the data from the csv file and fill the trees with it
 	 * @throws IOException if a problem to import occurs
 	 */
-	public void importData() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(SAVE_PATH_FILE));
+	public void importData(String pathFile) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(pathFile));
 		br.readLine();
 		String line = br.readLine();
 		int i = 0;
@@ -98,17 +100,7 @@ public class TravelGuide {
 		}
 	}
 
-	public void printFloydWarshallEdges() throws EmptyQueueException {
-		Edge [][] ed = cali.floydWarshallEdges();
-		for (int i = 0; i < ed.length; i++) {
-			for (int j = 0; j < ed.length; j++) {
-				System.out.print(ed[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
-	}
-
-	public void floydWarshallTime() throws EmptyQueueException {
+	public void floydWarshall() throws EmptyQueueException {
 		int [][] m = cali.floydWarshall(cali.VertexToMatrixTime(), cali.VertexToMatrixTime().length);
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m.length; j++) {
@@ -124,6 +116,44 @@ public class TravelGuide {
 			System.out.println("\n");
 		}
 	}
+	
+	public void printFloydWarshallEdges() throws EmptyQueueException {
+        Edge [][] ed = cali.floydWarshallEdges();
+        for (int i = 0; i < ed.length; i++) {
+            for (int j = 0; j < ed.length; j++) {
+                System.out.print(ed[i][j] + " ");
+            }
+            System.out.println("\n");
+        }
+    }
+	
+	public String searchPathByIndicator(int from, int to) throws EmptyQueueException{
+		String info = "";
+		Vector<String> path;
+		String from2 = cali.searchDueIndicator(from);
+		String to2 = cali.searchDueIndicator(to);
+		info += "Shortest path from: "+ from2 + " to -> "+ to2+": "+"\n";
+		path = cali.constructPath(from, to);
+		info += cali.printPath(path);
+		return info;
+	}
+	
+	public String searchPathByNames(String from, String to) throws EmptyQueueException{
+		String info = "";
+		Vector<String> path;
+		Vertex fromV = cali.searchVertex(from);
+		Vertex toV = cali.searchVertex(to);		
+		info += "Shortest path from: "+ from + " to -> "+ to+": "+"\n";
+		path = cali.constructPath(fromV.getIndicator(), toV.getIndicator());
+		info += cali.printPath(path);
+		return info;
+	}
+
+	public void initialize() throws EmptyQueueException {
+		cali.initialize(cali.getVertices().size(), cali.VertexToMatrixTime());
+		cali.floydWarshallV2(cali.getVertices().size());
+		cali.verticesToHasMap2();
+	}
 
 	public void prim() {
 		int [][] m = cali.primForTime();
@@ -134,5 +164,21 @@ public class TravelGuide {
 			System.out.println("\n");
 		}
 	}
+	/**
+	 * This method gets the Cali graph (just for test it)
+	 * @return Graph as Cali graph
+	 */
+	public Graph getCali() {
+		return cali;
+	}
 
+	public static String getSavePathFile() {
+		return SAVE_PATH_FILE;
+	}
+	
+
+	public static String getSavePathFileTest() {
+		return SAVE_PATH_FILE_TEST;
+	}
+	
 }
