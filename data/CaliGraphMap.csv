@@ -8,10 +8,10 @@ Centro Cultural de Cali,CAM,5,5400,1,1,1,1
 Cristo Rey,Zoologico de Cali,20,10000,0,1,0,1
 El Gato del Rio,Museo de Arte Moderno La Tertulia,3,3000,0,0,0,1
 El Planetario,Monumento al deporte,12,9000,1,1,1,0
-Unidad Deportiva Panamericana,Estadio Olimpio Pascual Guerrero,5,5400,1,1,1,1
-Estadio Olimpio Pascual Guerrero,Plaza de Toros Cañaveralejo ,18,8800,1,1,1,1
+Unidad Deportiva Panamericana,Estadio Olimpico Pascual Guerrero,5,5400,1,1,1,1
+Estadio Olimpico Pascual Guerrero,Plaza de Toros Cañaveralejo ,18,8800,1,1,1,1
 Gobernacion del Valle,Teatro Municipal,2,1,0,0,0,1
-Hospital Universitario del Valle,Estadio Olimpio Pascual Guerrero,2,1,0,0,0,1
+Hospital Universitario del Valle,Estadio Olimpico Pascual Guerrero,2,1,0,0,0,1
 Hotel Torre de Cali,Iglesia La Ermita,5,5400,1,1,1,1
 Iglesia La Ermita,Parque de los Poetas,2,1,0,0,0,1
 Iglesia San Antonio,Sebastian de Belalcazar,5,5400,1,1,1,1
@@ -46,7 +46,7 @@ Mirador Tres Cruces,Monumento a la Solidaridad Empresarial,20,10000,1,1,1,0
 Bulevar del Rio,Plaza Caycedo,2,1,0,0,0,1
 Museo Arqueologico La Merced,Centro Cultural de Cali,2,1,0,0,0,1
 Loma de la Cruz,Gobernacion del Valle,12,6500,0,0,0,1
-Biblioteca Departamental Jorge Garces Borrero,Estadio Olimpio Pascual Guerrero,5,5400,1,1,1,1
+Biblioteca Departamental Jorge Garces Borrero,Estadio Olimpico Pascual Guerrero,5,5400,1,1,1,1
 Centro comercial Unicentro,Parque de la Salud,10,9500,1,1,1,1
 Plaza de Toros Cañaveralejo ,Centro comercial Unicentro,25,16000,1,1,1,0
 Hotel Torre de Cali,Acuaparque de la caña,10,7000,1,1,1,0

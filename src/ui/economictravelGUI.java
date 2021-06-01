@@ -3,6 +3,7 @@ package ui;
 import java.io.File;
 import java.io.IOException;
 
+import exceptions.EmptyQueueException;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -173,7 +174,7 @@ public class economictravelGUI {
 	private static String HOSPITALUNIVERSITARIO = "imagenes\\hospitaluniversitario.jpg";
 	private static String HOTELDARNNCARLTON = "imagenes\\hoteldarnncarlton.jpg";
 	private static String HOTELINTERCONTINENTAL = "imagenes\\hotelintercontinental.jpg";
-	private static String HOTELTORREDECALI = "imagenes\\hoteltorredecali.jpeg";
+	private static String HOTELTORREDECALI = "imagenes\\hoteltorredecali.jpg";
 	private static String IGLESIASANANTONIO = "imagenes\\iglesiasanantonio.jpg";
 	private static String IGLESIASANFRANCISCO = "imagenes\\iglesiasanfrancisco.jpg";
 	private static String JARDINPLAZA = "imagenes\\jardinplaza.jpg";
@@ -188,14 +189,14 @@ public class economictravelGUI {
 	private static String MUSEOARQUEOLOGICO = "imagenes\\museoarqueologicolamerced.jfif";
 	private static String MUSEODELORO = "imagenes\\museodelorocalima.jpg";
 	private static String MUSEODEPARTAMENTALCIENCIA = "imagenes\\museodepartamentalcienciasnaturales.jpg";
-	private static String MUSEOTERTULIA = "imagenes\\museolatertulia.jfif";
+	private static String MUSEOTERTULIA = "imagenes\\museolatertulia.jpg";
 	private static String PARQUEDELASALUD = "imagenes\\parquedelasalud.jpg";
 	private static String PARQUEDELOSPOETAS = "imagenes\\parquedelospoetas.jpg";
 	private static String PASCUALGUERRERO = "imagenes\\pascual guerrero.jpg";
 	private static String PLAZACAICEDO = "imagenes\\plazacaicedo.jpg";
 	private static String PLAZADETOROS = "imagenes\\plazadetoroscañaveralejo.jpg";
 	private static String JAIROVARELA = "imagenes\\plazoletajairovarela.jpeg";
-	private static String TEATROMUNICIPAL = "imagenes\\teatromunicipal.jfif";
+	private static String TEATROMUNICIPAL = "imagenes\\teatromunicipal.jpg";
 	private static String UNICENTRO = "imagenes\\unicentro.jpeg";
 	private static String UNIDADDEPORTIVA = "imagenes\\unidaddeportivapanamericana.png";
 	private static String ZOOLOGICODECALI = "imagenes\\zoologicodecali.jpg";
@@ -210,7 +211,7 @@ public class economictravelGUI {
 
 	}
 
-	public void loadMainMenu() throws IOException {
+	public void loadMainMenu() throws IOException, EmptyQueueException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));
 		fxmlLoader.setController(this);
 		Parent mape = fxmlLoader.load();
@@ -226,8 +227,9 @@ public class economictravelGUI {
         m.setEndY(chipichapeV.getLayoutY());
         m.setVisible(true);
         map.getChildren().add(m);
+        System.out.println(tg.searchPathByNames("CAM","El Planetario"));
+        
 	}
-
 
 	public void move(AnchorPane m) {
 
@@ -843,6 +845,23 @@ public class economictravelGUI {
 		alert.setContentText("Usted seleccionó El Museo de Arte Moderno La Tertulia");
 		alert.showAndWait();
 
+	}
+	
+	public void toShowRoutesOnMap(String a, String v) {
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 

@@ -26,7 +26,7 @@ public class Main extends Application {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("basePane.fxml"));
 		fxmlLoader.setController(guiItem);
 		Parent root = fxmlLoader.load();
-		tg.importData();
+		tg.importData(tg.getSavePathFile());
 		guiItem.loadMainMenu();
 		Scene scene = new Scene(root);
 		primaryStage.setFullScreen(true);
@@ -35,3 +35,4 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 }
+
