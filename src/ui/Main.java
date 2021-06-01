@@ -20,7 +20,7 @@ public class Main {
 			System.out.println("Print prueba");
 			tg.initialize();
 			System.out.println();
-			tg.floydWithPath(9, 15);
+			System.out.println(tg.searchPath(41, 40));
 			System.out.println();
 //			System.out.println("Prim");
 //			tg.prim();

@@ -30,6 +30,17 @@ public class Vertex implements Comparable<Vertex>{
 		return e;
 	}
 
+	public Edge searchEdgeName(String v1, String v2) {
+		Edge e = null;
+		for (int i = 0; i < edges.size(); i++) {
+			if ((edges.get(i).getV1().getName().equals(v1) && edges.get(i).getV2().getName().equals(v2)) ||
+					(edges.get(i).getV1().getName().equals(v2) && edges.get(i).getV2().getName().equals(v1))){
+				e = edges.get(i);
+			}
+		}
+		return e;
+	}
+
 	public boolean addNeighbour(Vertex v) {
 		return !(neighbours.contains(v)) ? neighbours.add(v) : false;
 	}

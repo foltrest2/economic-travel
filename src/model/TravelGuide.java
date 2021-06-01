@@ -102,16 +102,6 @@ public class TravelGuide {
 		}
 	}
 
-	public void printFloydWarshallEdges() throws EmptyQueueException {
-		Edge [][] ed = cali.floydWarshalledges(cali.EdgesToMatrix(), cali.VertexToMatrixTime().length);
-		for (int i = 0; i < ed.length; i++) {
-			for (int j = 0; j < ed.length; j++) {
-				System.out.print(ed[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
-	}
-
 	public void floydWarshall() throws EmptyQueueException {
 		int [][] m = cali.floydWarshall(cali.VertexToMatrixTime(), cali.VertexToMatrixTime().length);
 		for (int i = 0; i < m.length; i++) {
@@ -122,13 +112,15 @@ public class TravelGuide {
 		}
 	}
 
-	public void floydWithPath(int from, int to) throws EmptyQueueException{
+	public String searchPath(int from, int to) throws EmptyQueueException{
+		String info = "";
 		Vector<String> path;
 		String from2 = cali.searchDueIndicator(from);
 		String to2 = cali.searchDueIndicator(to);
-		System.out.println("Shortest path from: "+ from2 + " to -> "+ to2+": ");
+		info += "Shortest path from: "+ from2 + " to -> "+ to2+": "+"\n";
 		path = cali.constructPath(from, to);
-		cali.printPath(path);
+		info += cali.printPath(path);
+		return info;
 	}
 
 	public void initialize() throws EmptyQueueException {

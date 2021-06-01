@@ -134,52 +134,6 @@ public class Graph {
 		return result;
 	}
 
-	public Edge[][] floydWarshalledges(Edge graph[][], int size) {
-		Edge result[][] = new Edge[size][size];
-		for (int i = 0; i < result.length; i++) {
-			for (int j = 0; j < result.length; j++) {
-				result[i][j] = new Edge(null, null, 999999999, 0, null);
-			}
-		}
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				if (graph[i][j] == null) {
-					if (i == j) {
-						result[i][j].setTime(0);
-					}
-				}else {
-					result[i][j] = graph[i][j];
-				}
-			}
-		}
-		for (int k = 0; k < size; k++) {
-			for (int i = 0; i < size; i++) {
-				for (int j = 0; j < size; j++) {
-					if (result[i][k].getTime() + result[k][j].getTime() < result[i][j].getTime()) {
-						//						if(result[i][k].getV1() != null) {
-						result[i][j].addEdgesToGo(result[i][k]);
-						//						} 
-						//						if(result[k][j].getV1() != null) {
-						result[i][j].addEdgesToGo(result[k][j]);
-						//						} 
-						result[i][j].setTime(result[i][k].getTime()+result[k][j].getTime());
-						result[i][j].setV1(result[i][k].getV1());
-						result[i][j].setV2(result[k][j].getV2());
-					}				
-				}
-			}
-		}
-		for (int i = 0; i < result.length; i++) {
-			for (int j = 0; j < result.length; j++) {
-				if(result[i][j].getTime() == 999999999) {
-					result[i][j].setTime(0);
-				}
-			}
-		}
-		floydEdges = result;
-		return result;
-	}
-
 	public void initialize(int V, int [][] graph){	
 		for(int i = 0; i < V; i++){
 			for(int j = 0; j < V; j++){
@@ -193,8 +147,6 @@ public class Graph {
 			for(int j = 0; j < V; j++){
 				dis[i][j] = graph[i][j];
 
-				// No edge between node
-				// i and j
 				if (graph[i][j] == INF)
 					Next[i][j] = Integer.MAX_VALUE;
 				else
@@ -205,13 +157,9 @@ public class Graph {
 
 	public Vector<String> constructPath(int u, int v) throws EmptyQueueException{
 
-		// If there's no path between
-		// node u and v, simply return
-		// an empty array
 		if (Next[u][v] == Integer.MAX_VALUE)
 			return null;
 
-		// Storing the path in a vector
 		Vector<String> path = new Vector<String>();
 
 		path.add(searchDueIndicator(u));
@@ -223,11 +171,14 @@ public class Graph {
 		return path;
 	}
 
-	public void printPath(Vector<String> path){
-		int n = path.size();
-		for(int i = 0; i < n - 1; i++)
-			System.out.print(path.get(i) + " -> ");
-		System.out.print(path.get(n - 1) + "\n");
+	public String printPath(Vector<String> path){
+		String info = "";
+		for(int i = 0; i < path.size() - 1; i++) {
+			info += path.get(i) + " -> ";
+		}
+		info += path.get(path.size() - 1) + "\n";
+
+		return info;
 	}
 
 	public void floydWarshallV3(int V){
@@ -257,24 +208,6 @@ public class Graph {
 		String name = "";	
 		name = verticesv2.get(indicatorToFind).getName();
 		return name;
-	}
-
-	public void printResult(int[][] dist, int[][] next) {
-		System.out.println("pair     dist    path");
-		for (int i = 0; i < next.length; i++) {
-			for (int j = 0; j < next.length; j++) {
-				if (i != j) {
-					int u = i;
-					int v = j;
-					String path = format("%d -> %d    %2d     %s", u, v, dist[i][j], u);
-					do {
-						u = next[u][v];
-						path += " -> " + u;
-					} while (u != v);
-					System.out.println(path);
-				}
-			}
-		}
 	}
 
 	public int[][] primForTime(){
