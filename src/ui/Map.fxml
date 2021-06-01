@@ -1,20 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ScrollPane fx:id="map" layoutX="-127.0" layoutY="-25.0" prefHeight="649.0" prefWidth="635.0">
-         <content>
-            <ImageView fitHeight="1218.0" fitWidth="1700.0">
+      <AnchorPane fx:id="map" layoutX="-979.0" layoutY="-241.0" prefHeight="1200.0" prefWidth="1500.0">
+         <children>
+            <ImageView fitHeight="1687.0" fitWidth="2939.0" layoutX="156.0" layoutY="126.0">
                <image>
                   <Image url="@../../../../Pictures/CaliHD.png" />
                </image>
             </ImageView>
-         </content>
-      </ScrollPane>
+            <Circle fx:id="parquedelasaludV" fill="DODGERBLUE" layoutX="1489.0" layoutY="1513.0" onMouseClicked="#clickOnParquedelasalud" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1483.0" layoutY="1505.0" text="28" />
+            <Circle fx:id="platillosVoladoresV" fill="DODGERBLUE" layoutX="1462.0" layoutY="1399.0" onMouseClicked="#clickOnPlatillosVoladores" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1455.0" layoutY="1390.0" text="39" />
+            <Circle fx:id="unicentroV" fill="DODGERBLUE" layoutX="1378.0" layoutY="1297.0" onMouseClicked="#clickOnUnicentro" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1371.0" layoutY="1288.0" text="41" />
+            <Circle fx:id="jardinPlazaV" fill="DODGERBLUE" layoutX="1537.0" layoutY="1337.0" onMouseClicked="#clickOnJardinPlaza" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1531.0" layoutY="1315.0" prefHeight="44.0" prefWidth="13.0" text="42" />
+            <Label layoutX="1500.0" layoutY="1288.0" text="41" />
+            <Label layoutX="1500.0" layoutY="1288.0" text="41" />
+            <Circle fx:id="monumentoALaAviacionV" fill="DODGERBLUE" layoutX="1217.0" layoutY="959.0" onMouseClicked="#clickOnMonumentoALaAviacion" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="pascualGuerreroV" fill="DODGERBLUE" layoutX="1333.0" layoutY="877.0" onMouseClicked="#clickOnPascualGuerrero" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="unidaddeportivaV" fill="DODGERBLUE" layoutX="1384.0" layoutY="907.0" onMouseClicked="#clickOnUnidadDeportiva" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="plazadetoroscañaveralejoV" fill="DODGERBLUE" layoutX="1304.0" layoutY="1053.0" onMouseClicked="#clickOnPlazadeToros" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1378.0" layoutY="898.0" text="10" />
+            <Label layoutX="1298.0" layoutY="1045.0" text="31" />
+            <Label layoutX="1326.0" layoutY="869.0" text="11" />
+            <Circle fx:id="hospitaluniversitarioV" fill="DODGERBLUE" layoutX="1282.0" layoutY="877.0" onMouseClicked="#clickOnHospitalUniversitario" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1276.0" layoutY="869.0" text="13" />
+            <Label layoutX="1211.0" layoutY="951.0" text="20" />
+            <Circle fx:id="iglesiaSanfranciscoV" fill="DODGERBLUE" layoutX="1496.0" layoutY="721.0" onMouseClicked="#clickOnSanFrancisco" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="catedralsanpedroV" fill="DODGERBLUE" layoutX="1513.0" layoutY="701.0" onMouseClicked="#catedralsanpedro" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="elbochincheV" fill="DODGERBLUE" layoutX="1547.0" layoutY="774.0" onMouseClicked="#clickOnElBochinche" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="museocienciasnaturalesV" fill="DODGERBLUE" layoutX="1422.0" layoutY="782.0" onMouseClicked="#clickOnMuseoCienciasNaturales" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="lomadelacruzV" fill="DODGERBLUE" layoutX="1412.0" layoutY="752.0" onMouseClicked="#clickOnLomaDeLaCruz" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="gobernaciondelValleV" fill="DODGERBLUE" layoutX="1472.0" layoutY="731.0" onMouseClicked="#clickOnGobernaciondelValle" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="bibliotecaJoseGarcesV" fill="DODGERBLUE" layoutX="1368.0" layoutY="791.0" onMouseClicked="#clickOnBibliotecaJoseGarces" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1365.0" layoutY="783.0" text="2" />
+            <Label layoutX="1416.0" layoutY="774.0" text="27" />
+            <Label layoutX="1542.0" layoutY="766.0" text="36" />
+            <Label layoutX="1405.0" layoutY="743.0" text="18" />
+            <Label layoutX="1466.0" layoutY="724.0" text="12" />
+            <Label layoutX="1490.0" layoutY="716.0" text="17" />
+            <Label layoutX="1510.0" layoutY="693.0" text="5" />
+            <Circle fx:id="museolamercedV" fill="DODGERBLUE" layoutX="1436.0" layoutY="682.0" onMouseClicked="#clickOnMuseoLaMerced" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="centroculturadecaliV" fill="DODGERBLUE" layoutX="1423.0" layoutY="702.0" onMouseClicked="#clickOnCentroculturaldecali" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="museodelorocalimaV" fill="DODGERBLUE" layoutX="1462.0" layoutY="702.0" onMouseClicked="#clickOnMuseoDelOroCalima" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="parquedelospoetasV" fill="DODGERBLUE" layoutX="1580.0" layoutY="664.0" onMouseClicked="#clickOnParquedelospoetas" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="bulevardelrioV" fill="DODGERBLUE" layoutX="1507.0" layoutY="671.0" onMouseClicked="#clickOnBulevarDelRio" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="teatromunicipalV" fill="DODGERBLUE" layoutX="1442.0" layoutY="716.0" onMouseClicked="#clickOnTeatroMunicipal" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="iglesialaermitaV" fill="DODGERBLUE" layoutX="1600.0" layoutY="644.0" onMouseClicked="#clickOnIglesiaLaErmita" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="plazaCaycedoV" fill="DODGERBLUE" layoutX="1538.0" layoutY="681.0" onMouseClicked="#clickOnPlazaCaycedo" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1503.0" layoutY="663.0" text="3" />
+            <Label layoutX="1535.0" layoutY="673.0" text="30" />
+            <Label layoutX="1594.0" layoutY="636.0" text="15" />
+            <Label layoutX="1574.0" layoutY="656.0" text="29" />
+            <Label layoutX="1456.0" layoutY="694.0" text="26" />
+            <Label layoutX="1436.0" layoutY="708.0" text="34" />
+            <Label layoutX="1430.0" layoutY="674.0" text="24" />
+            <Label layoutX="1417.0" layoutY="694.0" text="6" />
+            <Circle fx:id="monumentoamariamulataV" fill="DODGERBLUE" layoutX="1237.0" layoutY="645.0" onMouseClicked="#clickOnMariaMulata" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="zoologicodecaliV" fill="DODGERBLUE" layoutX="1124.0" layoutY="716.0" onMouseClicked="#clickOnZoologicodeCali" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="museodelatertuliaV" fill="DODGERBLUE" layoutX="1292.0" layoutY="682.0" onMouseClicked="#clickOnmuseodelatertulia" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="sebastiandebelalczararV" fill="DODGERBLUE" layoutX="1261.0" layoutY="706.0" onMouseClicked="#clickOnSebastiandebelalcazaar" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="hoteldanncarlton" fill="DODGERBLUE" layoutX="1358.0" layoutY="683.0" onMouseClicked="#clickOnhotelDarnnCarlton" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="elgatodelrioV" fill="DODGERBLUE" layoutX="1333.0" layoutY="653.0" onMouseClicked="#clickOnElGatodelRio" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="hotelintercontinentalV" fill="DODGERBLUE" layoutX="1378.0" layoutY="694.0" onMouseClicked="#clickOnHotelIntercontinental" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1352.0" layoutY="673.0" text="38" />
+            <Label layoutX="1372.0" layoutY="686.0" text="37" />
+            <Label layoutX="1118.0" layoutY="708.0" text="35" />
+            <Label layoutX="1231.0" layoutY="637.0" text="22" />
+            <Label layoutX="1251.0" layoutY="698.0" prefHeight="17.0" prefWidth="20.0" text="33" />
+            <Label layoutX="1286.0" layoutY="677.0" text="25" />
+            <Label layoutX="1326.0" layoutY="645.0" text="8" />
+            <Circle fx:id="cristoReyV" fill="DODGERBLUE" layoutX="1002.0" layoutY="811.0" onMouseClicked="#clickOnCristoRey" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="999.0" layoutY="803.0" text="7" />
+            <Circle fx:id="monumentoAlDeporteV" fill="DODGERBLUE" layoutX="2064.0" layoutY="429.0" onMouseClicked="#clickOnMonumentoAlDeporte" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="monumentoalasolidaridadempresarialV" fill="DODGERBLUE" layoutX="1751.0" layoutY="439.0" onMouseClicked="#clickOnMonumentoALaSolidaridadEmpresarial" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="chipichapeV" fill="DODGERBLUE" layoutX="1668.0" layoutY="419.0" onMouseClicked="#clickOnChipichape" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="acuaparquedelacañaV" fill="DODGERBLUE" layoutX="2084.0" layoutY="625.0" onMouseClicked="#clickOnAcuaparquedelaCaña" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="elplanetarioV" fill="DODGERBLUE" layoutX="2386.0" layoutY="593.0" onMouseClicked="#clickOnElPlanetario" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="hoteltorredecaliV" fill="DODGERBLUE" layoutX="1668.0" layoutY="573.0" onMouseClicked="#clickOnHotelTorredeCali" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1662.0" layoutY="565.0" text="14" />
+            <Label layoutX="2380.0" layoutY="585.0" text="9" />
+            <Label layoutX="2078.0" layoutY="617.0" text="1" />
+            <Label layoutX="2058.0" layoutY="421.0" text="23" />
+            <Label layoutX="1745.0" layoutY="431.0" text="21" />
+            <Label layoutX="1662.0" layoutY="411.0" text="40" />
+            <Circle fx:id="miradortrescrucesV" fill="DODGERBLUE" layoutX="1496.0" layoutY="470.0" onMouseClicked="#clickOnMiradorTresCruces" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1490.0" layoutY="461.0" text="19" />
+            <Circle fx:id="jairoVarelaV" fill="DODGERBLUE" layoutX="1463.0" layoutY="615.0" onMouseClicked="#clickOnJairoVarela" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="camV" fill="DODGERBLUE" layoutX="1490.0" layoutY="634.0" onMouseClicked="#clickOnCam" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1487.0" layoutY="626.0" text="4" />
+            <Label layoutX="1456.0" layoutY="609.0" text="32" />
+            <Circle fx:id="iglesiaSanAntonioV" fill="DODGERBLUE" layoutX="1330.0" layoutY="706.0" onMouseClicked="#clickOnSanAntonio" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1323.0" layoutY="700.0" text="16" />
+         </children>
+      </AnchorPane>
    </children>
 </Pane>
