@@ -3,7 +3,6 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import dataStructures.Edge;
 import dataStructures.Graph;
@@ -14,6 +13,7 @@ public class TravelGuide {
 
 	private final static String SEPARATOR = ",";
 //	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
+//	public final static String SAVE_PATH_FILE = "data/TestDataV2.csv"; 
 	public final static String SAVE_PATH_FILE = "data/CaliGraphMapV2.csv";
 
 	private Graph cali;
@@ -89,7 +89,7 @@ public class TravelGuide {
 	}
 
 	public void printEdgeMatrix() throws EmptyQueueException {
-		Edge [][] ed = cali.EdgesToMatrix();
+		Edge [][] ed = cali.edgesToMatrix();
 		for (int i = 0; i < ed.length; i++) {
 			for (int j = 0; j < ed.length; j++) {
 				System.out.print(ed[i][j] + " ");
@@ -99,7 +99,7 @@ public class TravelGuide {
 	}
 
 	public void printFloydWarshallEdges() throws EmptyQueueException {
-		Edge [][] ed = cali.floydWarshalledges(cali.EdgesToMatrix(), cali.VertexToMatrixTime().length);
+		Edge [][] ed = cali.floydWarshallEdges();
 		for (int i = 0; i < ed.length; i++) {
 			for (int j = 0; j < ed.length; j++) {
 				System.out.print(ed[i][j] + " ");
@@ -128,10 +128,10 @@ public class TravelGuide {
 		}
 	}
 
-	public String searchEdgesBetweenPlacesFloyd(String name1, String name2){
-		int m = cali.getVertices().get(name1).getIndicator();
-		int n = cali.getVertices().get(name2).getIndicator();
-		Edge xd[][] = cali.getFloydEdges();
-		return xd[m][n].showRoute();
-	}
+//	public String searchEdgesBetweenPlacesFloyd(String name1, String name2){
+//		int m = cali.getVertices().get(name1).getIndicator();
+//		int n = cali.getVertices().get(name2).getIndicator();
+//		Edge xd[][] = cali.getFloydEdges();
+//		return xd[m][n].showRoute();
+//	}
 }
