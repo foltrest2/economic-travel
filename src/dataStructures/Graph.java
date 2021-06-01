@@ -1,7 +1,6 @@
 package dataStructures;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
@@ -25,9 +24,6 @@ public class Graph {
 		for (String v : vertices.keySet()) {
 			q.enqueue(v);
 		}
-		for (int[] column : m) {
-			Arrays.fill(column, 0);
-		}
 		for (int i = 0; i < vertices.size(); i++) {
 			Vertex v = vertices.get(q.dequeue());
 			for (int j = 0; j < vertices.size(); j++) {	
@@ -47,9 +43,6 @@ public class Graph {
 		Queue<String> q = new Queue<>();
 		for (String v : vertices.keySet()) {
 			q.enqueue(v);
-		}
-		for (int[] column : m) {
-			Arrays.fill(column, 0);
 		}
 		for (int i = 0; i < vertices.size(); i++) {
 			Vertex v = vertices.get(q.dequeue());

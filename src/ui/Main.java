@@ -16,14 +16,13 @@ public class Main {
 //			System.out.println("Edge matrix");
 //			tg.printEdgeMatrix();
 			System.out.println("normal floyd");
-			tg.floydWarshall();
+			tg.floydWarshallTime();
 			System.out.println("Floyd edges");
 			tg.printFloydWarshallEdges();
 			System.out.println("Prim");
 			tg.prim();
 			System.out.println();
-//			System.out.println(tg.searchEdgesBetweenPlacesFloyd("Estadio Olimpico Pascual Guerrero","Cristo Rey"));
-//			System.out.println(tg.searchEdgesBetweenPlacesFloyd("El Bochinche","Chipichape"));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (EmptyQueueException e) {

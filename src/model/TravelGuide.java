@@ -108,8 +108,15 @@ public class TravelGuide {
 		}
 	}
 
-	public void floydWarshall() throws EmptyQueueException {
+	public void floydWarshallTime() throws EmptyQueueException {
 		int [][] m = cali.floydWarshall(cali.VertexToMatrixTime(), cali.VertexToMatrixTime().length);
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m.length; j++) {
+				System.out.print(m[i][j] + " ");
+			}
+			System.out.println("\n");
+		}
+		m = cali.floydWarshall(cali.VertexToMatrixCost(), cali.VertexToMatrixCost().length);
 		for (int i = 0; i < m.length; i++) {
 			for (int j = 0; j < m.length; j++) {
 				System.out.print(m[i][j] + " ");
@@ -128,10 +135,4 @@ public class TravelGuide {
 		}
 	}
 
-//	public String searchEdgesBetweenPlacesFloyd(String name1, String name2){
-//		int m = cali.getVertices().get(name1).getIndicator();
-//		int n = cali.getVertices().get(name2).getIndicator();
-//		Edge xd[][] = cali.getFloydEdges();
-//		return xd[m][n].showRoute();
-//	}
 }
