@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import dataStructures.Edge;
 import dataStructures.Graph;
@@ -14,9 +15,10 @@ import exceptions.EmptyQueueException;
 
 public class TravelGuide {
 
+
 	private final static String SEPARATOR = ",";
-	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
-//	public final static String SAVE_PATH_FILE = "data/CaliGraphMapV2.csv";
+//	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
+	public final static String SAVE_PATH_FILE = "data/CaliGraphMapV2.csv";
 
 	private Graph cali;
 
@@ -119,7 +121,22 @@ public class TravelGuide {
 			System.out.println("\n");
 		}
 	}
-	
+
+	public void floydWithPath(int from, int to) throws EmptyQueueException{
+		Vector<String> path;
+		String from2 = cali.searchDueIndicator(from);
+		String to2 = cali.searchDueIndicator(to);
+		System.out.println("Shortest path from: "+ from2 + " to -> "+ to2+": ");
+		path = cali.constructPath(from, to);
+		cali.printPath(path);
+	}
+
+	public void initialize() throws EmptyQueueException {
+		cali.initialize(cali.getVertices().size(), cali.VertexToMatrixTime());
+		cali.floydWarshallV3(cali.getVertices().size());
+		cali.verticesToHasMap2();
+	}
+
 	public void prim() {
 		int [][] m = cali.primForTime();
 		for (int i = 0; i < m.length; i++) {

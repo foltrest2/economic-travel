@@ -46,7 +46,7 @@ public class Vertex implements Comparable<Vertex>{
 			return true;
 		}
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -54,6 +54,7 @@ public class Vertex implements Comparable<Vertex>{
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public int getIndicator() {
 		return indicator;
 	}

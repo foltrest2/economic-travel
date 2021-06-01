@@ -1,8 +1,12 @@
 package dataStructures;
 
+import static java.lang.String.format;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.PriorityQueue;
+import java.util.Vector;
 
 import exceptions.EmptyQueueException;
 
@@ -10,11 +14,22 @@ public class Graph {
 
 	private HashMap<Integer,Edge> edges;
 	private HashMap<String, Vertex> vertices;
+	private HashMap<Integer, Vertex> verticesv2;
 	private Edge[][] floydEdges;
+
+	public static final int MAXN = 200;
+
+	// Infinite value for array
+	private static int INF = (int) 1e7;
+
+	private static int dis[][] = new int[MAXN][MAXN];
+	private static int Next[][] = new int[MAXN][MAXN];
+
 
 	public Graph() {
 		edges = new HashMap<>();
 		vertices = new HashMap<>();
+		verticesv2 = new HashMap<>();
 		floydEdges = new Edge[vertices.size()][vertices.size()];
 	}
 
@@ -101,20 +116,11 @@ public class Graph {
 				}
 			}
 		}
-
-		int[][] next = new int[size][size];
-		for (int i = 0; i < next.length; i++) {
-			for (int j = 0; j < next.length; j++)
-				if (i != j)
-					next[i][j] = j + 1;
-		}
-
 		for (int k = 0; k < size; k++) {
 			for (int i = 0; i < size; i++) {
 				for (int j = 0; j < size; j++) {
 					if (result[i][k] + result[k][j] < result[i][j])
 						result[i][j] = result[i][k] + result[k][j];
-					
 				}
 			}
 		}
@@ -127,7 +133,7 @@ public class Graph {
 		}
 		return result;
 	}
-	
+
 	public Edge[][] floydWarshalledges(Edge graph[][], int size) {
 		Edge result[][] = new Edge[size][size];
 		for (int i = 0; i < result.length; i++) {
@@ -172,6 +178,103 @@ public class Graph {
 		}
 		floydEdges = result;
 		return result;
+	}
+
+	public void initialize(int V, int [][] graph){	
+		for(int i = 0; i < V; i++){
+			for(int j = 0; j < V; j++){
+				if(graph[i][j] == 0 && i != j) {
+					graph[i][j] = INF;
+				}
+			}
+		}	
+
+		for(int i = 0; i < V; i++){
+			for(int j = 0; j < V; j++){
+				dis[i][j] = graph[i][j];
+
+				// No edge between node
+				// i and j
+				if (graph[i][j] == INF)
+					Next[i][j] = Integer.MAX_VALUE;
+				else
+					Next[i][j] = j;
+			}
+		}
+	}
+
+	public Vector<String> constructPath(int u, int v) throws EmptyQueueException{
+
+		// If there's no path between
+		// node u and v, simply return
+		// an empty array
+		if (Next[u][v] == Integer.MAX_VALUE)
+			return null;
+
+		// Storing the path in a vector
+		Vector<String> path = new Vector<String>();
+
+		path.add(searchDueIndicator(u));
+
+		while (u != v){
+			u = Next[u][v];
+			path.add(searchDueIndicator(u));
+		}
+		return path;
+	}
+
+	public void printPath(Vector<String> path){
+		int n = path.size();
+		for(int i = 0; i < n - 1; i++)
+			System.out.print(path.get(i) + " -> ");
+		System.out.print(path.get(n - 1) + "\n");
+	}
+
+	public void floydWarshallV3(int V){
+		for(int k = 0; k < V; k++){
+			for(int i = 0; i < V; i++){
+				for(int j = 0; j < V; j++){
+
+					if (dis[i][k] == INF || dis[k][j] == INF)
+						continue;
+
+					if (dis[i][j] > dis[i][k] +dis[k][j]){
+						dis[i][j] = dis[i][k] + dis[k][j];
+						Next[i][j] = Next[i][k];
+					}
+				}
+			}
+		}
+	}
+
+	public void verticesToHasMap2() {
+		for (String v: vertices.keySet()) {		
+			verticesv2.put(vertices.get(v).getIndicator(),vertices.get(v));
+		}
+	}
+
+	public String searchDueIndicator(int indicatorToFind) throws EmptyQueueException {
+		String name = "";	
+		name = verticesv2.get(indicatorToFind).getName();
+		return name;
+	}
+
+	public void printResult(int[][] dist, int[][] next) {
+		System.out.println("pair     dist    path");
+		for (int i = 0; i < next.length; i++) {
+			for (int j = 0; j < next.length; j++) {
+				if (i != j) {
+					int u = i;
+					int v = j;
+					String path = format("%d -> %d    %2d     %s", u, v, dist[i][j], u);
+					do {
+						u = next[u][v];
+						path += " -> " + u;
+					} while (u != v);
+					System.out.println(path);
+				}
+			}
+		}
 	}
 
 	public int[][] primForTime(){
