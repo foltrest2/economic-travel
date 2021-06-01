@@ -44,7 +44,7 @@ public class Graph {
 		}
 		return m;
 	}
-
+//tested
 	public Edge [][] edgesToMatrix() throws EmptyQueueException {
 		initializeRoutes();
 		Edge [][] ed = new Edge[vertices.size()][vertices.size()];

@@ -69,5 +69,4 @@ public class Edge {
 	public String toString() {
 		return ""+time;
 	}
-
 }

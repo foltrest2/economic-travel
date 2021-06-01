@@ -169,7 +169,6 @@ public class TravelGuide {
 		return SAVE_PATH_FILE;
 	}
 	
-
 	public static String getSavePathFileTest() {
 		return SAVE_PATH_FILE_TEST;
 	}
