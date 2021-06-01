@@ -5,16 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.TravelGuide;
 
 public class Main extends Application {
 
 	private economictravelGUI guiItem;
-	private TravelGuide tg;
 
 	public Main() {
-		tg = new TravelGuide();
-		guiItem = new economictravelGUI(tg);
+		
+		guiItem = new economictravelGUI();
 	}
 
 	public static void main(String[] args) {
@@ -26,7 +24,6 @@ public class Main extends Application {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("basePane.fxml"));
 		fxmlLoader.setController(guiItem);
 		Parent root = fxmlLoader.load();
-		tg.importData(tg.getSavePathFile());
 		guiItem.loadMainMenu();
 		Scene scene = new Scene(root);
 		primaryStage.setFullScreen(true);

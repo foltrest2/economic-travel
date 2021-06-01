@@ -2,7 +2,10 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Vector;
 
+import dataStructures.Vertex;
 import exceptions.EmptyQueueException;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -202,12 +205,13 @@ public class economictravelGUI {
 	private static String ZOOLOGICODECALI = "imagenes\\zoologicodecali.jpg";
 	private static String PLATILLOSVOLADORES = "imagenes\\platillosvoladores.jpg";
 	Line m;
+	ArrayList<Circle> circles;
 	
+	public economictravelGUI() {
 
-	public economictravelGUI(TravelGuide t) {
-
-		t=tg;
 		m = new Line();
+		tg = new TravelGuide();
+
 
 	}
 
@@ -215,24 +219,98 @@ public class economictravelGUI {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));
 		fxmlLoader.setController(this);
 		Parent mape = fxmlLoader.load();
+		tg.importData(tg.getSavePathFile());
+		tg.initialize();
 		basePane.setCenter(mape);
 		zoom(map);
-		m.setStrokeType(StrokeType.OUTSIDE);
-		m.setFill(Color.BLACK);
-		m.setStroke(Color.GREEN);
-		m.setStrokeWidth(2);
-        m.setStartX(camV.getLayoutX());
-        m.setStartY(camV.getLayoutY());
-        m.setEndX(chipichapeV.getLayoutX());
-        m.setEndY(chipichapeV.getLayoutY());
-        m.setVisible(true);
-        map.getChildren().add(m);
-        System.out.println(tg.searchPathByNames("CAM","El Planetario"));
-        
+		addCirclesToList();
+		putLinesToShowRoute(getArrayListOfVertexOfRoute("CAM","El Planetario"));
+		System.out.println(tg.getCali().searchVertex("Restaurante el Bochinche").getIndicator());
+		System.out.println(circles.get(tg.getCali().searchVertex("Restaurante el Bochinche").getIndicator()));
+	}
+	
+	public void addCirclesToList() {
+		
+		circles = new ArrayList<>();
+		circles.add(acuaparquedelacañaV);
+		circles.add(elplanetarioV);
+		circles.add(bibliotecaJoseGarcesV);
+		circles.add(museocienciasnaturalesV);
+		circles.add(bulevardelrioV);
+		circles.add(camV);
+		circles.add(catedralsanpedroV);
+		circles.add(iglesiaSanfranciscoV);
+		circles.add(centroculturadecaliV);
+		circles.add(cristoReyV);
+		circles.add(zoologicodecaliV);
+		circles.add(elgatodelrioV);
+		circles.add(museodelatertuliaV);
+		circles.add(monumentoAlDeporteV);
+		circles.add(unidaddeportivaV);
+		circles.add(pascualGuerreroV);
+		circles.add(plazadetoroscañaveralejoV);
+		circles.add(gobernaciondelValleV);
+		circles.add(teatromunicipalV);
+		circles.add(hospitaluniversitarioV);
+		circles.add(hoteltorredecaliV);
+		circles.add(iglesialaermitaV);
+		circles.add(parquedelospoetasV);
+		circles.add(iglesiaSanAntonioV);
+		circles.add(sebastiandebelalczararV);
+		circles.add(lomadelacruzV);
+		circles.add(miradortrescrucesV);
+		circles.add(monumentoamariamulataV);
+		circles.add(monumentoALaAviacionV);
+		circles.add(monumentoalasolidaridadempresarialV);
+		circles.add(museolamercedV);
+		circles.add(museodelorocalimaV);
+		circles.add(parquedelasaludV);
+		circles.add(jardinPlazaV);
+		circles.add(plazaCaycedoV);
+		circles.add(jairoVarelaV);
+		circles.add(elbochincheV);
+		circles.add(hotelintercontinentalV);
+		circles.add(hoteldanncarlton);
+		circles.add(platillosVoladoresV);
+		circles.add(chipichapeV);
+		circles.add(unicentroV);	
+	}
+
+	public ArrayList<Vertex> getArrayListOfVertexOfRoute(String nv1, String nv2) throws EmptyQueueException {
+
+
+		ArrayList<Vertex> route = new ArrayList<>();
+		int i1 = tg.getCali().searchVertex(nv1).getIndicator();
+		int i2 = tg.getCali().searchVertex(nv2).getIndicator();
+		Vector<String> routeBefore = tg.getCali().constructPath(i1,i2);
+
+		for(int i = 0; i< tg.getCali().constructPath(i1, i2).size(); i++) {
+              
+			Vertex c = tg.getCali().searchVertex(routeBefore.get(i));
+			route.add(c);
+		}
+		return route;
+	}
+
+	public void  putLinesToShowRoute(ArrayList<Vertex> vertex) {
+
+		for(int i = 0 ; i< vertex.size()-1; i++) {
+			
+			Line l = new Line();
+			l.setStartX(circles.get(vertex.get(i).getIndicator()).getLayoutX());
+			l.setStartY(circles.get(vertex.get(i).getIndicator()).getLayoutY());
+			l.setEndX(circles.get(vertex.get(i+1).getIndicator()).getLayoutX());
+			l.setEndY(circles.get(vertex.get(i+1).getIndicator()).getLayoutY());
+			l.setStrokeType(StrokeType.OUTSIDE);
+			l.setFill(Color.BLACK);
+			l.setStroke(Color.BLUE);
+			l.setStrokeWidth(2);
+			map.getChildren().add(l);	
+		}
+		
 	}
 
 	public void move(AnchorPane m) {
-
 
 
 	}
@@ -632,10 +710,10 @@ public class economictravelGUI {
 		alert.setHeaderText("Lugar #24");
 		alert.setContentText("Usted seleccionó El Museo Arqueologico La Merced");
 		alert.showAndWait();
-		
+
 
 	}
-	
+
 
 	@FXML
 	void clickOnParquedelasalud(MouseEvent event) {
@@ -705,7 +783,7 @@ public class economictravelGUI {
 		alert.setContentText("Usted seleccionó La Plaza Caicedo");
 		alert.showAndWait();
 	}
-	
+
 
 	@FXML
 	void clickOnPlazadeToros(MouseEvent event) {
@@ -846,22 +924,22 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-	
+
 	public void toShowRoutesOnMap(String a, String v) {
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 
 

@@ -165,7 +165,7 @@ public class TravelGuide {
 		return cali;
 	}
 
-	public  String getSavePathFile() {
+	public String getSavePathFile() {
 		return SAVE_PATH_FILE;
 	}
 	
