@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -154,7 +153,7 @@ public class economictravelGUI {
 	ImageView imav;
 	Image i;
 	File f;
-	
+
 	//constantes con las rutas de las imagenes de cada lugar
 	private static String ACUAPARQUE = "imagenes\\acuaparque.jpg";
 	private static String BIBLIOTECAJORGEGARCES = "imagenes\\bibliotecajorgegarces.jpg";
@@ -170,7 +169,7 @@ public class economictravelGUI {
 	private static String GOBERNACIONDELVALLE = "imagenes\\gobernaciondelvalle.jpg";
 	private static String HOSPITALUNIVERSITARIO = "imagenes\\hospitaluniversitario.jpg";
 	private static String HOTELDARNNCARLTON = "imagenes\\hoteldarnncarlton.jpg";
-	private static String HOTELINTERNCONTINENTAL = "imagenes\\hotelintercontinental.jpg";
+	private static String HOTELINTERCONTINENTAL = "imagenes\\hotelintercontinental.jpg";
 	private static String HOTELTORREDECALI = "imagenes\\hoteltorredecali.jpeg";
 	private static String IGLESIASANANTONIO = "imagenes\\iglesiasanantonio.jpg";
 	private static String IGLESIASANFRANCISCO = "imagenes\\iglesiasanfrancisco.jpg";
@@ -194,14 +193,15 @@ public class economictravelGUI {
 	private static String PLAZADETOROS = "imagenes\\plazadetoroscañaveralejo.jpg";
 	private static String JAIROVARELA = "imagenes\\plazoletajairovarela.jpeg";
 	private static String TEATROMUNICIPAL = "imagenes\\teatromunicipal.jfif";
-	private static String unicentro = "imagenes\\unicentro.jpeg";
+	private static String UNICENTRO = "imagenes\\unicentro.jpeg";
 	private static String UNIDADDEPORTIVA = "imagenes\\unidaddeportivapanamericana.png";
 	private static String ZOOLOGICODECALI = "imagenes\\zoologicodecali.jpg";
-	
+	private static String PLATILLOSVOLADORES = "imagenes\\platillosvoladores.jpg";
+
 	public economictravelGUI(TravelGuide t) {
 
 		t=tg;
-		
+
 	}
 
 	public void loadMainMenu() throws IOException {
@@ -210,7 +210,7 @@ public class economictravelGUI {
 		Parent mape = fxmlLoader.load();
 		basePane.setCenter(mape);
 		zoom(map);
-		
+
 
 
 
@@ -245,7 +245,7 @@ public class economictravelGUI {
 
 	@FXML
 	void catedralsanpedro(MouseEvent event) {
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		f = new File(CATEDRALMETROPOLITANA);
 		i = new Image(f.toURI().toString());
@@ -272,7 +272,7 @@ public class economictravelGUI {
 
 	@FXML
 	void clickOnBibliotecaJoseGarces(MouseEvent event) {
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		f = new File(BIBLIOTECAJORGEGARCES);
 		i = new Image(f.toURI().toString());
@@ -286,7 +286,7 @@ public class economictravelGUI {
 
 	@FXML
 	void clickOnBulevarDelRio(MouseEvent event) {
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		f = new File(BULEVARDELRIO);
 		i = new Image(f.toURI().toString());
@@ -300,7 +300,7 @@ public class economictravelGUI {
 
 	@FXML
 	void clickOnCam(MouseEvent event) {
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		f = new File(CAM);
 		i = new Image(f.toURI().toString());
@@ -315,7 +315,7 @@ public class economictravelGUI {
 
 	@FXML
 	void clickOnCentroculturaldecali(MouseEvent event) {
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		f = new File(CENTROCULTURALCALI);
 		i = new Image(f.toURI().toString());
@@ -328,7 +328,7 @@ public class economictravelGUI {
 
 	@FXML
 	void clickOnChipichape(MouseEvent event) {
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		f = new File(CHIPICHAPE);
 		i = new Image(f.toURI().toString());
@@ -338,12 +338,12 @@ public class economictravelGUI {
 		alert.setContentText("Usted seleccionó el Centro Comercial Chipichape");
 		alert.showAndWait();
 
-	
+
 	}
 
 	@FXML
 	void clickOnCristoRey(MouseEvent event) {
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		f = new File(CRISTOREY);
 		i = new Image(f.toURI().toString());
@@ -357,7 +357,7 @@ public class economictravelGUI {
 
 	@FXML
 	void clickOnElBochinche(MouseEvent event) {
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		f = new File(ELBOCHINCHE);
 		i = new Image(f.toURI().toString());
@@ -371,168 +371,462 @@ public class economictravelGUI {
 
 	@FXML
 	void clickOnElGatodelRio(MouseEvent event) {
-		
-		
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(ELGATODELRIO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #8");
+		alert.setContentText("Usted seleccionó El Gato del Rio");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnElPlanetario(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(ELPLANETARIO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #9");
+		alert.setContentText("Usted seleccionó El Planetario");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnGobernaciondelValle(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(GOBERNACIONDELVALLE);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #12");
+		alert.setContentText("Usted seleccionó La Gobernación del Valle");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnHospitalUniversitario(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(HOSPITALUNIVERSITARIO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #13");
+		alert.setContentText("Usted seleccionó El Hospital Universitario del Valle");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnHotelIntercontinental(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(HOTELINTERCONTINENTAL);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #37");
+		alert.setContentText("Usted seleccionó El Hotel Intercontinental");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnHotelTorredeCali(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(HOTELTORREDECALI);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #14");
+		alert.setContentText("Usted seleccionó El Hotel Torre de Cali");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnIglesiaLaErmita(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(LAERMITA);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #15");
+		alert.setContentText("Usted seleccionó La Iglesia La Ermita");
+		alert.showAndWait();
+
 
 	}
 
 	@FXML
 	void clickOnJairoVarela(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(JAIROVARELA);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #32");
+		alert.setContentText("Usted seleccionó La Plazoleta Jairo Varela");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnJardinPlaza(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(JARDINPLAZA);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #42");
+		alert.setContentText("Usted seleccionó el Centro Comercial Jardin Plaza");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnLomaDeLaCruz(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(LOMADELACRUZ);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #18");
+		alert.setContentText("Usted seleccionó La Loma de la Cruz");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnMariaMulata(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MONUMENTOALAMARIA);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #22");
+		alert.setContentText("Usted seleccionó El Monumento a Maria Mulata");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnMiradorTresCruces(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MIRADORTRESCRUCES);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #19");
+		alert.setContentText("Usted seleccionó El Mirador Tres Cruces");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnMonumentoALaAviacion(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MONUMENTOALAVIACION);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #20");
+		alert.setContentText("Usted seleccionó El Monumento a la Aviación");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnMonumentoALaSolidaridadEmpresarial(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MONUMENTOALASOLIDARIDAD);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #21");
+		alert.setContentText("Usted seleccionó El Monumento a la Solidaridad Empresarial");
+		alert.showAndWait();
 	}
 
 	@FXML
 	void clickOnMonumentoAlDeporte(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MONUMENTOALDEPORTE);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #23");
+		alert.setContentText("Usted seleccionó el Monumento al Deporte");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnMuseoCienciasNaturales(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MUSEODEPARTAMENTALCIENCIA);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #27");
+		alert.setContentText("Usted seleccionó El Museo Departamental de Ciencias Naturales");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnMuseoDelOroCalima(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MUSEODELORO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #26");
+		alert.setContentText("Usted seleccionó El Museo del oro Camila");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnMuseoLaMerced(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MUSEOARQUEOLOGICO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #24");
+		alert.setContentText("Usted seleccionó El Museo Arqueologico La Merced");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnParquedelasalud(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(PARQUEDELASALUD);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #28");
+		alert.setContentText("Usted seleccionó El Parque de la Salud");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnParquedelospoetas(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(PARQUEDELOSPOETAS);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #29");
+		alert.setContentText("Usted seleccionó El Parque de los Poetas");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnPascualGuerrero(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(PASCUALGUERRERO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #11");
+		alert.setContentText("Usted seleccionó El Estadio Olimpico Pascual Guerrero");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnPlatillosVoladores(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(PLATILLOSVOLADORES);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #39");
+		alert.setContentText("Usted seleccionó El Restaurante Platillos Voladores");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnPlazaCaycedo(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(PLAZACAICEDO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #30");
+		alert.setContentText("Usted seleccionó La Plaza Caicedo");
+		alert.showAndWait();
 	}
 
 	@FXML
 	void clickOnPlazadeToros(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(PLAZADETOROS);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #31");
+		alert.setContentText("Usted seleccionó La Plaza de Toros Cañaveralejo");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnSanAntonio(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(IGLESIASANANTONIO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #16");
+		alert.setContentText("Usted seleccionó La Iglesia San Antonio");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnSanFrancisco(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(IGLESIASANFRANCISCO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #17");
+		alert.setContentText("Usted seleccionó La Iglesia San Francisco");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnSebastiandebelalcazaar(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MONUMENTOASEBASTIAN);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #33");
+		alert.setContentText("Usted seleccionó El Monumento de Sebastian de Belalcazar");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnTeatroMunicipal(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(TEATROMUNICIPAL);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #34");
+		alert.setContentText("Usted seleccionó El Teatro Municipal");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnUnicentro(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(UNICENTRO);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #41");
+		alert.setContentText("Usted seleccionó El Centro Comercial Unicentro");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnUnidadDeportiva(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(UNIDADDEPORTIVA);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #10");
+		alert.setContentText("Usted seleccionó La Unidad Deportiva Panamericana");
+		alert.showAndWait();
 
 	}
 
 	@FXML
 	void clickOnZoologicodeCali(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(ZOOLOGICODECALI);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #35");
+		alert.setContentText("Usted seleccionó El Zoologico de Cali");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnhotelDarnnCarlton(MouseEvent event) {
 
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(HOTELDARNNCARLTON);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #38");
+		alert.setContentText("Usted seleccionó El Hotel Darrn Carlton");
+		alert.showAndWait();
+
 	}
 
 	@FXML
 	void clickOnmuseodelatertulia(MouseEvent event) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		f = new File(MUSEOTERTULIA);
+		i = new Image(f.toURI().toString());
+		imav = new ImageView(i);
+		alert.setGraphic(imav);
+		alert.setHeaderText("Lugar #25");
+		alert.setContentText("Usted seleccionó El Museo de Arte Moderno La Tertulia");
+		alert.showAndWait();
 
 	}
 
