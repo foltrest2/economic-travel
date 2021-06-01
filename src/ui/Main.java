@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		 TravelGuide tg = new TravelGuide();
 		 try {
-			tg.importData(TravelGuide.getSavePathFileTest());
+			tg.importData(tg.getSavePathFileTest());
 			System.out.println("Normal matrix");
 			tg.printMatrix();
 //			System.out.println("Edge matrix");

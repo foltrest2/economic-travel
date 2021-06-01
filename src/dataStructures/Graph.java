@@ -24,7 +24,7 @@ public class Graph {
 		verticesv2 = new HashMap<>();
 		routes = new ArrayList<ArrayList<ArrayList<Edge>>>();
 	}
-//tested
+	//tested
 	public int [][] VertexToMatrixTime() throws EmptyQueueException{
 		int [][] m = new int [vertices.size()][vertices.size()];
 		Queue<String> q = new Queue<>();
@@ -44,7 +44,7 @@ public class Graph {
 		}
 		return m;
 	}
-//tested
+	//tested
 	public Edge [][] edgesToMatrix() throws EmptyQueueException {
 		initializeRoutes();
 		Edge [][] ed = new Edge[vertices.size()][vertices.size()];
@@ -61,7 +61,7 @@ public class Graph {
 		}	
 		return ed;
 	}
-
+	//tested
 	public int[][] floydWarshall(int graph[][], int size) {
 		int result[][] = new int[size][size];
 		for (int i = 0; i < result.length; i++) {
@@ -112,7 +112,7 @@ public class Graph {
 			}
 		}
 	}
-
+	//tested
 	public Edge[][] floydWarshallEdges() throws EmptyQueueException {
 		Edge result[][] = edgesToMatrix();
 		for (int k = 0; k < result.length; k++) {
@@ -179,7 +179,7 @@ public class Graph {
 		}
 		return result;
 	}
-
+	//tested
 	public int[][] primForTime(){
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
 		for (String v : vertices.keySet()) {
@@ -206,7 +206,7 @@ public class Graph {
 		}
 		return m;
 	}
-
+	//tested
 	public int[][] primForCost(){
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
 		for (String v : vertices.keySet()) {
@@ -233,7 +233,7 @@ public class Graph {
 		}	
 		return m;
 	}
-	
+	//tested	
 	public Vector<String> constructPath(int u, int v) throws EmptyQueueException{
 		if (Next[u][v] == Integer.MAX_VALUE)
 			return null;
@@ -255,7 +255,7 @@ public class Graph {
 
 		return info;
 	}
-	
+	//implicit tested	
 	public void initialize(int V, int [][] graph){	
 		for(int i = 0; i < V; i++){
 			for(int j = 0; j < V; j++){
@@ -276,7 +276,7 @@ public class Graph {
 			}
 		}
 	}
-	
+	//implicit tested		
 	public void initializeRoutes() {
 		for (int i = 0; i < vertices.size(); i++) {	
 			routes.add(new ArrayList<ArrayList<Edge>>());	
@@ -287,36 +287,19 @@ public class Graph {
 			}
 		}
 	}
-	
-	public boolean addVertex(String name, int indicator) {
-		if (vertices.containsKey(name)) {
-			return false;
-		}
-		else {
-			Vertex v = new Vertex(name, indicator);
-			vertices.put(name, v);
-			return true;
-		}
-	}
-	
-	public void addEdge(Vertex v1, Vertex v2, int time, int cost, int [] transport) {
-		Edge e = new Edge(v1, v2, time, cost, transport);
-		edges.put(e.hashCode(), e);
-		v1.addConnection(v1, v2, e);
-	}
-	
+	//tested	
 	public void verticesToHasMap2() {
 		for (String v: vertices.keySet()) {		
 			verticesv2.put(vertices.get(v).getIndicator(),vertices.get(v));
 		}
 	}
-
+	//tested
 	public String searchDueIndicator(int indicatorToFind) throws EmptyQueueException {
 		String name = "";	
 		name = verticesv2.get(indicatorToFind).getName();
 		return name;
 	}
-	
+	//tested
 	public Vertex searchVertex(String name) {
 		return vertices.get(name);
 	}
