@@ -256,12 +256,8 @@ public class GraphTest {
 	public void testSearchDueIndicator()  {
 		setupScenary1();
 		tg.getCali().verticesToHasMap2();
-		try {
-			assertEquals("Portada al mar", tg.getCali().searchDueIndicator(4), "Fail test");
-			assertEquals("El Bochinche", tg.getCali().searchDueIndicator(0), "Fail test");
-		} catch (EmptyQueueException e) {
-			e.printStackTrace();
-		}
+		assertEquals("Portada al mar", tg.getCali().searchDueIndicator(4), "Fail test");
+		assertEquals("El Bochinche", tg.getCali().searchDueIndicator(0), "Fail test");
 	}
 	
 	@Test

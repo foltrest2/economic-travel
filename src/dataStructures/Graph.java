@@ -117,7 +117,10 @@ public class Graph {
 		}
 		return result;
 	}
-
+	/**
+	 * This method makes a Floyd Warshall for the time with a little modification to save the vertex by box
+	 * @param V is the integer of matrix size
+	 */
 	public void floydWarshallV2Time(int V){
 		for(int k = 0; k < V; k++){
 			for(int i = 0; i < V; i++){
@@ -132,7 +135,10 @@ public class Graph {
 			}
 		}
 	}
-
+	/**
+	 * This method makes a Floyd Warshall for the cost with a little modification to save the vertex by box
+	 * @param V is the integer of matrix size
+	 */
 	public void floydWarshallV2Cost(int V){
 		for(int k = 0; k < V; k++){
 			for(int i = 0; i < V; i++){
@@ -323,7 +329,12 @@ public class Graph {
 		}	
 		return m;
 	}
-	
+	/**
+	 * This method makes and returns the route per box after make the floydWarshallV2Time
+	 * @param u Integer is the integer of vertex1 indicator
+	 * @param v Integer is the integer of vertex2 indicator
+	 * @return path as Vector of the list vertices names
+	 */
 	public Vector<String> constructPathTime(int u, int v) throws EmptyQueueException{
 		if (next[u][v] == Integer.MAX_VALUE)
 			return null;
@@ -335,7 +346,12 @@ public class Graph {
 		}
 		return path;
 	}
-	
+	/**
+	 * This method makes and returns the route per box after make the floydWarshallV2Cost
+	 * @param u Integer is the integer of vertex1 indicator
+	 * @param v Integer is the integer of vertex2 indicator
+	 * @return Vector as String of the list vertices names
+	 */
 	public Vector<String> constructPathCost(int u, int v) throws EmptyQueueException{
 		if (nextCost[u][v] == Integer.MAX_VALUE)
 			return null;
@@ -347,7 +363,11 @@ public class Graph {
 		}
 		return path;
 	}
-
+	/**
+	 * This method makes and returns the route per box after make the floydWarshallV2Cost
+	 * @param path Vector as the list of places stored in a box for the time or for the cost
+	 * @return info as String of the list vertices names
+	 */
 	public String printPath(Vector<String> path){
 		String info = "";
 		for(int i = 0; i < path.size() - 1; i++) {
@@ -357,7 +377,11 @@ public class Graph {
 
 		return info;
 	}
-
+	/**
+	 * This method initialize the static matrix next with times
+	 * @param v integer as the matrix size
+	 * @param graph integer as the graph times
+	 */
 	public void initializeTime(int V, int [][] graph){	
 		for(int i = 0; i < V; i++){
 			for(int j = 0; j < V; j++){
@@ -378,7 +402,11 @@ public class Graph {
 			}
 		}
 	}
-
+	/**
+	 * This method initialize the static matrix next with costs
+	 * @param v integer as the matrix size
+	 * @param graph integer as the graph times
+	 */
 	public void initializeCost(int V, int [][] graph){	
 		for(int i = 0; i < V; i++){
 			for(int j = 0; j < V; j++){
@@ -410,7 +438,12 @@ public class Graph {
 			}
 		}
 	}
-	
+	/**
+	 * This method adds a vertex to the graph
+	 * @param name String as the vertex name
+	 * @param indicator integer as the vertex indicator
+	 * @return boolean that notify the successfully added or not
+	 */
 	public boolean addVertex(String name, int indicator) {
 		if (vertices.containsKey(name)) {
 			return false;
@@ -421,25 +454,43 @@ public class Graph {
 			return true;
 		}
 	}
-
+	/**
+	 * This method adds an edge to the graph
+	 * @param v1 Vertex as the first one vertex to add
+	 * @param v2 Vertex as the first one vertex to add
+	 * @param time integer as the edge time or weight 
+	 * @param cost integer as the edge cost or weight 
+	 * @param transport integer Array as the transport options avails 
+	 */
 	public void addEdge(Vertex v1, Vertex v2, int time, int cost, int [] transport) {
 		Edge e = new Edge(v1, v2, time, cost, transport);
 		edges.put(e.hashCode(), e);
 		v1.addConnection(v1, v2, e);
 	}
-
+	/**
+	 * This method saves the vertices hashmap to verticesv2 hashmap but now the key is the indicator
+	 * 
+	 */
 	public void verticesToHasMap2() {
 		for (String v: vertices.keySet()) {	
 			verticesv2.put(vertices.get(v).getIndicator(),vertices.get(v));
 		}
 	}
-
-	public String searchDueIndicator(int indicatorToFind) throws EmptyQueueException {
+	/**
+	 * This method search the name of a vertex vy the indicator
+	 * @param indicatorToFind integer as the vertex indicator
+	 * @return name String with vertex name
+	 */
+	public String searchDueIndicator(int indicatorToFind) {
 		String name = "";	
 		name = verticesv2.get(indicatorToFind).getName();
 		return name;
 	}
-
+	/**
+	 * This method search the vertex by the vertex name
+	 * @param name String as vertex name
+	 * @return Vertex as the vertex found on vertices hashmap
+	 */
 	public Vertex searchVertex(String name) {
 		return vertices.get(name);
 	}
