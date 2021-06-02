@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -268,13 +270,40 @@
                </font>
             </Button>
             <ComboBox fx:id="searchOptionComboBox" layoutX="25.0" layoutY="120.0" onAction="#searchOption" prefWidth="150.0" />
-            <Label layoutX="28.0" layoutY="93.0" text="Search Option">
+            <Label fx:id="youcanlabel" layoutX="197.0" layoutY="177.0" prefHeight="14.0" prefWidth="274.0" text="You can go with that limit">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <ComboBox fx:id="restrictionComboBox" layoutX="224.0" layoutY="120.0" prefWidth="150.0" />
+            <ComboBox fx:id="restrictionComboBox" layoutX="224.0" layoutY="120.0" onAction="#restrictionOption" prefWidth="150.0" />
             <Label fx:id="restrictionOptionLabel" layoutX="233.0" layoutY="93.0" text="Restriction Option">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="limittxt" layoutX="28.0" layoutY="198.0" />
+            <Label fx:id="limitlabel" layoutX="53.0" layoutY="170.0" text="Limit">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="103.0" text="Search Option">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="103.0" text="Search Option">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="youcantlabel" layoutX="197.0" layoutY="206.0" prefHeight="34.0" prefWidth="203.0" text="You can't go with that limit">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <ColorPicker fx:id="routecolor" layoutX="222.0" layoutY="243.0" />
+            <Label layoutX="114.0" layoutY="249.0" prefHeight="14.0" prefWidth="95.0" text="Route color">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>

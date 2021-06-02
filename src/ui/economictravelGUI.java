@@ -17,11 +17,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -187,6 +189,19 @@ public class economictravelGUI {
 
 	@FXML
 	private ComboBox<String> restrictionComboBox;
+	@FXML
+	private TextField limittxt;
+
+	@FXML
+	private Label limitlabel;
+
+	@FXML
+	private Label youcantlabel;
+
+	@FXML
+	private ColorPicker routecolor;
+	@FXML
+	private Label youcanlabel;
 
 	Label start;
 	Label end;
@@ -258,15 +273,14 @@ public class economictravelGUI {
 		initializePlacesTable();
 		initializesearchOptionComboBox();
 		initializerestrictionComboBox();
+		initializeSomeLabels();
 		tg.getCali().floydWarshallEdges();
 		fromplacelabel.setTextFill(Color.BLUE);
 		restrictionComboBox.setVisible(false);
 		restrictionOptionLabel.setVisible(false);
-
 	}
 
 	public void addCirclesToList() {
-
 		lines = new ArrayList<>();
 		circles = new ArrayList<>();
 		circles.add(acuaparquedelacañaV);
@@ -356,16 +370,10 @@ public class economictravelGUI {
 					route.add(e.getV2());
 				}
 			}
-
 			break;
-
-		case 3:
-			break;
-
 		default:
 			break;
 		}
-
 
 		return route;
 	}
@@ -383,7 +391,7 @@ public class economictravelGUI {
 		return info;
 	}
 
-	public void  putLinesToShowRoute(ArrayList<Vertex> vertex) {
+	public void  putLinesToShowRoute(ArrayList<Vertex> vertex, Color color) {
 
 		for(int i = 0 ; i< vertex.size()-1; i++) {
 
@@ -395,7 +403,7 @@ public class economictravelGUI {
 			l.setEndY(circles.get(vertex.get(i+1).getIndicator()).getLayoutY());
 			l.setStrokeType(StrokeType.OUTSIDE);
 			l.setFill(Color.BLACK);
-			l.setStroke(Color.BLUE);
+			l.setStroke(color);
 			l.setStrokeWidth(2);
 			map.getChildren().add(l);
 			lines.add(l);
@@ -412,12 +420,9 @@ public class economictravelGUI {
 		map.getChildren().add(start);
 		map.getChildren().add(end);
 
-
 	}
 
 	public void move(AnchorPane m) {
-
-
 	}
 
 	public void zoom( AnchorPane pane) {
@@ -439,7 +444,6 @@ public class economictravelGUI {
 
 				});
 	}
-
 	@FXML
 	void catedralsanpedro(MouseEvent event) {
 
@@ -453,7 +457,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnAcuaparquedelaCaña(MouseEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -464,9 +467,7 @@ public class economictravelGUI {
 		alert.setHeaderText("Lugar #1");
 		alert.setContentText("Usted seleccionó acuaparque de la caña");
 		alert.showAndWait();
-
 	}
-
 	@FXML
 	void clickOnBibliotecaJoseGarces(MouseEvent event) {
 
@@ -478,9 +479,7 @@ public class economictravelGUI {
 		alert.setHeaderText("Lugar #2");
 		alert.setContentText("Usted seleccionó la biblioteca departamental Jorge Garces Borrero");
 		alert.showAndWait();
-
 	}
-
 	@FXML
 	void clickOnBulevarDelRio(MouseEvent event) {
 
@@ -494,7 +493,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnCam(MouseEvent event) {
 
@@ -509,7 +507,6 @@ public class economictravelGUI {
 
 
 	}
-
 	@FXML
 	void clickOnCentroculturaldecali(MouseEvent event) {
 
@@ -522,7 +519,6 @@ public class economictravelGUI {
 		alert.setContentText("Usted seleccionó el centro cultural de Cali");
 		alert.showAndWait();
 	}
-
 	@FXML
 	void clickOnChipichape(MouseEvent event) {
 
@@ -537,7 +533,6 @@ public class economictravelGUI {
 
 
 	}
-
 	@FXML
 	void clickOnCristoRey(MouseEvent event) {
 
@@ -551,7 +546,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnElBochinche(MouseEvent event) {
 
@@ -565,7 +559,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnElGatodelRio(MouseEvent event) {
 
@@ -579,7 +572,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnElPlanetario(MouseEvent event) {
 
@@ -593,7 +585,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnGobernaciondelValle(MouseEvent event) {
 
@@ -607,7 +598,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnHospitalUniversitario(MouseEvent event) {
 
@@ -621,7 +611,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnHotelIntercontinental(MouseEvent event) {
 
@@ -635,7 +624,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnHotelTorredeCali(MouseEvent event) {
 
@@ -649,7 +637,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnIglesiaLaErmita(MouseEvent event) {
 
@@ -664,7 +651,6 @@ public class economictravelGUI {
 
 
 	}
-
 	@FXML
 	void clickOnJairoVarela(MouseEvent event) {
 
@@ -692,7 +678,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnLomaDeLaCruz(MouseEvent event) {
 
@@ -706,7 +691,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnMariaMulata(MouseEvent event) {
 
@@ -720,7 +704,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnMiradorTresCruces(MouseEvent event) {
 
@@ -734,7 +717,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnMonumentoALaAviacion(MouseEvent event) {
 
@@ -748,7 +730,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnMonumentoALaSolidaridadEmpresarial(MouseEvent event) {
 
@@ -761,7 +742,6 @@ public class economictravelGUI {
 		alert.setContentText("Usted seleccionó El Monumento a la Solidaridad Empresarial");
 		alert.showAndWait();
 	}
-
 	@FXML
 	void clickOnMonumentoAlDeporte(MouseEvent event) {
 
@@ -787,9 +767,7 @@ public class economictravelGUI {
 		alert.setHeaderText("Lugar #27");
 		alert.setContentText("Usted seleccionó El Museo Departamental de Ciencias Naturales");
 		alert.showAndWait();
-
 	}
-
 	@FXML
 	void clickOnMuseoDelOroCalima(MouseEvent event) {
 
@@ -803,7 +781,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnMuseoLaMerced(MouseEvent event) {
 
@@ -818,8 +795,6 @@ public class economictravelGUI {
 
 
 	}
-
-
 	@FXML
 	void clickOnParquedelasalud(MouseEvent event) {
 
@@ -833,7 +808,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnParquedelospoetas(MouseEvent event) {
 
@@ -847,7 +821,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnPascualGuerrero(MouseEvent event) {
 
@@ -861,7 +834,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnPlatillosVoladores(MouseEvent event) {
 
@@ -875,7 +847,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnPlazaCaycedo(MouseEvent event) {
 
@@ -888,8 +859,6 @@ public class economictravelGUI {
 		alert.setContentText("Usted seleccionó La Plaza Caicedo");
 		alert.showAndWait();
 	}
-
-
 	@FXML
 	void clickOnPlazadeToros(MouseEvent event) {
 
@@ -903,7 +872,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnSanAntonio(MouseEvent event) {
 
@@ -917,7 +885,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnSanFrancisco(MouseEvent event) {
 
@@ -931,7 +898,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnSebastiandebelalcazaar(MouseEvent event) {
 
@@ -945,7 +911,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnTeatroMunicipal(MouseEvent event) {
 
@@ -959,7 +924,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnUnicentro(MouseEvent event) {
 
@@ -973,7 +937,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnUnidadDeportiva(MouseEvent event) {
 
@@ -987,7 +950,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnZoologicodeCali(MouseEvent event) {
 
@@ -1001,7 +963,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnhotelDarnnCarlton(MouseEvent event) {
 
@@ -1015,7 +976,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	@FXML
 	void clickOnmuseodelatertulia(MouseEvent event) {
 
@@ -1029,7 +989,13 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
+	public void initializeSomeLabels() {
+		youcanlabel.setVisible(false);
+		youcantlabel.setVisible(false);
+		limittxt.setVisible(false);
+		limitlabel.setVisible(false);
 
+	}
 	public void initializePlacesTable() {
 
 		ObservableList <Vertex> oblist;
@@ -1038,114 +1004,174 @@ public class economictravelGUI {
 		Fr.setCellValueFactory(new PropertyValueFactory<Vertex,String>("name"));
 
 	}
-
 	public void initializesearchOptionComboBox() {
 
 		ArrayList<String> op = new ArrayList<>();
-		op.add("Considering All Restriction");
-		op.add("With one Restriction");
-		op.add("With one Restriction but it must pass by all the places");
+		op.add("To Quote Trip");
+		op.add("To Quote Trip with Limit");
+		op.add("Tour of all the places in the city");
 		ObservableList<String> options = FXCollections.observableList(op);
 		searchOptionComboBox.setItems(options);
 	}
-
 	public void initializerestrictionComboBox() {
 
 		ArrayList<String> op = new ArrayList<>();
-		op.add("Time Restriction");
-		op.add("Cost Restriction");
+		op.add("Time");
+		op.add("Cost");
 		ObservableList<String> options = FXCollections.observableList(op);
 		restrictionComboBox.setItems(options);
 
 	}
-
 	@FXML
 	void searchOption(ActionEvent event) {
-
 		if(searchOptionComboBox.getSelectionModel().getSelectedItem() != null) {
-
-			if(searchOptionComboBox.getSelectionModel().getSelectedIndex() == 1 || searchOptionComboBox.getSelectionModel().getSelectedIndex() == 2) {
-				restrictionComboBox.setVisible(true);
-				restrictionOptionLabel.setVisible(true);
+			if(searchOptionComboBox.getSelectionModel().getSelectedIndex() == 1) {
+				youcanlabel.setVisible(true);
+				youcantlabel.setVisible(true);
+				limitlabel.setVisible(true);
+				limittxt.setVisible(true);
 			}else {
-
-				restrictionComboBox.setVisible(false);
-				restrictionOptionLabel.setVisible(false);
+				youcanlabel.setVisible(false);
+				youcantlabel.setVisible(false);
+				limitlabel.setVisible(false);
+				limittxt.setVisible(false);
+				youcanlabel.setTextFill(Color.BLACK);
+				youcantlabel.setTextFill(Color.BLACK);
+				youcantlabel.setText("You cant go with that limit");
 			}
+
+			restrictionComboBox.setVisible(true);
+			restrictionOptionLabel.setVisible(true);	
 		}
 	}
 
 	@FXML
+	void restrictionOption(ActionEvent event) {
+
+		if(searchOptionComboBox.getSelectionModel().getSelectedItem() != null) {
+			if(searchOptionComboBox.getSelectionModel().getSelectedIndex() == 1) {	
+				if(restrictionComboBox.getSelectionModel().getSelectedIndex() == 0) {				
+					limitlabel.setText("Time limit");
+				}else if(searchOptionComboBox.getSelectionModel().getSelectedIndex() == 1) {		
+					limitlabel.setText("Cost limit");
+				}
+			}
+		}		
+	}
+
+	@FXML
 	void showRoute(ActionEvent event) {
-        
-		
+
+		youcantlabel.setText("You cant go with that limit");
+		Color color = routecolor.getValue();
 		tg.getCali().resetEdgesMark();
 		map.getChildren().remove(start);
 		map.getChildren().remove(end);
 		ObservableList<Line> lines2 = FXCollections.observableList(lines);
 		map.getChildren().removeAll(lines2);
 		lines.clear();
+		int limit = 0;
 		String info = "";
 		String v1 = fromplacelabel.getText();
 		String v2 = toplacelabel.getText();
 		ArrayList<Vertex> route = new ArrayList<>();
+		boolean youcango = false;
 		int time = 0;
-
 		if(searchOptionComboBox.getSelectionModel().getSelectedItem() != null) {
-
 			switch(searchOptionComboBox.getSelectionModel().getSelectedIndex()) {
-
 			case 0:
-				break;
-
-			case 1:
-
-				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
+				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()){
 				case 0:
 					try {
-
-						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,0));
+						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,0),color);
 						info = tg.searchPathByNamesTimes(v1,v2);
 						time = tg.getCali().minimumTime(v1, v2);
-					} catch (NumberFormatException | EmptyQueueException e) {
 
+					} catch (NumberFormatException | EmptyQueueException e) {
 						showAlertWhenInvalidInput();
 						e.printStackTrace();	
-					}
+					}	
 					showAlertWithRoute(v1,v2,info,time, false);
-
 					break;
-
 				case 1:
-
 					try {
-						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,1));
+						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,1),color);
 						info = tg.searchPathByNamesCost(v1,v2);
 						time = tg.getCali().priceToPay(v1, v2);
 
 					} catch (NumberFormatException | EmptyQueueException e) {
+						showAlertWhenInvalidInput();
+						e.printStackTrace();	
+					}		
+					showAlertWithRoute(v1,v2,info,time, true);
+					break;
+				}
+				break;
+			case 1:
+				limit = Integer.parseInt(limittxt.getText());
+				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
+				case 0:
+					try {
+						youcango = tg.getCali().travelWithTimeLimit(v1, v2, limit);
+						time = tg.getCali().minimumTime(v1, v2);
+						info = tg.searchPathByNamesTimes(v1,v2);
+						if(youcango == false) {
+
+							youcanlabel.setTextFill(Color.RED);
+							youcantlabel.setTextFill(Color.GREEN);
+							youcantlabel.setText("you need " +(time-limit)+" more minutes");
+							limittxt.clear();
+						}else {
+
+							youcanlabel.setTextFill(Color.GREEN);
+							youcantlabel.setTextFill(Color.RED);
+							putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,0),color);
+							showAlertWithRoute(v1,v2,info,time, false);
+							limittxt.clear();
+						}
+					} catch (NumberFormatException | EmptyQueueException e) {
 
 						showAlertWhenInvalidInput();
 						e.printStackTrace();	
 					}
 
-					showAlertWithRoute(v1,v2,info,time, true);
 					break;
 
+				case 1:
+					try {
+						youcango = tg.getCali().priceToPayWithLimit(v1, v2, limit);
+						time = tg.getCali().priceToPay(v1, v2);
+						info = tg.searchPathByNamesCost(v1,v2);
+						if(youcango == false) {
+
+							youcanlabel.setTextFill(Color.RED);
+							youcantlabel.setTextFill(Color.GREEN);
+							youcantlabel.setText("you need " +(time-limit)+"more");
+							limittxt.clear();
+						}else {
+
+							youcanlabel.setTextFill(Color.GREEN);
+							youcantlabel.setTextFill(Color.RED);
+							putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,1),color);
+							showAlertWithRoute(v1,v2,info,time, true);
+							limittxt.clear();
+						}
+					} catch (NumberFormatException | EmptyQueueException e) {
+
+						showAlertWhenInvalidInput();
+						e.printStackTrace();	
+					}
+
+					break;
 				}
-
 				break;
-
 			case 2:
-
 				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
-
-
 				case 0:				
 					try {
 						tg.getCali().primForTime();	
 						route = getArrayListOfVertexOfRoute("","",2);
-						putLinesToShowRoute(route);
+						putLinesToShowRoute(route,color);
 						info = constructPathPrim(route);
 						showAlertWithRoute("","",info,time,false);
 
@@ -1157,11 +1183,10 @@ public class economictravelGUI {
 					break;
 
 				case 1:
-
 					try {
 						tg.getCali().primForCost();	
 						route = getArrayListOfVertexOfRoute("","",2);
-						putLinesToShowRoute(route);
+						putLinesToShowRoute(route,color);
 						info = constructPathPrim(route);
 						showAlertWithRoute("","",info,time,true);
 
@@ -1169,21 +1194,16 @@ public class economictravelGUI {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 					break;
-
 				}
-
 				break;
 
 			default:
 				break;
-
 			}
+
 		}
-
 	}
-
 	@FXML
 	void switchPlace(ActionEvent event) {
 
@@ -1199,7 +1219,6 @@ public class economictravelGUI {
 		}
 
 	}
-
 	@FXML
 	void clickOnPlace(MouseEvent event) {
 
@@ -1212,20 +1231,18 @@ public class economictravelGUI {
 		}
 
 	}
-
 	public void showAlertWithRoute(String v1, String v2, String info, int time, boolean cost) {
 
 
 		Alert alert = new Alert(AlertType.INFORMATION);
 
-		if(!v1.equalsIgnoreCase("") && !v2.equalsIgnoreCase("")) {		
+		if(!v1.equalsIgnoreCase("") && !v2.equalsIgnoreCase("")) {	
 			if(cost == true) {	
 				alert.setHeaderText("Route Information: "+v1+" - "+v2+"\n"+"Minimum Cost: "+time);
 			}else {			
-				alert.setHeaderText("Route Information: "+v1+" - "+v2+"\n"+"Minimum Time: "+time+" minutes ");
-			}		
+				alert.setHeaderText("Route Information: "+v1+" - "+v2+"\n"+"Minimum Time: "+time+" minutes ");	
+			}
 		}else {
-
 			if(cost == true) {	
 				alert.setHeaderText("All Places route by cost"+"\n");
 
@@ -1237,7 +1254,6 @@ public class economictravelGUI {
 		alert.showAndWait();
 
 	}
-
 	public void showAlertWhenInvalidInput() {
 
 		Alert alert = new Alert(AlertType.ERROR);
