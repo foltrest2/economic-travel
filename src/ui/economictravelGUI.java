@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
-
-import javax.swing.JLabel;
-
 import dataStructures.Vertex;
 import exceptions.EmptyQueueException;
 import javafx.collections.FXCollections;
@@ -22,7 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,7 +29,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeType;
-import model.Player;
 import model.TravelGuide;
 
 public class economictravelGUI {
@@ -963,18 +958,18 @@ public class economictravelGUI {
 
 		ObservableList<Line> lines2 = FXCollections.observableList(lines);
 		map.getChildren().removeAll(lines2);
-		String v1 = "";
-		String v2 = "";
 		String info = "";
+		String v1 = fromplacelabel.getText();
+		String v2 = toplacelabel.getText();
 
 		try {
-			v1 = tg.getCali().searchDueIndicator(Integer.parseInt(startPlaceText.getText()));
-			v2 = tg.getCali().searchDueIndicator(Integer.parseInt(endPlaceText.getText()));
+			
 			putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2));
-			info = tg.searchPathByNames(v1, v2);
+			info = tg.searchPathByNames(v1,v2);
 		} catch (NumberFormatException | EmptyQueueException e) {
-
-			e.printStackTrace();
+            
+			showAlertWhenInvalidInput();
+			e.printStackTrace();	
 		}
 
 		showAlertWithRouteInText(v1,v2,info);
@@ -1013,9 +1008,18 @@ public class economictravelGUI {
 	public void showAlertWithRouteInText(String v1, String v2, String info) {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setHeaderText("Información de la ruta: "+v1+" - "+v2);
+		alert.setHeaderText("Route Information: "+v1+" - "+v2);
 		alert.setContentText(info);
 		alert.showAndWait();
+	}
+	
+	public void showAlertWhenInvalidInput() {
+		
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setHeaderText("ERROR");
+		alert.setContentText("Your choose an invalid Option");
+		alert.showAndWait();
+		
 	}
 
 }
