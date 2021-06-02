@@ -3,6 +3,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 import dataStructures.Edge;
 import dataStructures.Graph;
@@ -140,6 +141,15 @@ public class TravelGuide {
 		path = cali.constructPath(fromV.getIndicator(), toV.getIndicator());
 		info += cali.printPath(path);
 		return info;
+	}
+	
+	public ArrayList<Vertex> toArrayFromHash(){
+		
+		ArrayList<Vertex> c = new ArrayList<>();
+		for (String v: cali.getVertices().keySet()) {		
+			c.add(cali.getVertices().get(v));
+		}
+		return c;
 	}
 
 	public void initialize() throws EmptyQueueException {

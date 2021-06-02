@@ -5,14 +5,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.JLabel;
+
 import dataStructures.Vertex;
 import exceptions.EmptyQueueException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +33,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeType;
+import model.Player;
 import model.TravelGuide;
 
 public class economictravelGUI {
@@ -157,6 +168,17 @@ public class economictravelGUI {
 	private Circle camV;
 	@FXML
 	private Circle iglesiaSanAntonioV;
+	@FXML
+	private TableView<Vertex> PlacesTable;
+
+	@FXML
+	private TableColumn<Vertex, String> Fr;
+
+	@FXML
+	private Label fromplacelabel;
+
+	@FXML
+	private Label toplacelabel;
 	ImageView imav;
 	Image i;
 	File f;
@@ -204,15 +226,14 @@ public class economictravelGUI {
 	private static String UNIDADDEPORTIVA = "imagenes\\unidaddeportivapanamericana.png";
 	private static String ZOOLOGICODECALI = "imagenes\\zoologicodecali.jpg";
 	private static String PLATILLOSVOLADORES = "imagenes\\platillosvoladores.jpg";
-	Line m;
 	ArrayList<Circle> circles;
-	
+	ArrayList<Line> lines;
+
 	public economictravelGUI() {
 
-		m = new Line();
+
 		tg = new TravelGuide();
-
-
+		
 	}
 
 	public void loadMainMenu() throws IOException, EmptyQueueException {
@@ -224,13 +245,14 @@ public class economictravelGUI {
 		basePane.setCenter(mape);
 		zoom(map);
 		addCirclesToList();
-		putLinesToShowRoute(getArrayListOfVertexOfRoute("CAM","El Planetario"));
-		System.out.println(tg.getCali().searchVertex("Restaurante el Bochinche").getIndicator());
-		System.out.println(circles.get(tg.getCali().searchVertex("Restaurante el Bochinche").getIndicator()));
+		initializePlacesTable();
+		fromplacelabel.setTextFill(Color.BLUE);
+
 	}
-	
+
 	public void addCirclesToList() {
-		
+
+		lines = new ArrayList<>();
 		circles = new ArrayList<>();
 		circles.add(acuaparquedelacañaV);
 		circles.add(elplanetarioV);
@@ -285,7 +307,7 @@ public class economictravelGUI {
 		Vector<String> routeBefore = tg.getCali().constructPath(i1,i2);
 
 		for(int i = 0; i< tg.getCali().constructPath(i1, i2).size(); i++) {
-              
+
 			Vertex c = tg.getCali().searchVertex(routeBefore.get(i));
 			route.add(c);
 		}
@@ -295,7 +317,7 @@ public class economictravelGUI {
 	public void  putLinesToShowRoute(ArrayList<Vertex> vertex) {
 
 		for(int i = 0 ; i< vertex.size()-1; i++) {
-			
+
 			Line l = new Line();
 			l.setStartX(circles.get(vertex.get(i).getIndicator()).getLayoutX());
 			l.setStartY(circles.get(vertex.get(i).getIndicator()).getLayoutY());
@@ -305,9 +327,10 @@ public class economictravelGUI {
 			l.setFill(Color.BLACK);
 			l.setStroke(Color.BLUE);
 			l.setStrokeWidth(2);
-			map.getChildren().add(l);	
+			map.getChildren().add(l);
+			lines.add(l);
 		}
-		
+
 	}
 
 	public void move(AnchorPane m) {
@@ -925,22 +948,74 @@ public class economictravelGUI {
 
 	}
 
-	public void toShowRoutesOnMap(String a, String v) {
+	public void initializePlacesTable() {
 
 
-
-
-
-
-
-
-
-
-
-
-
+		ObservableList <Vertex> oblist;
+		oblist = FXCollections.observableList(tg.toArrayFromHash());
+		PlacesTable.setItems(oblist);
+		Fr.setCellValueFactory(new PropertyValueFactory<Vertex,String>("name"));
 
 	}
 
+	@FXML
+	void showRoute(ActionEvent event) {
+
+		ObservableList<Line> lines2 = FXCollections.observableList(lines);
+		map.getChildren().removeAll(lines2);
+		String v1 = "";
+		String v2 = "";
+		String info = "";
+
+		try {
+			v1 = tg.getCali().searchDueIndicator(Integer.parseInt(startPlaceText.getText()));
+			v2 = tg.getCali().searchDueIndicator(Integer.parseInt(endPlaceText.getText()));
+			putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2));
+			info = tg.searchPathByNames(v1, v2);
+		} catch (NumberFormatException | EmptyQueueException e) {
+
+			e.printStackTrace();
+		}
+
+		showAlertWithRouteInText(v1,v2,info);
+
+	}
+
+	@FXML
+	void switchPlace(ActionEvent event) {
+		
+		if(fromplacelabel.getTextFill() == Color.BLUE) {
+			
+			toplacelabel.setTextFill(Color.BLUE);
+			fromplacelabel.setTextFill(Color.BLACK);
+			
+		}else {	
+			fromplacelabel.setTextFill(Color.BLUE);
+			toplacelabel.setTextFill(Color.BLACK);
+	
+		}
+		
+	}
+	
+	@FXML
+    void clickOnPlace(MouseEvent event) {
+		
+		if(toplacelabel.getTextFill() == Color.BLUE) {
+			
+			toplacelabel.setText(PlacesTable.getSelectionModel().getSelectedItem().getName());
+		}else{
+			
+			fromplacelabel.setText(PlacesTable.getSelectionModel().getSelectedItem().getName());
+		}
+
+    }
+
+	public void showAlertWithRouteInText(String v1, String v2, String info) {
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText("Información de la ruta: "+v1+" - "+v2);
+		alert.setContentText(info);
+		alert.showAndWait();
+	}
 
 }
