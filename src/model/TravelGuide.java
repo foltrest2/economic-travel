@@ -83,16 +83,6 @@ public class TravelGuide {
 		System.out.println(cali.priceToPayWithLimit("Cristo Rey", "Centro comercial Chipichape", 16000));
 	}
 	
-	public void printFloydWarshallEdges() throws EmptyQueueException {
-        Edge [][] ed = cali.floydWarshallEdges();
-        for (int i = 0; i < ed.length; i++) {
-            for (int j = 0; j < ed.length; j++) {
-                System.out.print(ed[i][j] + " ");
-            }
-            System.out.println("\n");
-        }
-    }
-	
 	public String searchPathByIndicator(int from, int to) throws EmptyQueueException{
 		String info = "";
 		Vector<String> path;

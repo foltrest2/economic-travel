@@ -39,8 +39,25 @@ public class GraphTest {
 	}
 	
 	@Test
+	public void testVertextToMatrixCost() {
+		setupScenary1();
+		int verify [][] = {{0, 8056, 0, 0, 0}, 
+				{8056, 0, 8188, 0, 0}, 
+				{0, 8188, 0, 5747, 8139}, 
+				{0, 0, 5747, 0, 0}, 
+				{0, 0, 8139, 0, 0}};
+		try {
+			assertEquals(verify[1][0], tg.getCali().VertexToMatrixCost()[1][0], "Fail test");
+			assertEquals(verify[4][2], tg.getCali().VertexToMatrixCost()[4][2], "Fail test");
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
 	public void testedgesToMatrix()  {
 		setupScenary1();
+		tg.getCali().initializeRoutes();
 		int verify [][] = {{0, 18, 0, 0, 0}, 
 				{18, 0, 6, 0, 0}, 
 				{0, 6, 0, 21, 14}, 
@@ -76,6 +93,7 @@ public class GraphTest {
 	@Test
 	public void testFloydWarshallEdges() {
 		setupScenary1();
+		tg.getCali().initializeRoutes();
 		int verify [][] = {{0, 18, 24, 45, 38}, 
 				{18, 0, 6, 27, 20}, 
 				{24, 6, 0, 21, 14}, 
@@ -97,6 +115,46 @@ public class GraphTest {
 			e.printStackTrace();
 		}
 
+	}
+	
+	@Test
+	public void testPriceToPay() {
+		setupScenary1();
+		tg.getCali().initializeRoutes();
+		try {
+			tg.getCali().floydWarshallEdges();
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}		
+		assertEquals(8056, tg.getCali().priceToPay("El Bochinche", "Torre de Cali"), "Fail test");
+		assertEquals(8918, tg.getCali().priceToPay("El Bochinche", "La 14"), "Fail test");
+
+	}
+	
+	@Test
+	public void testTravelWithTimeLimit() {
+		setupScenary1();
+		tg.getCali().initializeRoutes();	
+		try {
+			assertFalse(tg.getCali().travelWithTimeLimit("El Bochinche", "La 14", 5));
+			assertTrue(tg.getCali().travelWithTimeLimit("El Bochinche", "Torre de Cali", 20));
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	@Test
+	public void testPriceToPayWithLimit() {
+		setupScenary1();
+		tg.getCali().initializeRoutes();
+		try {
+			tg.getCali().floydWarshallEdges();
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
+		assertFalse(tg.getCali().priceToPayWithLimit("El Bochinche", "Portada al mar", 5000));
+		assertTrue(tg.getCali().priceToPayWithLimit("El Bochinche", "Torre de Cali", 9000));
 	}
 	
 	@Test
@@ -126,7 +184,7 @@ public class GraphTest {
 	}
 	
 	@Test
-	public void testConstructPath() {
+	public void testConstructPathTime() {
 		setupScenary1();
 		try {
 			tg.initialize();
@@ -151,6 +209,40 @@ public class GraphTest {
 		} catch (EmptyQueueException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testConstructPathCost() {
+		setupScenary1();
+		try {
+			tg.initialize();
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
+		Vector<String> path = new Vector<String>();
+		path.add("El Bochinche");
+		path.add("Torre de Cali");
+		try {
+			assertEquals(path, tg.getCali().constructPathCost(0, 1), "Fail test");
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
+		path.clear();
+		path.add("El Bochinche");
+		path.add("Torre de Cali");
+		path.add("Zoologico");
+		try {
+			assertEquals(path, tg.getCali().constructPathCost(0, 2), "Fail test");
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testAddVertex()  {
+		setupScenary1();
+		assertTrue(tg.getCali().addVertex("Universidad Icesi", 5));
+		assertFalse(tg.getCali().addVertex("La 14", 6));
 	}
 	
 	@Test
