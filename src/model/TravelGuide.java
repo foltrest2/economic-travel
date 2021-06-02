@@ -23,7 +23,6 @@ public class TravelGuide {
 	public TravelGuide() {
 		cali = new Graph();
 	}
-
 	/**
 	 * This method imports the data from the csv file and fill the trees with it
 	 * @throws IOException if a problem to import occurs
@@ -151,16 +150,6 @@ public class TravelGuide {
 		cali.floydWarshallV2(cali.getVertices().size());
 		cali.verticesToHasMap2();
 	}
-
-	public void prim() {
-		int [][] m = cali.primForTime();
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
-	}
 	/**
 	 * This method gets the Cali graph (just for test it)
 	 * @return Graph as Cali graph
@@ -169,11 +158,11 @@ public class TravelGuide {
 		return cali;
 	}
 
-	public static String getSavePathFile() {
+	public String getSavePathFile() {
 		return SAVE_PATH_FILE;
 	}
 	
-	public static String getSavePathFileTest() {
+	public String getSavePathFileTest() {
 		return SAVE_PATH_FILE_TEST;
 	}
 	

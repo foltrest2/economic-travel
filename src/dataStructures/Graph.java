@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Vector;
-
 import exceptions.EmptyQueueException;
 
 public class Graph {
@@ -61,7 +60,7 @@ public class Graph {
 		}	
 		return ed;
 	}
-
+	
 	public int[][] floydWarshall(int graph[][], int size) {
 		int result[][] = new int[size][size];
 		for (int i = 0; i < result.length; i++) {
@@ -112,7 +111,7 @@ public class Graph {
 			}
 		}
 	}
-
+	
 	public Edge[][] floydWarshallEdges() throws EmptyQueueException {
 		Edge result[][] = edgesToMatrix();
 		for (int k = 0; k < result.length; k++) {
@@ -249,7 +248,7 @@ public class Graph {
 		}
 		return m;
 	}
-
+	
 	public int[][] primForCost(){
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
 		for (String v : vertices.keySet()) {
@@ -276,7 +275,7 @@ public class Graph {
 		}	
 		return m;
 	}
-
+		
 	public Vector<String> constructPath(int u, int v) throws EmptyQueueException{
 		if (Next[u][v] == Integer.MAX_VALUE)
 			return null;
@@ -320,7 +319,7 @@ public class Graph {
 		}
 	}
 
-	public void initializeRoutes() {
+public void initializeRoutes() {
 		for (int i = 0; i < vertices.size(); i++) {	
 			routes.add(new ArrayList<ArrayList<Edge>>());	
 		}
@@ -349,11 +348,11 @@ public class Graph {
 	}
 
 	public void verticesToHasMap2() {
-		for (String v: vertices.keySet()) {		
+		for (String v: vertices.keySet()) {	
 			verticesv2.put(vertices.get(v).getIndicator(),vertices.get(v));
 		}
 	}
-
+	
 	public String searchDueIndicator(int indicatorToFind) throws EmptyQueueException {
 		String name = "";	
 		name = verticesv2.get(indicatorToFind).getName();
