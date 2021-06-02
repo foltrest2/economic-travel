@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		 TravelGuide tg = new TravelGuide();
 		 try {
-			tg.importData(TravelGuide.getSavePathFileTest());
+			tg.importData(TravelGuide.getSavePathFile());
 			System.out.println("Normal matrix");
 			tg.printMatrix();
 //			System.out.println("Edge matrix");
@@ -22,12 +22,13 @@ public class Main {
 //			System.out.println(tg.searchPathByIndicator(41, 40));
 			System.out.println();
 //			System.out.println(tg.searchPathByNames("Parque de la Salud", "CAM"));
-			System.out.println(tg.searchPathByNames("El Bochinche", "Torre de Cali"));
+//			System.out.println(tg.searchPathByNames("El Bochinche", "Torre de Cali"));
 //			System.out.println("Prim");
 //			tg.prim();
 			System.out.println("Floyd edges");
 			tg.printFloydWarshallEdges();
 			System.out.println();
+			tg.pay();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (EmptyQueueException e) {

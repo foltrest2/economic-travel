@@ -42,7 +42,11 @@ public class Vertex implements Comparable<Vertex>{
 	}
 
 	public boolean addNeighbour(Vertex v) {
-		return !(neighbours.contains(v)) ? neighbours.add(v) : false;
+		if (v == this) {
+			return false;
+		}
+		else
+			return (!neighbours.contains(v)) ? neighbours.add(v) : false;
 	}
 
 	public boolean addConnection(Vertex v1, Vertex v2, Edge e) {
