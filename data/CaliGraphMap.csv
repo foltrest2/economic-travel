@@ -1,32 +1,32 @@
-﻿NameV1,NameV2,Time,Cost,Mio,Taxi,App,Pata
+﻿NameV1,NameV2,Time,Cost,Mio,Taxi,App,A pie
 Acuaparque de la caña,El Planetario,10,5400,1,1,1,0
 Biblioteca Departamental Jorge Garces Borrero,Museo Departamental de Ciencias Naturales,2,1,0,0,0,1
 Bulevar del Rio,CAM,2,1,0,0,0,1
 CAM,Catedral Metropolitana San Pedro,5,5400,1,1,1,1
 Catedral Metropolitana San Pedro,Iglesia San Francisco,2,1,0,0,0,1
 Centro Cultural de Cali,CAM,5,5400,1,1,1,1
-Cristo Rey,Zoologico de Cali,20,10000,0,1,0,1
+Cristo Rey,Zoologico de Cali,20,10000,0,1,0,0
 El Gato del Rio,Museo de Arte Moderno La Tertulia,3,3000,0,0,0,1
 El Planetario,Monumento al deporte,12,9000,1,1,1,0
 Unidad Deportiva Panamericana,Estadio Olimpico Pascual Guerrero,5,5400,1,1,1,1
-Estadio Olimpico Pascual Guerrero,Plaza de Toros Cañaveralejo ,18,8800,1,1,1,1
+Estadio Olimpico Pascual Guerrero,Plaza de Toros Cañaveralejo ,18,8800,1,1,1,0
 Gobernacion del Valle,Teatro Municipal,2,1,0,0,0,1
 Hospital Universitario del Valle,Estadio Olimpico Pascual Guerrero,2,1,0,0,0,1
 Hotel Torre de Cali,Iglesia La Ermita,5,5400,1,1,1,1
 Iglesia La Ermita,Parque de los Poetas,2,1,0,0,0,1
 Iglesia San Antonio,Sebastian de Belalcazar,5,5400,1,1,1,1
 Iglesia San Francisco,Gobernacion del Valle,2,1,0,0,0,1
-Loma de la Cruz,Iglesia San Antonio,10,6000,1,1,1,1
-Mirador Tres Cruces,Monumento a Maria Mulata,25,12000,1,0,1,1
+Loma de la Cruz,Iglesia San Antonio,10,6000,1,1,1,0
+Mirador Tres Cruces,Monumento a Maria Mulata,25,12000,1,0,1,0
 Monumento a la Aviacion,Hospital Universitario del Valle,5,5400,1,1,1,1
 Monumento a la Solidaridad Empresarial,Monumento al deporte,5,5400,1,1,1,1
 Monumento a Maria Mulata,Sebastian de Belalcazar,15,8500,1,1,1,0
 Monumento al deporte,Acuaparque de la caña,10,8200,1,1,1,0
-Museo Arqueologico La Merced,Iglesia San Francisco,10,6000,1,1,1,1
+Museo Arqueologico La Merced,Iglesia San Francisco,10,6000,1,1,1,0
 Museo de Arte Moderno La Tertulia,Sebastian de Belalcazar,3,3000,0,0,0,1
 Museo del Oro Calima,Centro Cultural de Cali,2,1,0,0,0,1
 Museo Departamental de Ciencias Naturales,Loma de la Cruz,5,5400,1,1,1,1
-Parque de la Salud,Centro comercial Jardin Plaza,10,8000,1,1,1,1
+Parque de la Salud,Centro comercial Jardin Plaza,10,8000,1,1,1,0
 Parque de los Poetas,Bulevar del Rio,2,1,0,0,0,1
 Plaza Caycedo,Catedral Metropolitana San Pedro,2,1,0,0,0,1
 Plaza de Toros Cañaveralejo ,Unidad Deportiva Panamericana,20,10000,1,1,1,0
@@ -41,13 +41,13 @@ Restaurante Platillos voladores,Centro comercial Jardin Plaza,5,5400,1,1,1,1
 Centro comercial Chipichape,Monumento a la Solidaridad Empresarial,5,5400,1,1,1,1
 Centro comercial Unicentro,Centro comercial Jardin Plaza,5,5400,1,1,1,1
 Cristo Rey,Monumento a la Aviacion,25,15000,1,1,1,0
-El Gato del Rio,Iglesia San Antonio,8,6200,1,1,1,1
+El Gato del Rio,Iglesia San Antonio,8,6200,1,1,1,0
 Mirador Tres Cruces,Monumento a la Solidaridad Empresarial,20,10000,1,1,1,0
 Bulevar del Rio,Plaza Caycedo,2,1,0,0,0,1
 Museo Arqueologico La Merced,Centro Cultural de Cali,2,1,0,0,0,1
-Loma de la Cruz,Gobernacion del Valle,12,6500,0,0,0,1
+Loma de la Cruz,Gobernacion del Valle,12,6500,0,0,0,0
 Biblioteca Departamental Jorge Garces Borrero,Estadio Olimpico Pascual Guerrero,5,5400,1,1,1,1
-Centro comercial Unicentro,Parque de la Salud,10,9500,1,1,1,1
+Centro comercial Unicentro,Parque de la Salud,10,9500,1,1,1,0
 Plaza de Toros Cañaveralejo ,Centro comercial Unicentro,25,16000,1,1,1,0
 Hotel Torre de Cali,Acuaparque de la caña,10,7000,1,1,1,0
 Centro comercial Unicentro,Restaurante Platillos voladores,5,5400,1,1,1,1
