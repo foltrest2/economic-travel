@@ -45,7 +45,6 @@ public class Graph {
 	}
 	//tested
 	public Edge [][] edgesToMatrix() throws EmptyQueueException {
-		initializeRoutes();
 		Edge [][] ed = new Edge[vertices.size()][vertices.size()];
 		Queue<Integer> q = new Queue<>();
 		for (Integer v : edges.keySet()) {
@@ -219,6 +218,18 @@ public class Graph {
 	public boolean priceToPayWithLimit(String from, String to, int limit) {
 		int totalPrice = priceToPay(from, to);
 		boolean canGo = totalPrice < limit;
+		return canGo;
+	}
+	
+	public int minimumTime(String from, String to) throws EmptyQueueException {
+		Vertex v1 = vertices.get(from);
+		Vertex v2 = vertices.get(to);
+		return floydWarshallEdges()[v1.getIndicator()][v2.getIndicator()].getTime();
+	}
+
+	public boolean travelWithTimeLimit(String from, String to, int limit) throws EmptyQueueException {
+		int totalTime = minimumTime(from, to);
+		boolean canGo = totalTime < limit;
 		return canGo;
 	}
 

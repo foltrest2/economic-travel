@@ -149,6 +149,7 @@ public class TravelGuide {
 		cali.initialize(cali.getVertices().size(), cali.VertexToMatrixTime());
 		cali.floydWarshallV2(cali.getVertices().size());
 		cali.verticesToHasMap2();
+		cali.initializeRoutes();
 	}
 	/**
 	 * This method gets the Cali graph (just for test it)
