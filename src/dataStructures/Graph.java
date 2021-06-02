@@ -45,7 +45,7 @@ public class Graph {
 		}
 		return m;
 	}
-	
+
 	public int [][] VertexToMatrixCost() throws EmptyQueueException{
 		int [][] m = new int [vertices.size()][vertices.size()];
 		Queue<String> q = new Queue<>();
@@ -65,9 +65,8 @@ public class Graph {
 		}
 		return m;
 	}
-	
+
 	public Edge [][] edgesToMatrix() throws EmptyQueueException {
-		initializeRoutes();
 		Edge [][] ed = new Edge[vertices.size()][vertices.size()];
 		Queue<Integer> q = new Queue<>();
 		for (Integer v : edges.keySet()) {
@@ -82,7 +81,7 @@ public class Graph {
 		}	
 		return ed;
 	}
-	
+
 	public int[][] floydWarshall(int graph[][], int size) {
 		int result[][] = new int[size][size];
 		for (int i = 0; i < result.length; i++) {
@@ -133,7 +132,7 @@ public class Graph {
 			}
 		}
 	}
-	
+
 	public void floydWarshallV2Cost(int V){
 		for(int k = 0; k < V; k++){
 			for(int i = 0; i < V; i++){
@@ -148,7 +147,7 @@ public class Graph {
 			}
 		}
 	}
-	
+
 	public Edge[][] floydWarshallEdges() throws EmptyQueueException {
 		Edge result[][] = edgesToMatrix();
 		for (int k = 0; k < result.length; k++) {
@@ -161,7 +160,7 @@ public class Graph {
 						if (i != j) {
 							int transportE1 [] = result[i][k].getTransport();
 							int transportE2 [] = result[k][j].getTransport();
-							int transport [] = {Math.max(transportE1[0], transportE2[0]), Math.max(transportE1[1], transportE2[1]), Math.max(transportE1[2], transportE2[2])};
+							int transport [] = {Math.max(transportE1[0], transportE2[0]), Math.max(transportE1[1], transportE2[1]), Math.max(transportE1[2], transportE2[2]), Math.max(transportE1[3], transportE2[3])};
 							result[i][j] = new Edge(result[i][k].getV1(), result[k][j].getV2(), result[i][k].getTime() + result[k][j].getTime(), result[i][k].getCost() + result[k][j].getCost(), transport);			
 							if (routes.get(i).get(k).isEmpty()) 
 								routes.get(i).get(j).add(result[i][k]);
@@ -215,7 +214,62 @@ public class Graph {
 		}
 		return result;
 	}
-	
+
+	public int priceToPay(String from, String to) {
+		Vertex v1 = vertices.get(from);
+		Vertex v2 = vertices.get(to);
+		int totalPrice = 0, i = 0;
+		boolean mioTaked = false, minimumPaid = false;
+		for (Edge e : routes.get(v1.getIndicator()).get(v2.getIndicator())) {
+			if (e.getTransport()[3] == 1) {
+				continue;
+			}
+			else if (e.getTransport()[0] == 1 && !mioTaked) {
+				totalPrice += 2200;
+				mioTaked = true;
+			}
+			else if (e.getTransport()[0] == 1 && mioTaked) {
+				continue;
+			}else { 
+				if (i < 2 && !minimumPaid) {
+					totalPrice += e.getCost();
+					mioTaked = false; 
+					minimumPaid = true;
+				}
+				else {
+					if (e.getTransport()[1] == 1) {
+						totalPrice += e.getCost()*0.25;
+						mioTaked = false;
+					}
+					else if (e.getTransport()[2] == 1) {
+						totalPrice += e.getCost()*0.15;
+						mioTaked = false;
+					}
+				}
+			}
+			i++;
+		}
+		return totalPrice;
+	}
+
+	public boolean priceToPayWithLimit(String from, String to, int limit) {
+		int totalPrice = priceToPay(from, to);
+		boolean canGo = totalPrice < limit;
+		return canGo;
+	}
+
+	public int minimumTime(String from, String to) throws EmptyQueueException {
+		Vertex v1 = vertices.get(from);
+		Vertex v2 = vertices.get(to);
+		return floydWarshallEdges()[v1.getIndicator()][v2.getIndicator()].getTime();
+	}
+
+	public boolean travelWithTimeLimit(String from, String to, int limit) throws EmptyQueueException {
+		int totalTime = minimumTime(from, to);
+		boolean canGo = totalTime < limit;
+		return canGo;
+	}
+
 	public int[][] primForTime(){
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
 		for (String v : vertices.keySet()) {
@@ -242,7 +296,7 @@ public class Graph {
 		}
 		return m;
 	}
-	
+
 	public int[][] primForCost(){
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
 		for (String v : vertices.keySet()) {
@@ -269,7 +323,7 @@ public class Graph {
 		}	
 		return m;
 	}
-		
+
 	public Vector<String> constructPathTime(int u, int v) throws EmptyQueueException{
 		if (next[u][v] == Integer.MAX_VALUE)
 			return null;
@@ -281,7 +335,7 @@ public class Graph {
 		}
 		return path;
 	}
-	
+
 	public Vector<String> constructPathCost(int u, int v) throws EmptyQueueException{
 		if (nextCost[u][v] == Integer.MAX_VALUE)
 			return null;
@@ -303,7 +357,7 @@ public class Graph {
 
 		return info;
 	}
-		
+
 	public void initializeTime(int V, int [][] graph){	
 		for(int i = 0; i < V; i++){
 			for(int j = 0; j < V; j++){
@@ -324,7 +378,7 @@ public class Graph {
 			}
 		}
 	}
-	
+
 	public void initializeCost(int V, int [][] graph){	
 		for(int i = 0; i < V; i++){
 			for(int j = 0; j < V; j++){
@@ -345,7 +399,7 @@ public class Graph {
 			}
 		}
 	}
-			
+
 	public void initializeRoutes() {
 		for (int i = 0; i < vertices.size(); i++) {	
 			routes.add(new ArrayList<ArrayList<Edge>>());	
@@ -356,13 +410,30 @@ public class Graph {
 			}
 		}
 	}
-	
+
+	public boolean addVertex(String name, int indicator) {
+		if (vertices.containsKey(name)) {
+			return false;
+		}
+		else {
+			Vertex v = new Vertex(name, indicator);
+			vertices.put(name, v);
+			return true;
+		}
+	}
+
+	public void addEdge(Vertex v1, Vertex v2, int time, int cost, int [] transport) {
+		Edge e = new Edge(v1, v2, time, cost, transport);
+		edges.put(e.hashCode(), e);
+		v1.addConnection(v1, v2, e);
+	}
+
 	public void verticesToHasMap2() {
 		for (String v: vertices.keySet()) {	
 			verticesv2.put(vertices.get(v).getIndicator(),vertices.get(v));
 		}
 	}
-	
+
 	public String searchDueIndicator(int indicatorToFind) throws EmptyQueueException {
 		String name = "";	
 		name = verticesv2.get(indicatorToFind).getName();

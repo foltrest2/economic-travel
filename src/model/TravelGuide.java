@@ -37,7 +37,7 @@ public class TravelGuide {
 			if (!cali.getVertices().containsKey(parts[0]) && !cali.getVertices().containsKey(parts[1])) {
 				Vertex v1 = new Vertex(parts[0], i);
 				Vertex v2 = new Vertex(parts[1], i+1);
-				int [] transport = {Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6])};
+				int [] transport = {Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7])};
 				Edge e = new Edge(v1, v2, Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), transport);
 				cali.getVertices().put(parts[0], v1);
 				cali.getVertices().put(parts[1], v2);
@@ -48,7 +48,7 @@ public class TravelGuide {
 			}
 			else if (cali.getVertices().containsKey(parts[0]) && !cali.getVertices().containsKey(parts[1])) {
 				Vertex v2 = new Vertex(parts[1], i);
-				int [] transport = {Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6])};
+				int [] transport = {Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7])};
 				Edge e = new Edge(cali.getVertices().get(parts[0]), v2, Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), transport);
 				cali.getVertices().put(parts[1], v2);
 				cali.getEdges().put(e.hashCode(), e);
@@ -58,7 +58,7 @@ public class TravelGuide {
 			}
 			else if (!cali.getVertices().containsKey(parts[0]) && cali.getVertices().containsKey(parts[1])) {
 				Vertex v1 = new Vertex(parts[0], i);
-				int [] transport = {Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6])};
+				int [] transport = {Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7])};
 				Edge e = new Edge(v1, cali.getVertices().get(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), transport);
 				cali.getVertices().put(parts[0], v1);
 				cali.getEdges().put(e.hashCode(), e);
@@ -69,7 +69,7 @@ public class TravelGuide {
 			else {
 				Vertex v1 = cali.getVertices().get(parts[0]);
 				Vertex v2 = cali.getVertices().get(parts[1]);
-				int [] transport = {Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6])};
+				int [] transport = {Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7])};
 				Edge e = new Edge(v1, v2, Integer.parseInt(parts[2]), Integer.parseInt(parts[3]), transport);
 				cali.getEdges().put(e.hashCode(), e);
 				v1.addConnection(v1, v2, e);
@@ -78,6 +78,20 @@ public class TravelGuide {
 		}
 		br.close();
 	}
+
+	public void pay() {
+		System.out.println(cali.priceToPayWithLimit("Cristo Rey", "Centro comercial Chipichape", 16000));
+	}
+	
+	public void printFloydWarshallEdges() throws EmptyQueueException {
+        Edge [][] ed = cali.floydWarshallEdges();
+        for (int i = 0; i < ed.length; i++) {
+            for (int j = 0; j < ed.length; j++) {
+                System.out.print(ed[i][j] + " ");
+            }
+            System.out.println("\n");
+        }
+    }
 	
 	public String searchPathByIndicator(int from, int to) throws EmptyQueueException{
 		String info = "";
@@ -118,6 +132,7 @@ public class TravelGuide {
 		cali.floydWarshallV2Time(cali.getVertices().size());
 		cali.floydWarshallV2Cost(cali.getVertices().size());
 		cali.verticesToHasMap2();
+		cali.initializeRoutes();
 	}
 	/**
 	 * This method gets the Cali graph (just for test it)

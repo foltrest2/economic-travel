@@ -43,6 +43,7 @@ public class Vertex implements Comparable<Vertex>{
 
 	public boolean addNeighbour(Vertex v) {
 		if (v == this) {
+
             return false;
         }
         else
