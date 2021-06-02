@@ -25,7 +25,7 @@ public class Graph {
 		verticesv2 = new HashMap<>();
 		routes = new ArrayList<ArrayList<ArrayList<Edge>>>();
 	}
-	
+
 	public int [][] VertexToMatrixTime() throws EmptyQueueException{
 		int [][] m = new int [vertices.size()][vertices.size()];
 		Queue<String> q = new Queue<>();
@@ -438,6 +438,12 @@ public class Graph {
 		String name = "";	
 		name = verticesv2.get(indicatorToFind).getName();
 		return name;
+	}
+
+	public void resetEdgesMark() {
+		for (Integer v: edges.keySet()) {	
+			edges.get(v).setUseThisWay(false);
+		}
 	}
 
 	public Vertex searchVertex(String name) {

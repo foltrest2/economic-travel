@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
+
+import dataStructures.Edge;
 import dataStructures.Vertex;
 import exceptions.EmptyQueueException;
 import javafx.collections.FXCollections;
@@ -186,6 +188,9 @@ public class economictravelGUI {
 	@FXML
 	private ComboBox<String> restrictionComboBox;
 
+	Label start;
+	Label end;
+
 	//constantes con las rutas de las imagenes de cada lugar
 	private static String ACUAPARQUE = "imagenes\\acuaparque.jpg";
 	private static String BIBLIOTECAJORGEGARCES = "imagenes\\bibliotecajorgegarces.jpg";
@@ -236,6 +241,8 @@ public class economictravelGUI {
 
 
 		tg = new TravelGuide();
+		start = new Label();
+		end = new Label();
 
 	}
 
@@ -251,6 +258,7 @@ public class economictravelGUI {
 		initializePlacesTable();
 		initializesearchOptionComboBox();
 		initializerestrictionComboBox();
+		tg.getCali().floydWarshallEdges();
 		fromplacelabel.setTextFill(Color.BLUE);
 		restrictionComboBox.setVisible(false);
 		restrictionOptionLabel.setVisible(false);
@@ -305,25 +313,80 @@ public class economictravelGUI {
 		circles.add(unicentroV);	
 	}
 
-	public ArrayList<Vertex> getArrayListOfVertexOfRoute(String nv1, String nv2) throws EmptyQueueException {
+	public ArrayList<Vertex> getArrayListOfVertexOfRoute(String nv1, String nv2, int type) throws EmptyQueueException {
 
 
 		ArrayList<Vertex> route = new ArrayList<>();
-		int i1 = tg.getCali().searchVertex(nv1).getIndicator();
-		int i2 = tg.getCali().searchVertex(nv2).getIndicator();
-		Vector<String> routeBefore = tg.getCali().constructPathTime(i1,i2);
+		Vector<String> routeBefore = new Vector<>();
+		int i1 = 0;
+		int i2 = 0;
 
-		for(int i = 0; i< tg.getCali().constructPathTime(i1, i2).size(); i++) {
-
-			Vertex c = tg.getCali().searchVertex(routeBefore.get(i));
-			route.add(c);
+		if(!nv1.equalsIgnoreCase("") && !nv2.equalsIgnoreCase("")) {
+			i1 = tg.getCali().searchVertex(nv1).getIndicator();
+			i2 = tg.getCali().searchVertex(nv2).getIndicator();
 		}
+		switch(type) {
+
+		case 0:
+			routeBefore = tg.getCali().constructPathTime(i1,i2);
+
+			for(int i = 0; i< tg.getCali().constructPathTime(i1, i2).size(); i++) {
+
+				Vertex c = tg.getCali().searchVertex(routeBefore.get(i));
+				route.add(c);
+			}
+			break;
+
+		case 1:
+			routeBefore = tg.getCali().constructPathCost(i1,i2);
+
+			for(int i = 0; i< tg.getCali().constructPathCost(i1, i2).size(); i++) {
+
+				Vertex c = tg.getCali().searchVertex(routeBefore.get(i));
+				route.add(c);
+			}
+			break;
+		case 2:
+
+			for (Integer key : tg.getCali().getEdges().keySet()) {
+				Edge e = tg.getCali().getEdges().get(key);
+				if (e.isUseThisWay()) {
+
+					route.add(e.getV1());
+					route.add(e.getV2());
+				}
+			}
+
+			break;
+
+		case 3:
+			break;
+
+		default:
+			break;
+		}
+
+
 		return route;
+	}
+
+	public String constructPathPrim(ArrayList<Vertex> routes) {
+
+		String info = "Route: ";
+
+		for(int i = 0; i <routes.size(); i++) {
+
+
+			info+= routes.get(i).getName()+ " - ";
+		}
+
+		return info;
 	}
 
 	public void  putLinesToShowRoute(ArrayList<Vertex> vertex) {
 
 		for(int i = 0 ; i< vertex.size()-1; i++) {
+
 
 			Line l = new Line();
 			l.setStartX(circles.get(vertex.get(i).getIndicator()).getLayoutX());
@@ -337,6 +400,18 @@ public class economictravelGUI {
 			map.getChildren().add(l);
 			lines.add(l);
 		}
+
+		start.setTextFill(Color.RED);
+		end.setTextFill(Color.RED);
+		start.setText("Start");
+		start.setLayoutX(lines.get(0).getStartX());
+		start.setLayoutY(lines.get(0).getStartY());
+		end.setText("End");
+		end.setLayoutX(lines.get(lines.size()-1).getEndX());
+		end.setLayoutY(lines.get(lines.size()-1).getEndY());
+		map.getChildren().add(start);
+		map.getChildren().add(end);
+
 
 	}
 
@@ -957,7 +1032,6 @@ public class economictravelGUI {
 
 	public void initializePlacesTable() {
 
-
 		ObservableList <Vertex> oblist;
 		oblist = FXCollections.observableList(tg.toArrayFromHash());
 		PlacesTable.setItems(oblist);
@@ -968,9 +1042,9 @@ public class economictravelGUI {
 	public void initializesearchOptionComboBox() {
 
 		ArrayList<String> op = new ArrayList<>();
-		op.add("No Restriction");
-		op.add("With Restriction");
-		op.add("With Restriction but it must pass by all the places");
+		op.add("Considering All Restriction");
+		op.add("With one Restriction");
+		op.add("With one Restriction but it must pass by all the places");
 		ObservableList<String> options = FXCollections.observableList(op);
 		searchOptionComboBox.setItems(options);
 	}
@@ -1003,12 +1077,18 @@ public class economictravelGUI {
 
 	@FXML
 	void showRoute(ActionEvent event) {
-
+        
+		
+		tg.getCali().resetEdgesMark();
+		map.getChildren().remove(start);
+		map.getChildren().remove(end);
 		ObservableList<Line> lines2 = FXCollections.observableList(lines);
 		map.getChildren().removeAll(lines2);
+		lines.clear();
 		String info = "";
 		String v1 = fromplacelabel.getText();
 		String v2 = toplacelabel.getText();
+		ArrayList<Vertex> route = new ArrayList<>();
 		int time = 0;
 
 		if(searchOptionComboBox.getSelectionModel().getSelectedItem() != null) {
@@ -1016,18 +1096,15 @@ public class economictravelGUI {
 			switch(searchOptionComboBox.getSelectionModel().getSelectedIndex()) {
 
 			case 0:
-
+				break;
 
 			case 1:
 
 				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
-
-
 				case 0:
-
 					try {
 
-						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2));
+						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,0));
 						info = tg.searchPathByNamesTimes(v1,v2);
 						time = tg.getCali().minimumTime(v1, v2);
 					} catch (NumberFormatException | EmptyQueueException e) {
@@ -1035,52 +1112,75 @@ public class economictravelGUI {
 						showAlertWhenInvalidInput();
 						e.printStackTrace();	
 					}
+					showAlertWithRoute(v1,v2,info,time, false);
+
 					break;
 
 				case 1:
 
 					try {
-
-						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2));
+						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,1));
 						info = tg.searchPathByNamesCost(v1,v2);
-						time = tg.getCali().minimumTime(v1, v2);
+						time = tg.getCali().priceToPay(v1, v2);
+
 					} catch (NumberFormatException | EmptyQueueException e) {
 
 						showAlertWhenInvalidInput();
 						e.printStackTrace();	
 					}
+
+					showAlertWithRoute(v1,v2,info,time, true);
 					break;
 
 				}
+
+				break;
 
 			case 2:
 
 				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
 
 
-				case 0:
+				case 0:				
+					try {
+						tg.getCali().primForTime();	
+						route = getArrayListOfVertexOfRoute("","",2);
+						putLinesToShowRoute(route);
+						info = constructPathPrim(route);
+						showAlertWithRoute("","",info,time,false);
+
+					} catch (EmptyQueueException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					break;
 
 				case 1:
 
+					try {
+						tg.getCali().primForCost();	
+						route = getArrayListOfVertexOfRoute("","",2);
+						putLinesToShowRoute(route);
+						info = constructPathPrim(route);
+						showAlertWithRoute("","",info,time,true);
+
+					} catch (EmptyQueueException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					break;
 
 				}
 
+				break;
+
+			default:
+				break;
 
 			}
 		}
-
-		try {
-
-			putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2));
-			info = tg.searchPathByNamesTimes(v1,v2);
-			time = tg.getCali().minimumTime(v1, v2);
-		} catch (NumberFormatException | EmptyQueueException e) {
-
-			showAlertWhenInvalidInput();
-			e.printStackTrace();	
-		}
-
-		showAlertWithRouteInTextWhenTimeOnly(v1,v2,info,time);
 
 	}
 
@@ -1113,12 +1213,29 @@ public class economictravelGUI {
 
 	}
 
-	public void showAlertWithRouteInTextWhenTimeOnly(String v1, String v2, String info, int time) {
+	public void showAlertWithRoute(String v1, String v2, String info, int time, boolean cost) {
+
 
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setHeaderText("Route Information: "+v1+" - "+v2+"\n"+"Minimum Time: "+time+" minutes ");
+
+		if(!v1.equalsIgnoreCase("") && !v2.equalsIgnoreCase("")) {		
+			if(cost == true) {	
+				alert.setHeaderText("Route Information: "+v1+" - "+v2+"\n"+"Minimum Cost: "+time);
+			}else {			
+				alert.setHeaderText("Route Information: "+v1+" - "+v2+"\n"+"Minimum Time: "+time+" minutes ");
+			}		
+		}else {
+
+			if(cost == true) {	
+				alert.setHeaderText("All Places route by cost"+"\n");
+
+			}else {		
+				alert.setHeaderText("All places route by time"+"\n");
+			}		
+		}
 		alert.setContentText(info);
 		alert.showAndWait();
+
 	}
 
 	public void showAlertWhenInvalidInput() {
