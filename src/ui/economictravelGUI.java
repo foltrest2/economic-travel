@@ -961,18 +961,20 @@ public class economictravelGUI {
 		String info = "";
 		String v1 = fromplacelabel.getText();
 		String v2 = toplacelabel.getText();
+		int time = 0;
 
 		try {
 			
 			putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2));
 			info = tg.searchPathByNames(v1,v2);
+			time = tg.getCali().minimumTime(v1, v2);
 		} catch (NumberFormatException | EmptyQueueException e) {
             
 			showAlertWhenInvalidInput();
 			e.printStackTrace();	
 		}
 
-		showAlertWithRouteInText(v1,v2,info);
+		showAlertWithRouteInTextWhenTimeOnly(v1,v2,info,time);
 
 	}
 
@@ -1005,10 +1007,10 @@ public class economictravelGUI {
 
     }
 
-	public void showAlertWithRouteInText(String v1, String v2, String info) {
+	public void showAlertWithRouteInTextWhenTimeOnly(String v1, String v2, String info, int time) {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setHeaderText("Route Information: "+v1+" - "+v2);
+		alert.setHeaderText("Route Information: "+v1+" - "+v2+"\n"+"Minimum Time: "+time+" minutes ");
 		alert.setContentText(info);
 		alert.showAndWait();
 	}
