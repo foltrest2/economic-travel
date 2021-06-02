@@ -84,36 +84,6 @@ public class TravelGuide {
 		System.out.println(cali.priceToPayWithLimit("Cristo Rey", "Centro comercial Chipichape", 16000));
 	}
 	
-	public void printMatrix() throws EmptyQueueException {
-		int [][] m = cali.VertexToMatrixTime();
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
-	}
-
-	public void printEdgeMatrix() throws EmptyQueueException {
-		Edge [][] ed = cali.edgesToMatrix();
-		for (int i = 0; i < ed.length; i++) {
-			for (int j = 0; j < ed.length; j++) {
-				System.out.print(ed[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
-	}
-
-	public void floydWarshall() throws EmptyQueueException {
-		int [][] m = cali.floydWarshall(cali.VertexToMatrixTime(), cali.VertexToMatrixTime().length);
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
-	}
-	
 	public void printFloydWarshallEdges() throws EmptyQueueException {
         Edge [][] ed = cali.floydWarshallEdges();
         for (int i = 0; i < ed.length; i++) {
@@ -130,18 +100,29 @@ public class TravelGuide {
 		String from2 = cali.searchDueIndicator(from);
 		String to2 = cali.searchDueIndicator(to);
 		info += "Shortest path from: "+ from2 + " to -> "+ to2+": "+"\n";
-		path = cali.constructPath(from, to);
+		path = cali.constructPathTime(from, to);
 		info += cali.printPath(path);
 		return info;
 	}
 	
-	public String searchPathByNames(String from, String to) throws EmptyQueueException{
+	public String searchPathByNamesTimes(String from, String to) throws EmptyQueueException{
 		String info = "";
 		Vector<String> path;
 		Vertex fromV = cali.searchVertex(from);
 		Vertex toV = cali.searchVertex(to);		
 		info += "Shortest path from: "+ from + " to -> "+ to+": "+"\n";
-		path = cali.constructPath(fromV.getIndicator(), toV.getIndicator());
+		path = cali.constructPathTime(fromV.getIndicator(), toV.getIndicator());
+		info += cali.printPath(path);
+		return info;
+	}
+	
+	public String searchPathByNamesCost(String from, String to) throws EmptyQueueException{
+		String info = "";
+		Vector<String> path;
+		Vertex fromV = cali.searchVertex(from);
+		Vertex toV = cali.searchVertex(to);		
+		info += "Shortest path from: "+ from + " to -> "+ to+": "+"\n";
+		path = cali.constructPathCost(fromV.getIndicator(), toV.getIndicator());
 		info += cali.printPath(path);
 		return info;
 	}
@@ -156,8 +137,10 @@ public class TravelGuide {
 	}
 
 	public void initialize() throws EmptyQueueException {
-		cali.initialize(cali.getVertices().size(), cali.VertexToMatrixTime());
-		cali.floydWarshallV2(cali.getVertices().size());
+		cali.initializeTime(cali.getVertices().size(), cali.VertexToMatrixTime());
+		cali.initializeCost(cali.getVertices().size(), cali.VertexToMatrixCost());
+		cali.floydWarshallV2Time(cali.getVertices().size());
+		cali.floydWarshallV2Cost(cali.getVertices().size());
 		cali.verticesToHasMap2();
 		cali.initializeRoutes();
 	}

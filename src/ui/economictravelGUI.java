@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -174,9 +175,16 @@ public class economictravelGUI {
 
 	@FXML
 	private Label toplacelabel;
+	@FXML
+	private Label restrictionOptionLabel;
 	ImageView imav;
 	Image i;
 	File f;
+	@FXML
+	private ComboBox<String> searchOptionComboBox;
+
+	@FXML
+	private ComboBox<String> restrictionComboBox;
 
 	//constantes con las rutas de las imagenes de cada lugar
 	private static String ACUAPARQUE = "imagenes\\acuaparque.jpg";
@@ -228,7 +236,7 @@ public class economictravelGUI {
 
 
 		tg = new TravelGuide();
-		
+
 	}
 
 	public void loadMainMenu() throws IOException, EmptyQueueException {
@@ -241,7 +249,11 @@ public class economictravelGUI {
 		zoom(map);
 		addCirclesToList();
 		initializePlacesTable();
+		initializesearchOptionComboBox();
+		initializerestrictionComboBox();
 		fromplacelabel.setTextFill(Color.BLUE);
+		restrictionComboBox.setVisible(false);
+		restrictionOptionLabel.setVisible(false);
 
 	}
 
@@ -299,9 +311,9 @@ public class economictravelGUI {
 		ArrayList<Vertex> route = new ArrayList<>();
 		int i1 = tg.getCali().searchVertex(nv1).getIndicator();
 		int i2 = tg.getCali().searchVertex(nv2).getIndicator();
-		Vector<String> routeBefore = tg.getCali().constructPath(i1,i2);
+		Vector<String> routeBefore = tg.getCali().constructPathTime(i1,i2);
 
-		for(int i = 0; i< tg.getCali().constructPath(i1, i2).size(); i++) {
+		for(int i = 0; i< tg.getCali().constructPathTime(i1, i2).size(); i++) {
 
 			Vertex c = tg.getCali().searchVertex(routeBefore.get(i));
 			route.add(c);
@@ -953,6 +965,42 @@ public class economictravelGUI {
 
 	}
 
+	public void initializesearchOptionComboBox() {
+
+		ArrayList<String> op = new ArrayList<>();
+		op.add("No Restriction");
+		op.add("With Restriction");
+		op.add("With Restriction but it must pass by all the places");
+		ObservableList<String> options = FXCollections.observableList(op);
+		searchOptionComboBox.setItems(options);
+	}
+
+	public void initializerestrictionComboBox() {
+
+		ArrayList<String> op = new ArrayList<>();
+		op.add("Time Restriction");
+		op.add("Cost Restriction");
+		ObservableList<String> options = FXCollections.observableList(op);
+		restrictionComboBox.setItems(options);
+
+	}
+
+	@FXML
+	void searchOption(ActionEvent event) {
+
+		if(searchOptionComboBox.getSelectionModel().getSelectedItem() != null) {
+
+			if(searchOptionComboBox.getSelectionModel().getSelectedIndex() == 1 || searchOptionComboBox.getSelectionModel().getSelectedIndex() == 2) {
+				restrictionComboBox.setVisible(true);
+				restrictionOptionLabel.setVisible(true);
+			}else {
+
+				restrictionComboBox.setVisible(false);
+				restrictionOptionLabel.setVisible(false);
+			}
+		}
+	}
+
 	@FXML
 	void showRoute(ActionEvent event) {
 
@@ -963,13 +1011,71 @@ public class economictravelGUI {
 		String v2 = toplacelabel.getText();
 		int time = 0;
 
+		if(searchOptionComboBox.getSelectionModel().getSelectedItem() != null) {
+
+			switch(searchOptionComboBox.getSelectionModel().getSelectedIndex()) {
+
+			case 0:
+
+
+			case 1:
+
+				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
+
+
+				case 0:
+
+					try {
+
+						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2));
+						info = tg.searchPathByNamesTimes(v1,v2);
+						time = tg.getCali().minimumTime(v1, v2);
+					} catch (NumberFormatException | EmptyQueueException e) {
+
+						showAlertWhenInvalidInput();
+						e.printStackTrace();	
+					}
+					break;
+
+				case 1:
+
+					try {
+
+						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2));
+						info = tg.searchPathByNamesCost(v1,v2);
+						time = tg.getCali().minimumTime(v1, v2);
+					} catch (NumberFormatException | EmptyQueueException e) {
+
+						showAlertWhenInvalidInput();
+						e.printStackTrace();	
+					}
+					break;
+
+				}
+
+			case 2:
+
+				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
+
+
+				case 0:
+
+				case 1:
+
+
+				}
+
+
+			}
+		}
+
 		try {
-			
+
 			putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2));
-			info = tg.searchPathByNames(v1,v2);
+			info = tg.searchPathByNamesTimes(v1,v2);
 			time = tg.getCali().minimumTime(v1, v2);
 		} catch (NumberFormatException | EmptyQueueException e) {
-            
+
 			showAlertWhenInvalidInput();
 			e.printStackTrace();	
 		}
@@ -980,32 +1086,32 @@ public class economictravelGUI {
 
 	@FXML
 	void switchPlace(ActionEvent event) {
-		
+
 		if(fromplacelabel.getTextFill() == Color.BLUE) {
-			
+
 			toplacelabel.setTextFill(Color.BLUE);
 			fromplacelabel.setTextFill(Color.BLACK);
-			
+
 		}else {	
 			fromplacelabel.setTextFill(Color.BLUE);
 			toplacelabel.setTextFill(Color.BLACK);
-	
+
 		}
-		
+
 	}
-	
+
 	@FXML
-    void clickOnPlace(MouseEvent event) {
-		
+	void clickOnPlace(MouseEvent event) {
+
 		if(toplacelabel.getTextFill() == Color.BLUE) {
-			
+
 			toplacelabel.setText(PlacesTable.getSelectionModel().getSelectedItem().getName());
 		}else{
-			
+
 			fromplacelabel.setText(PlacesTable.getSelectionModel().getSelectedItem().getName());
 		}
 
-    }
+	}
 
 	public void showAlertWithRouteInTextWhenTimeOnly(String v1, String v2, String info, int time) {
 
@@ -1014,14 +1120,14 @@ public class economictravelGUI {
 		alert.setContentText(info);
 		alert.showAndWait();
 	}
-	
+
 	public void showAlertWhenInvalidInput() {
-		
+
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setHeaderText("ERROR");
 		alert.setContentText("Your choose an invalid Option");
 		alert.showAndWait();
-		
+
 	}
 
 }

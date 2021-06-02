@@ -11,11 +11,13 @@ public class Graph {
 	private HashMap<Integer,Edge> edges;
 	private HashMap<String, Vertex> vertices;
 	private HashMap<Integer, Vertex> verticesv2;
-	private ArrayList<ArrayList<ArrayList<Edge>>> routes;	
-	public static final int MAXN = 200;
+	private ArrayList<ArrayList<ArrayList<Edge>>> routes;
+	public static final int MAXSIZE = 42;
 	private static int INF = (int) 1e7;
-	private static int dis[][] = new int[MAXN][MAXN];
-	private static int Next[][] = new int[MAXN][MAXN];
+	private static int dis[][] = new int[MAXSIZE][MAXSIZE];
+	private static int next[][] = new int[MAXSIZE][MAXSIZE];
+	private static int disCost[][] = new int[MAXSIZE][MAXSIZE];
+	private static int nextCost[][] = new int[MAXSIZE][MAXSIZE];
 
 	public Graph() {
 		edges = new HashMap<>();
@@ -23,7 +25,7 @@ public class Graph {
 		verticesv2 = new HashMap<>();
 		routes = new ArrayList<ArrayList<ArrayList<Edge>>>();
 	}
-	//tested
+	
 	public int [][] VertexToMatrixTime() throws EmptyQueueException{
 		int [][] m = new int [vertices.size()][vertices.size()];
 		Queue<String> q = new Queue<>();
@@ -43,7 +45,27 @@ public class Graph {
 		}
 		return m;
 	}
-	//tested
+
+	public int [][] VertexToMatrixCost() throws EmptyQueueException{
+		int [][] m = new int [vertices.size()][vertices.size()];
+		Queue<String> q = new Queue<>();
+		for (String v : vertices.keySet()) {
+			q.enqueue(v);
+		}
+		for (int i = 0; i < vertices.size(); i++) {
+			Vertex v = vertices.get(q.dequeue());
+			for (int j = 0; j < vertices.size(); j++) {	
+				if (j < v.getNeighbours().size()) {
+					Edge e = v.searchEdge(v, v.getNeighbours().get(j));
+					if (e != null) {
+						m[v.getIndicator()][v.getNeighbours().get(j).getIndicator()] = e.getCost();
+					}
+				}
+			}
+		}
+		return m;
+	}
+
 	public Edge [][] edgesToMatrix() throws EmptyQueueException {
 		Edge [][] ed = new Edge[vertices.size()][vertices.size()];
 		Queue<Integer> q = new Queue<>();
@@ -96,7 +118,7 @@ public class Graph {
 		return result;
 	}
 
-	public void floydWarshallV2(int V){
+	public void floydWarshallV2Time(int V){
 		for(int k = 0; k < V; k++){
 			for(int i = 0; i < V; i++){
 				for(int j = 0; j < V; j++){
@@ -104,7 +126,22 @@ public class Graph {
 						continue;
 					if (dis[i][j] > dis[i][k] +dis[k][j]){
 						dis[i][j] = dis[i][k] + dis[k][j];
-						Next[i][j] = Next[i][k];
+						next[i][j] = next[i][k];
+					}
+				}
+			}
+		}
+	}
+
+	public void floydWarshallV2Cost(int V){
+		for(int k = 0; k < V; k++){
+			for(int i = 0; i < V; i++){
+				for(int j = 0; j < V; j++){
+					if (disCost[i][k] == INF || disCost[k][j] == INF)
+						continue;
+					if (disCost[i][j] > disCost[i][k] + disCost[k][j]){
+						disCost[i][j] = disCost[i][k] + disCost[k][j];
+						nextCost[i][j] = nextCost[i][k];
 					}
 				}
 			}
@@ -220,12 +257,11 @@ public class Graph {
 		boolean canGo = totalPrice < limit;
 		return canGo;
 	}
-	
+
 	public int minimumTime(String from, String to) throws EmptyQueueException {
 		Vertex v1 = vertices.get(from);
 		Vertex v2 = vertices.get(to);
 		return floydWarshallEdges()[v1.getIndicator()][v2.getIndicator()].getTime();
-		
 	}
 
 	public boolean travelWithTimeLimit(String from, String to, int limit) throws EmptyQueueException {
@@ -288,13 +324,25 @@ public class Graph {
 		return m;
 	}
 
-	public Vector<String> constructPath(int u, int v) throws EmptyQueueException{
-		if (Next[u][v] == Integer.MAX_VALUE)
+	public Vector<String> constructPathTime(int u, int v) throws EmptyQueueException{
+		if (next[u][v] == Integer.MAX_VALUE)
 			return null;
 		Vector<String> path = new Vector<String>();
 		path.add(searchDueIndicator(u));
 		while (u != v){
-			u = Next[u][v];
+			u = next[u][v];
+			path.add(searchDueIndicator(u));
+		}
+		return path;
+	}
+
+	public Vector<String> constructPathCost(int u, int v) throws EmptyQueueException{
+		if (nextCost[u][v] == Integer.MAX_VALUE)
+			return null;
+		Vector<String> path = new Vector<String>();
+		path.add(searchDueIndicator(u));
+		while (u != v){
+			u = nextCost[u][v];
 			path.add(searchDueIndicator(u));
 		}
 		return path;
@@ -310,7 +358,7 @@ public class Graph {
 		return info;
 	}
 
-	public void initialize(int V, int [][] graph){	
+	public void initializeTime(int V, int [][] graph){	
 		for(int i = 0; i < V; i++){
 			for(int j = 0; j < V; j++){
 				if(graph[i][j] == 0 && i != j) {
@@ -324,9 +372,30 @@ public class Graph {
 				dis[i][j] = graph[i][j];
 
 				if (graph[i][j] == INF)
-					Next[i][j] = Integer.MAX_VALUE;
+					next[i][j] = Integer.MAX_VALUE;
 				else
-					Next[i][j] = j;
+					next[i][j] = j;
+			}
+		}
+	}
+
+	public void initializeCost(int V, int [][] graph){	
+		for(int i = 0; i < V; i++){
+			for(int j = 0; j < V; j++){
+				if(graph[i][j] == 0 && i != j) {
+					graph[i][j] = INF;
+				}
+			}
+		}	
+
+		for(int i = 0; i < V; i++){
+			for(int j = 0; j < V; j++){
+				disCost[i][j] = graph[i][j];
+
+				if (graph[i][j] == INF)
+					nextCost[i][j] = Integer.MAX_VALUE;
+				else
+					nextCost[i][j] = j;
 			}
 		}
 	}

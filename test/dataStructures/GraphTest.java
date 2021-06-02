@@ -137,7 +137,7 @@ public class GraphTest {
 		path.add("El Bochinche");
 		path.add("Torre de Cali");
 		try {
-			assertEquals(path, tg.getCali().constructPath(0, 1), "Fail test");
+			assertEquals(path, tg.getCali().constructPathTime(0, 1), "Fail test");
 		} catch (EmptyQueueException e) {
 			e.printStackTrace();
 		}
@@ -147,7 +147,7 @@ public class GraphTest {
 		path.add("Zoologico");
 		path.add("Portada al mar");
 		try {
-			assertEquals(path, tg.getCali().constructPath(0, 4), "Fail test");
+			assertEquals(path, tg.getCali().constructPathTime(0, 4), "Fail test");
 		} catch (EmptyQueueException e) {
 			e.printStackTrace();
 		}
