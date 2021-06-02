@@ -29,7 +29,7 @@ public class Main {
 			tg.printFloydWarshallEdges();
 			System.out.println();
 			tg.pay();
-			tg.importData(tg.getSavePathFileTest());
+//			tg.importData(tg.getSavePathFileTest());
 			tg.initialize();
 			System.out.println(tg.searchPathByNames("El Bochinche", "Torre de Cali"));
 		} catch (IOException e) {
