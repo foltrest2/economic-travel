@@ -39,7 +39,7 @@ public class GraphTest {
 	}
 	
 	@Test
-	public void testedgesToMatrix() throws EmptyQueueException {
+	public void testedgesToMatrix()  {
 		setupScenary1();
 		int verify [][] = {{0, 18, 0, 0, 0}, 
 				{18, 0, 6, 0, 0}, 
@@ -47,12 +47,17 @@ public class GraphTest {
 				{0, 0, 21, 0, 0}, 
 				{0, 0, 14, 0, 0}};
 		
-		assertEquals(verify[1][0], tg.getCali().edgesToMatrix()[1][0].getTime(), "Fail test");
-		assertEquals(verify[4][2], tg.getCali().edgesToMatrix()[4][2].getTime(), "Fail test");
+		try {
+			assertEquals(verify[1][0], tg.getCali().edgesToMatrix()[1][0].getTime(), "Fail test");
+			assertEquals(verify[4][2], tg.getCali().edgesToMatrix()[4][2].getTime(), "Fail test");
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@Test
-	public void testFloydWarshall() throws EmptyQueueException {
+	public void testFloydWarshall()  {
 		setupScenary1();
 		int verify [][] = {{0, 18, 24, 45, 38}, 
 				{18, 0, 6, 27, 20}, 
@@ -60,12 +65,16 @@ public class GraphTest {
 				{45, 27, 21, 0, 35}, 
 				{38, 20, 14, 35, 0}};
 		
-		assertEquals(verify[1][0], tg.getCali().floydWarshall(tg.getCali().VertexToMatrixTime(), tg.getCali().getVertices().size())[1][0], "Fail test");
-		assertEquals(verify[4][2], tg.getCali().floydWarshall(tg.getCali().VertexToMatrixTime(), tg.getCali().getVertices().size())[4][2], "Fail test");	
+		try {
+			assertEquals(verify[1][0], tg.getCali().floydWarshall(tg.getCali().VertexToMatrixTime(), tg.getCali().getVertices().size())[1][0], "Fail test");
+			assertEquals(verify[4][2], tg.getCali().floydWarshall(tg.getCali().VertexToMatrixTime(), tg.getCali().getVertices().size())[4][2], "Fail test");	
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
-	public void testFloydWarshallEdges() throws EmptyQueueException {
+	public void testFloydWarshallEdges() {
 		setupScenary1();
 		int verify [][] = {{0, 18, 24, 45, 38}, 
 				{18, 0, 6, 27, 20}, 
@@ -79,14 +88,19 @@ public class GraphTest {
 				{21991, 13935, 5747, null, 13886}, 
 				{24383, 16327, 8139, 13886, null}};
 		
-		assertEquals(verify[1][0], tg.getCali().floydWarshallEdges()[1][0].getTime(), "Fail test");
-		assertEquals(verify[4][2], tg.getCali().floydWarshallEdges()[4][2].getTime(), "Fail test");
-		assertEquals(verify2[1][0], tg.getCali().floydWarshallEdges()[1][0].getCost(), "Fail test");
-		assertEquals(verify2[4][2], tg.getCali().floydWarshallEdges()[4][2].getCost(), "Fail test");
+		try {
+			assertEquals(verify[1][0], tg.getCali().floydWarshallEdges()[1][0].getTime(), "Fail test");
+			assertEquals(verify[4][2], tg.getCali().floydWarshallEdges()[4][2].getTime(), "Fail test");
+			assertEquals(verify2[1][0], tg.getCali().floydWarshallEdges()[1][0].getCost(), "Fail test");
+			assertEquals(verify2[4][2], tg.getCali().floydWarshallEdges()[4][2].getCost(), "Fail test");
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	@Test
-	public void testPrimForTime() throws EmptyQueueException {
+	public void testPrimForTime()  {
 		setupScenary1();
 		int verify [][] = {{0, 18, 0, 0, 0}, 
 				{0, 0, 0, 0, 0}, 
@@ -99,7 +113,7 @@ public class GraphTest {
 	}
 	
 	@Test
-	public void testPrimForCost() throws EmptyQueueException {
+	public void testPrimForCost()  {
 		setupScenary1();
 		int verify [][] = {{0, 8056, 0, 0, 0}, 
 				{0, 0, 0, 0, 0}, 
@@ -112,38 +126,54 @@ public class GraphTest {
 	}
 	
 	@Test
-	public void testConstructPath() throws EmptyQueueException {
+	public void testConstructPath() {
 		setupScenary1();
-		tg.initialize();
+		try {
+			tg.initialize();
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
 		Vector<String> path = new Vector<String>();
 		path.add("El Bochinche");
 		path.add("Torre de Cali");
-		assertEquals(path, tg.getCali().constructPath(0, 1), "Fail test");
+		try {
+			assertEquals(path, tg.getCali().constructPath(0, 1), "Fail test");
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
 		path.clear();
 		path.add("El Bochinche");
 		path.add("Torre de Cali");
 		path.add("Zoologico");
 		path.add("Portada al mar");
-		assertEquals(path, tg.getCali().constructPath(0, 4), "Fail test");
+		try {
+			assertEquals(path, tg.getCali().constructPath(0, 4), "Fail test");
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
-	public void testVerticesToHasMap2() throws EmptyQueueException {
+	public void testVerticesToHasMap2()  {
 		setupScenary1();
 		tg.getCali().verticesToHasMap2();	
 		assertEquals(tg.getCali().getVertices().size(), tg.getCali().getVerticesv2().size(), "Fail test");
 	}
 	
 	@Test
-	public void testSearchDueIndicator() throws EmptyQueueException {
+	public void testSearchDueIndicator()  {
 		setupScenary1();
 		tg.getCali().verticesToHasMap2();
-		assertEquals("Portada al mar", tg.getCali().searchDueIndicator(4), "Fail test");
-		assertEquals("El Bochinche", tg.getCali().searchDueIndicator(0), "Fail test");
+		try {
+			assertEquals("Portada al mar", tg.getCali().searchDueIndicator(4), "Fail test");
+			assertEquals("El Bochinche", tg.getCali().searchDueIndicator(0), "Fail test");
+		} catch (EmptyQueueException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
-	public void testSearchVertex() throws EmptyQueueException {
+	public void testSearchVertex()  {
 		setupScenary1();
 		assertEquals("El Bochinche", tg.getCali().searchVertex("El Bochinche").getName(), "Fail test");
 		assertNull(tg.getCali().searchVertex("Universidad Icesi"));

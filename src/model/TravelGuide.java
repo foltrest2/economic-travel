@@ -23,7 +23,6 @@ public class TravelGuide {
 	public TravelGuide() {
 		cali = new Graph();
 	}
-
 	/**
 	 * This method imports the data from the csv file and fill the trees with it
 	 * @throws IOException if a problem to import occurs
@@ -79,46 +78,6 @@ public class TravelGuide {
 		}
 		br.close();
 	}
-
-	public void printMatrix() throws EmptyQueueException {
-		int [][] m = cali.VertexToMatrixTime();
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
-	}
-
-	public void printEdgeMatrix() throws EmptyQueueException {
-		Edge [][] ed = cali.edgesToMatrix();
-		for (int i = 0; i < ed.length; i++) {
-			for (int j = 0; j < ed.length; j++) {
-				System.out.print(ed[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
-	}
-
-	public void floydWarshall() throws EmptyQueueException {
-		int [][] m = cali.floydWarshall(cali.VertexToMatrixTime(), cali.VertexToMatrixTime().length);
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
-	}
-	
-	public void printFloydWarshallEdges() throws EmptyQueueException {
-        Edge [][] ed = cali.floydWarshallEdges();
-        for (int i = 0; i < ed.length; i++) {
-            for (int j = 0; j < ed.length; j++) {
-                System.out.print(ed[i][j] + " ");
-            }
-            System.out.println("\n");
-        }
-    }
 	
 	public String searchPathByIndicator(int from, int to) throws EmptyQueueException{
 		String info = "";
@@ -146,16 +105,6 @@ public class TravelGuide {
 		cali.initialize(cali.getVertices().size(), cali.VertexToMatrixTime());
 		cali.floydWarshallV2(cali.getVertices().size());
 		cali.verticesToHasMap2();
-	}
-
-	public void prim() {
-		int [][] m = cali.primForTime();
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
 	}
 	/**
 	 * This method gets the Cali graph (just for test it)
