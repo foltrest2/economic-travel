@@ -369,7 +369,7 @@ public class Graph {
 		}
 		return m;
 	}
-	
+
 	public int[][] primForCost(){
 		initializePrimRoutes();
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
@@ -416,43 +416,45 @@ public class Graph {
 		boolean mioTaked = false, minimumPaid = false;
 		for (ArrayList<ArrayList<Edge>> row : primRoutes) {
 			for (ArrayList<Edge> column : row) {
-				if (column.get(0).getTransport()[3] == 1) {
-					mioTaked = false;
-					minimumPaid = false;
-					continue;
-				}
-				else if (column.get(0).getTransport()[0] == 1 && !mioTaked) {
-					totalPrice += 2200;
-					mioTaked = true;
-					minimumPaid = false;
-				}
-				else if (column.get(0).getTransport()[0] == 1 && mioTaked) {
-					continue;
-				}else { 
-					if (i < 2 && !minimumPaid) {
-						totalPrice += column.get(0).getCost();
-						mioTaked = false; 
-						minimumPaid = true;
+				if(column.get(0)!=null) {
+					if (column.get(0).getTransport()[3] == 1) {
+						mioTaked = false;
+						minimumPaid = false;
+						continue;
 					}
-					else {
-						if (i < 2 && minimumPaid) {
-							i++;
-							continue;
+					else if (column.get(0).getTransport()[0] == 1 && !mioTaked) {
+						totalPrice += 2200;
+						mioTaked = true;
+						minimumPaid = false;
+					}
+					else if (column.get(0).getTransport()[0] == 1 && mioTaked) {
+						continue;
+					}else { 
+						if (i < 2 && !minimumPaid) {
+							totalPrice += column.get(0).getCost();
+							mioTaked = false; 
+							minimumPaid = true;
 						}
-						if (column.get(0).getTransport()[1] == 1) {
-							totalPrice += column.get(0).getCost()*0.25;
-							mioTaked = false;
-						}
-						else if (column.get(0).getTransport()[2] == 1) {
-							totalPrice += column.get(0).getCost()*0.15;
-							mioTaked = false;
+						else {
+							if (i < 2 && minimumPaid) {
+								i++;
+								continue;
+							}
+							if (column.get(0).getTransport()[1] == 1) {
+								totalPrice += column.get(0).getCost()*0.25;
+								mioTaked = false;
+							}
+							else if (column.get(0).getTransport()[2] == 1) {
+								totalPrice += column.get(0).getCost()*0.15;
+								mioTaked = false;
+							}
 						}
 					}
+					if (minimumPaid)
+						i++;
+					else
+						i = 0;
 				}
-				if (minimumPaid)
-					i++;
-				else
-					i = 0;
 			}
 		}	
 		return totalPrice;
@@ -624,7 +626,7 @@ public class Graph {
 		name = verticesv2.get(indicatorToFind).getName();
 		return name;
 	}
-	
+
 	public void resetEdgesMark() {
 		for (Integer v: edges.keySet()) {	
 			edges.get(v).setUseThisWay(false);
