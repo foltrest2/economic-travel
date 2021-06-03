@@ -39,7 +39,7 @@
                   <Font size="10.0" />
                </font></Label>
             <Circle fx:id="jardinPlazaV" fill="DODGERBLUE" layoutX="1537.0" layoutY="1337.0" onMouseClicked="#clickOnJardinPlaza" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="1531.0" layoutY="1297.0" prefHeight="44.0" prefWidth="13.0" text="42">
+            <Label layoutX="1532.0" layoutY="1307.0" prefHeight="20.0" prefWidth="13.0" text="42">
                <font>
                   <Font size="10.0" />
                </font></Label>

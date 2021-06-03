@@ -38,7 +38,6 @@ import model.TravelGuide;
 
 public class economictravelGUI {
 
-
 	private TravelGuide tg;
 
 	@FXML
@@ -361,7 +360,6 @@ public class economictravelGUI {
 			}
 			break;
 		case 2:
-
 			for (Integer key : tg.getCali().getEdges().keySet()) {
 				Edge e = tg.getCali().getEdges().get(key);
 				if (e.isUseThisWay()) {
