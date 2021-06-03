@@ -1031,131 +1031,152 @@ public class economictravelGUI {
 		ArrayList<Vertex> route = new ArrayList<>();
 		boolean youcango = false;
 		int time = 0;
-		if(searchOptionComboBox.getSelectionModel().getSelectedItem() != null) {
-			switch(searchOptionComboBox.getSelectionModel().getSelectedIndex()) {
-			case 0:
-				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()){
-				case 0:
-					try {
-						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,0),color);
-						info = tg.searchPathByNamesTimes(v1,v2);
-						time = tg.getCali().minimumTime(v1, v2);
+		if(searchOptionComboBox.getSelectionModel().getSelectedItem() != null && restrictionComboBox.getSelectionModel().getSelectedItem() != null) {
+			if(restrictionComboBox.getSelectionModel().getSelectedItem()!= null) {
+				if(searchOptionComboBox.getSelectionModel().getSelectedIndex() == 0 || searchOptionComboBox.getSelectionModel().getSelectedIndex() == 1) {
+					if(fromplacelabel.getText().equalsIgnoreCase("from place selected") || toplacelabel.getText().equalsIgnoreCase("To place selected")) {
+						showAlertWhenObjectivePlaceIsMissing();
+					}else {
 
-					} catch (NumberFormatException | EmptyQueueException e) {
-						showAlertWhenInvalidInput();
-						e.printStackTrace();	
+						switch(searchOptionComboBox.getSelectionModel().getSelectedIndex()) {
+						case 0:
+							switch(restrictionComboBox.getSelectionModel().getSelectedIndex()){
+							case 0:
+								try {
+									putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,0),color);
+									info = tg.searchPathByNamesTimes(v1,v2);
+									time = tg.getCali().minimumTime(v1, v2);
+
+								} catch (NumberFormatException | EmptyQueueException e) {
+									showAlertWhenInvalidInput();
+									e.printStackTrace();	
+								}	
+								showAlertWithRoute(v1,v2,info,time, false);
+								break;
+							case 1:
+								try {
+									putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,1),color);
+									info = tg.searchPathByNamesCost(v1,v2);
+									time = tg.getCali().priceToPay(v1, v2);
+
+								} catch (NumberFormatException | EmptyQueueException e) {
+									showAlertWhenInvalidInput();
+									e.printStackTrace();	
+								}		
+								showAlertWithRoute(v1,v2,info,time, true);
+								break;
+							}
+							break;
+						case 1:
+
+							String check = limittxt.getText();
+							boolean isNumeric = check.chars().allMatch( Character::isDigit );
+							if(isNumeric == false || limittxt.getText().equals("")) {
+								Alert alert = new Alert(AlertType.ERROR);
+								alert.setHeaderText("ERROR");
+								alert.setContentText("Please, put a valid limit input");
+								alert.showAndWait();
+								youcanlabel.setTextFill(Color.BLACK);
+								youcantlabel.setTextFill(Color.BLACK);
+								limittxt.clear();
+
+							}else {
+								limit = Integer.parseInt(limittxt.getText());
+								switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
+								case 0:
+									try {
+										youcango = tg.getCali().travelWithTimeLimit(v1, v2, limit);
+										time = tg.getCali().minimumTime(v1, v2);
+										info = tg.searchPathByNamesTimes(v1,v2);
+										if(youcango == false) {
+
+											youcanlabel.setTextFill(Color.RED);
+											youcantlabel.setTextFill(Color.GREEN);
+											youcantlabel.setText("you need " +(time-limit)+" more minutes");
+											limittxt.clear();
+										}else {
+
+											youcanlabel.setTextFill(Color.GREEN);
+											youcantlabel.setTextFill(Color.RED);
+											putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,0),color);
+											showAlertWithRoute(v1,v2,info,time, false);
+											limittxt.clear();
+										}
+									} catch (NumberFormatException | EmptyQueueException e) {
+
+										showAlertWhenInvalidInput();
+										e.printStackTrace();	
+									}
+
+									break;
+
+								case 1:
+									try {
+										youcango = tg.getCali().priceToPayWithLimit(v1, v2, limit);
+										time = tg.getCali().priceToPay(v1, v2);
+										info = tg.searchPathByNamesCost(v1,v2);
+										if(youcango == false) {
+
+											youcanlabel.setTextFill(Color.RED);
+											youcantlabel.setTextFill(Color.GREEN);
+											youcantlabel.setText("you need " +(time-limit)+"more");
+											limittxt.clear();
+										}else {
+
+											youcanlabel.setTextFill(Color.GREEN);
+											youcantlabel.setTextFill(Color.RED);
+											putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,1),color);
+											showAlertWithRoute(v1,v2,info,time, true);
+											limittxt.clear();
+										}
+									} catch (NumberFormatException | EmptyQueueException e) {
+
+										showAlertWhenInvalidInput();
+										e.printStackTrace();	
+									}
+									break;
+								}
+							}
+							break;
+						default:
+							break;
+						}
 					}	
-					showAlertWithRoute(v1,v2,info,time, false);
-					break;
-				case 1:
-					try {
-						putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,1),color);
-						info = tg.searchPathByNamesCost(v1,v2);
-						time = tg.getCali().priceToPay(v1, v2);
+				}else {
+					switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
+					case 0:				
+						try {
+							time = tg.getCali().minimumTimePrim(tg.getCali().primForTime());
+							route = getArrayListOfVertexOfRoute("","",2);
+							putLinesToShowRoute(route,color);
+							info = constructPathPrim(route);
+							showAlertWithRoute("","",info,time,false);
 
-					} catch (NumberFormatException | EmptyQueueException e) {
-						showAlertWhenInvalidInput();
-						e.printStackTrace();	
-					}		
-					showAlertWithRoute(v1,v2,info,time, true);
-					break;
-				}
-				break;
-			case 1:
-				limit = Integer.parseInt(limittxt.getText());
-				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
-				case 0:
-					try {
-						youcango = tg.getCali().travelWithTimeLimit(v1, v2, limit);
-						time = tg.getCali().minimumTime(v1, v2);
-						info = tg.searchPathByNamesTimes(v1,v2);
-						if(youcango == false) {
-
-							youcanlabel.setTextFill(Color.RED);
-							youcantlabel.setTextFill(Color.GREEN);
-							youcantlabel.setText("you need " +(time-limit)+" more minutes");
-							limittxt.clear();
-						}else {
-
-							youcanlabel.setTextFill(Color.GREEN);
-							youcantlabel.setTextFill(Color.RED);
-							putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,0),color);
-							showAlertWithRoute(v1,v2,info,time, false);
-							limittxt.clear();
+						} catch (EmptyQueueException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					} catch (NumberFormatException | EmptyQueueException e) {
 
-						showAlertWhenInvalidInput();
-						e.printStackTrace();	
-					}
+						break;
 
-					break;
+					case 1:
+						try {
+							time = tg.getCali().priceToPayPrim(tg.getCali().primForCost());
+							route = getArrayListOfVertexOfRoute("","",2);
+							putLinesToShowRoute(route,color);
+							info = constructPathPrim(route);
+							showAlertWithRoute("","",info,time,true);
 
-				case 1:
-					try {
-						youcango = tg.getCali().priceToPayWithLimit(v1, v2, limit);
-						time = tg.getCali().priceToPay(v1, v2);
-						info = tg.searchPathByNamesCost(v1,v2);
-						if(youcango == false) {
-
-							youcanlabel.setTextFill(Color.RED);
-							youcantlabel.setTextFill(Color.GREEN);
-							youcantlabel.setText("you need " +(time-limit)+"more");
-							limittxt.clear();
-						}else {
-
-							youcanlabel.setTextFill(Color.GREEN);
-							youcantlabel.setTextFill(Color.RED);
-							putLinesToShowRoute(getArrayListOfVertexOfRoute(v1,v2,1),color);
-							showAlertWithRoute(v1,v2,info,time, true);
-							limittxt.clear();
+						} catch (EmptyQueueException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					} catch (NumberFormatException | EmptyQueueException e) {
-
-						showAlertWhenInvalidInput();
-						e.printStackTrace();	
+						break;
 					}
-
-					break;
 				}
-				break;
-			case 2:
-				switch(restrictionComboBox.getSelectionModel().getSelectedIndex()) {
-				case 0:				
-					try {
-						tg.getCali().primForTime();	
-						route = getArrayListOfVertexOfRoute("","",2);
-						putLinesToShowRoute(route,color);
-						info = constructPathPrim(route);
-						showAlertWithRoute("","",info,time,false);
-
-					} catch (EmptyQueueException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					break;
-
-				case 1:
-					try {
-						tg.getCali().primForCost();	
-						route = getArrayListOfVertexOfRoute("","",2);
-						putLinesToShowRoute(route,color);
-						info = constructPathPrim(route);
-						showAlertWithRoute("","",info,time,true);
-
-					} catch (EmptyQueueException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					break;
-				}
-				break;
-
-			default:
-				break;
 			}
-
+		}else {
+			showAlertWhenNoOptionIsSelected();
 		}
 	}
 	@FXML
@@ -1198,10 +1219,10 @@ public class economictravelGUI {
 			}
 		}else {
 			if(cost == true) {	
-				alert.setHeaderText("All Places route by cost"+"\n");
+				alert.setHeaderText("Cost: $"+time+" All Places route by cost"+"\n");
 
 			}else {		
-				alert.setHeaderText("All places route by time"+"\n");
+				alert.setHeaderText("Time "+time+" minutes"+" All places route by time"+"\n");
 			}		
 		}
 		alert.setContentText(info);
@@ -1215,6 +1236,29 @@ public class economictravelGUI {
 		alert.setContentText("Your choose an invalid Option");
 		alert.showAndWait();
 
+	}
+
+	public void showAlertWhenNoLimit() {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setHeaderText("INVALID LIMIT ERROR");
+		alert.setContentText("Please, put a valid limit input");
+		alert.showAndWait();	
+	}
+
+	public void showAlertWhenObjectivePlaceIsMissing() {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setHeaderText("ROUTE OBJECTIVE ERROR");
+		alert.setContentText("Please, check out the route to search, because one of them if not both are missing");
+		alert.showAndWait();	
+	}
+	public void showAlertWhenNoOptionIsSelected() {
+
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setHeaderText("INVALID OPTION ERROR");
+		alert.setContentText("Please, check out the search option, because you choose an invalid option either search or restriction option");
+		alert.showAndWait();	
 	}
 
 }

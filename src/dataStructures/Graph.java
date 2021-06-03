@@ -416,7 +416,7 @@ public class Graph {
 		boolean mioTaked = false, minimumPaid = false;
 		for (ArrayList<ArrayList<Edge>> row : primRoutes) {
 			for (ArrayList<Edge> column : row) {
-				if(column.get(0)!=null) {
+				if(!column.isEmpty()) {
 					if (column.get(0).getTransport()[3] == 1) {
 						mioTaked = false;
 						minimumPaid = false;
