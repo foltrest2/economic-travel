@@ -229,12 +229,12 @@
       </AnchorPane>
       <AnchorPane layoutX="1000.0" layoutY="357.0" prefHeight="743.0" prefWidth="700.0">
          <children>
-            <TableView fx:id="PlacesTable" layoutX="14.0" layoutY="275.0" onMouseClicked="#clickOnPlace" prefHeight="107.0" prefWidth="200.0">
+            <TableView fx:id="PlacesTable" layoutX="18.0" layoutY="163.0" onMouseClicked="#clickOnPlace" prefHeight="220.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="Fr" prefWidth="199.0" text="Places To Choose" />
               </columns>
             </TableView>
-            <Button layoutX="224.0" layoutY="341.0" mnemonicParsing="false" onAction="#showRoute" text="Show Route">
+            <Button layoutX="234.0" layoutY="361.0" mnemonicParsing="false" onAction="#showRoute" text="Show Route">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
@@ -249,7 +249,7 @@
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="fromplacelabel" layoutX="14.0" layoutY="430.0" prefHeight="58.0" prefWidth="359.0" text="From Place selected">
+            <Label fx:id="fromplacelabel" layoutX="14.0" layoutY="430.0" prefHeight="58.0" prefWidth="297.0" text="From Place selected">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
@@ -259,46 +259,41 @@
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <Button layoutX="231.0" layoutY="293.0" mnemonicParsing="false" onAction="#switchPlace" text="Switch">
+            <Button layoutX="239.0" layoutY="262.0" mnemonicParsing="false" onAction="#switchPlace" text="Switch">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Button>
-            <ComboBox fx:id="searchOptionComboBox" layoutX="25.0" layoutY="120.0" onAction="#searchOption" prefWidth="150.0" />
-            <Label fx:id="youcanlabel" layoutX="197.0" layoutY="177.0" prefHeight="14.0" prefWidth="274.0" text="You can go with that limit">
+            <ComboBox fx:id="searchOptionComboBox" layoutX="28.0" layoutY="66.0" onAction="#searchOption" prefWidth="150.0" />
+            <Label fx:id="youcanlabel" layoutX="213.0" layoutY="107.0" prefHeight="14.0" prefWidth="274.0" text="You can go with that limit">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <ComboBox fx:id="restrictionComboBox" layoutX="224.0" layoutY="120.0" onAction="#restrictionOption" prefWidth="150.0" />
-            <Label fx:id="restrictionOptionLabel" layoutX="233.0" layoutY="93.0" text="Restriction Option">
+            <ComboBox fx:id="restrictionComboBox" layoutX="225.0" layoutY="66.0" onAction="#restrictionOption" prefWidth="150.0" />
+            <Label fx:id="restrictionOptionLabel" layoutX="234.0" layoutY="52.0" text="Restriction Option">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="limittxt" layoutX="28.0" layoutY="198.0" />
-            <Label fx:id="limitlabel" layoutX="53.0" layoutY="170.0" text="Limit">
+            <TextField fx:id="limittxt" layoutX="29.0" layoutY="121.0" />
+            <Label fx:id="limitlabel" layoutX="68.0" layoutY="107.0" text="Limit">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="38.0" layoutY="103.0" text="Search Option">
+            <Label layoutX="39.0" layoutY="52.0" text="Search Option">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="38.0" layoutY="103.0" text="Search Option">
+            <Label fx:id="youcantlabel" layoutX="212.0" layoutY="129.0" prefHeight="34.0" prefWidth="203.0" text="You can't go with that limit">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="youcantlabel" layoutX="197.0" layoutY="206.0" prefHeight="34.0" prefWidth="203.0" text="You can't go with that limit">
-               <font>
-                  <Font name="OCR A Extended" size="12.0" />
-               </font>
-            </Label>
-            <ColorPicker fx:id="routecolor" layoutX="222.0" layoutY="243.0" />
-            <Label layoutX="114.0" layoutY="249.0" prefHeight="14.0" prefWidth="95.0" text="Route color">
+            <ColorPicker fx:id="routecolor" layoutX="314.0" layoutY="185.0" prefHeight="25.0" prefWidth="95.0" />
+            <Label layoutX="231.0" layoutY="190.0" prefHeight="14.0" prefWidth="95.0" text="Route color">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
