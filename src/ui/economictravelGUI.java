@@ -1152,7 +1152,6 @@ public class economictravelGUI {
 							showAlertWithRoute("","",info,time,false);
 
 						} catch (EmptyQueueException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 
@@ -1167,7 +1166,6 @@ public class economictravelGUI {
 							showAlertWithRoute("","",info,time,true);
 
 						} catch (EmptyQueueException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						break;

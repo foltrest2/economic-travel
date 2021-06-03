@@ -30,13 +30,11 @@ public class Graph {
 		routes = new ArrayList<ArrayList<ArrayList<Edge>>>();
 		primRoutes = new ArrayList<ArrayList<ArrayList<Edge>>>();
 	}
-
 	/**
 	 * This method transform the vertices HashMap into a nxn vertices matrix with time attribute  
 	 * @return the time's matrix
 	 * @throws EmptyQueueException
 	 */
-
 	public int [][] VertexToMatrixTime() throws EmptyQueueException{
 		int [][] m = new int [vertices.size()][vertices.size()];
 		Queue<String> q = new Queue<>();
