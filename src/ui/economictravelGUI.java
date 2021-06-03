@@ -254,17 +254,10 @@ public class economictravelGUI {
 	ArrayList<Line> lines;
 
 	public economictravelGUI() {
-        
-		
+
 		tg = new TravelGuide();
 		start = new Label();
 		end = new Label();
-		caliMap = new ImageView();
-        File a = new File("imagenes/CaliHD.png");
-		Image im = new Image(a.toURI().toString());
-        caliMap.setImage(im);
-		
-
 	}
 
 	public void loadMainMenu() throws IOException, EmptyQueueException {
@@ -284,6 +277,10 @@ public class economictravelGUI {
 		fromplacelabel.setTextFill(Color.BLUE);
 		restrictionComboBox.setVisible(false);
 		restrictionOptionLabel.setVisible(false);
+		File a = new File("imagenes\\CaliHD.png");
+		Image im = new Image(a.toURI().toString());
+		caliMap.setImage(im);
+
 	}
 
 	public void addCirclesToList() {
