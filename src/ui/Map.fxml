@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -18,11 +17,7 @@
    <children>
       <AnchorPane fx:id="map" layoutX="-979.0" layoutY="-241.0" prefHeight="1200.0" prefWidth="1500.0">
          <children>
-            <ImageView fx:id="caliMap" fitHeight="1687.0" fitWidth="2939.0" layoutX="156.0" layoutY="126.0">
-               <image>
-                  <Image url="@../../../../Pictures/CaliHD.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="caliMap" fitHeight="1687.0" fitWidth="2939.0" layoutX="156.0" layoutY="126.0" />
             <Circle fx:id="parquedelasaludV" fill="DODGERBLUE" layoutX="1489.0" layoutY="1513.0" onMouseClicked="#clickOnParquedelasalud" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
             <Label layoutX="1484.0" layoutY="1488.0" text="28">
                <font>
