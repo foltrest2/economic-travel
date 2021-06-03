@@ -14,9 +14,7 @@ public class Main extends Application {
 		
 		guiItem = new economictravelGUI();
 	}
-
 	public static void main(String[] args) {
-
 		launch(args);
 
 	}
@@ -32,6 +30,7 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Economic Travel");
 		primaryStage.show();
+
 	}
 }
 

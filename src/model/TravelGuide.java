@@ -12,7 +12,6 @@ import exceptions.EmptyQueueException;
 
 public class TravelGuide {
 
-
 	private final static String SEPARATOR = ",";
 //	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
 //	public final static String SAVE_PATH_FILE = "data/TestDataV2.csv"; 
@@ -79,21 +78,21 @@ public class TravelGuide {
 		}
 		br.close();
 	}
-
-	public void pay() {
-		System.out.println(cali.priceToPayWithLimit("Cristo Rey", "Centro comercial Chipichape", 16000));
+	public void prim() {
+		int [][] m = cali.primForTime();
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m.length; j++) {
+				System.out.print(m[i][j] + " ");
+			}
+			System.out.println();
+		}
 	}
-	
-	public void printFloydWarshallEdges() throws EmptyQueueException {
-        Edge [][] ed = cali.floydWarshallEdges();
-        for (int i = 0; i < ed.length; i++) {
-            for (int j = 0; j < ed.length; j++) {
-                System.out.print(ed[i][j] + " ");
-            }
-            System.out.println("\n");
-        }
-    }
-	
+	/**
+	 * This method returns a String with the best times route between a path due indicator
+	 * @param from Integer is the integer of vertex1 indicator
+	 * @param to Integer is the integer of vertex2 indicator
+	 * @return info String with the route information
+	 */
 	public String searchPathByIndicator(int from, int to) throws EmptyQueueException{
 		String info = "";
 		Vector<String> path;
@@ -104,7 +103,12 @@ public class TravelGuide {
 		info += cali.printPath(path);
 		return info;
 	}
-	
+	/**
+	 * This method returns a String with the best times route between a path due places names
+	 * @param from String is the String name of vertex1
+	 * @param to String is the String name of vertex1
+	 * @return info String with the route information
+	 */
 	public String searchPathByNamesTimes(String from, String to) throws EmptyQueueException{
 		String info = "";
 		Vector<String> path;
@@ -115,7 +119,12 @@ public class TravelGuide {
 		info += cali.printPath(path);
 		return info;
 	}
-	
+	/**
+	 * This method returns a String with the best cost route between a path due places names
+	 * @param from String is the String name of vertex1
+	 * @param to String is the String name of vertex1
+	 * @return info String with the route information
+	 */
 	public String searchPathByNamesCost(String from, String to) throws EmptyQueueException{
 		String info = "";
 		Vector<String> path;
@@ -126,7 +135,7 @@ public class TravelGuide {
 		info += cali.printPath(path);
 		return info;
 	}
-	
+
 	public ArrayList<Vertex> toArrayFromHash(){
 		
 		ArrayList<Vertex> c = new ArrayList<>();
@@ -136,6 +145,9 @@ public class TravelGuide {
 		return c;
 	}
 
+	/**
+	 * This method initialize methods that just an one execution is needed
+	 */
 	public void initialize() throws EmptyQueueException {
 		cali.initializeTime(cali.getVertices().size(), cali.VertexToMatrixTime());
 		cali.initializeCost(cali.getVertices().size(), cali.VertexToMatrixCost());
@@ -159,5 +171,4 @@ public class TravelGuide {
 	public String getSavePathFileTest() {
 		return SAVE_PATH_FILE_TEST;
 	}
-	
 }
