@@ -311,7 +311,7 @@ public class Graph {
 	 */
 	public boolean priceToPayWithLimit(String from, String to, int limit) {
 		int totalPrice = priceToPay(from, to);
-		boolean canGo = totalPrice < limit;
+		boolean canGo = totalPrice <= limit;
 		return canGo;
 	}
 	/**
@@ -334,7 +334,7 @@ public class Graph {
 	 */
 	public boolean travelWithTimeLimit(String from, String to, int limit) throws EmptyQueueException {
 		int totalTime = minimumTime(from, to);
-		boolean canGo = totalTime < limit;
+		boolean canGo = totalTime <= limit;
 		return canGo;
 	}
 	/**

@@ -39,128 +39,88 @@ import model.TravelGuide;
 public class economictravelGUI {
 
 	private TravelGuide tg;
-
 	@FXML
 	private BorderPane basePane;
-
 	@FXML
 	private AnchorPane map;
 	@FXML
 	private ImageView caliMap;
-
 	@FXML
 	private Circle parquedelasaludV;
-
 	@FXML
 	private Circle platillosVoladoresV;
-
 	@FXML
-
 	private Circle unicentroV;
 	@FXML
 	private Circle jardinPlazaV;
-
 	@FXML
 	private Circle monumentoALaAviacionV;
-
 	@FXML
 	private Circle pascualGuerreroV;
-
 	@FXML
 	private Circle unidaddeportivaV;
-
 	@FXML
 	private Circle plazadetoroscañaveralejoV;
-
 	@FXML
 	private Circle hospitaluniversitarioV;
-
 	@FXML
 	private Circle iglesiaSanfranciscoV;
-
 	@FXML
 	private Circle catedralsanpedroV;
 	@FXML
 	private Circle elbochincheV;
-
 	@FXML
 	private Circle museocienciasnaturalesV;
-
 	@FXML
 	private Circle lomadelacruzV;
-
 	@FXML
 	private Circle gobernaciondelValleV;
-
 	@FXML
 	private Circle bibliotecaJoseGarcesV;
-
 	@FXML
 	private Circle museolamercedV;
-
 	@FXML
 	private Circle centroculturadecaliV;
-
 	@FXML
 	private Circle museodelorocalimaV;
-
 	@FXML
 	private Circle parquedelospoetasV;
-
 	@FXML
 	private Circle bulevardelrioV;
-
 	@FXML
 	private Circle teatromunicipalV;
-
 	@FXML
 	private Circle iglesialaermitaV;
-
 	@FXML
 	private Circle plazaCaycedoV;
-
 	@FXML
 	private Circle monumentoamariamulataV;
-
 	@FXML
 	private Circle zoologicodecaliV;
-
 	@FXML
 	private Circle museodelatertuliaV;
-
 	@FXML
 	private Circle sebastiandebelalczararV;
-
 	@FXML
 	private Circle hoteldanncarlton;
-
 	@FXML
 	private Circle elgatodelrioV;
-
 	@FXML
 	private Circle hotelintercontinentalV;
-
 	@FXML
 	private Circle cristoReyV;
-
 	@FXML
 	private Circle monumentoAlDeporteV;
-
 	@FXML
 	private Circle monumentoalasolidaridadempresarialV;
-
 	@FXML
 	private Circle chipichapeV;
-
 	@FXML
 	private Circle acuaparquedelacañaV;
-
 	@FXML
 	private Circle elplanetarioV;
-
 	@FXML
 	private Circle hoteltorredecaliV;
-
 	@FXML
 	private Circle miradortrescrucesV;
 	@FXML
@@ -171,13 +131,10 @@ public class economictravelGUI {
 	private Circle iglesiaSanAntonioV;
 	@FXML
 	private TableView<Vertex> PlacesTable;
-
 	@FXML
 	private TableColumn<Vertex, String> Fr;
-
 	@FXML
 	private Label fromplacelabel;
-
 	@FXML
 	private Label toplacelabel;
 	@FXML
@@ -187,23 +144,18 @@ public class economictravelGUI {
 	File f;
 	@FXML
 	private ComboBox<String> searchOptionComboBox;
-
 	@FXML
 	private ComboBox<String> restrictionComboBox;
 	@FXML
 	private TextField limittxt;
-
 	@FXML
 	private Label limitlabel;
-
 	@FXML
 	private Label youcantlabel;
-
 	@FXML
 	private ColorPicker routecolor;
 	@FXML
 	private Label youcanlabel;
-
 	Label start;
 	Label end;
 
