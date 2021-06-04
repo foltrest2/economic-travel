@@ -9,6 +9,14 @@ public class Edge {
 	private Vertex v1;
 	private Vertex v2;
 
+	/**
+	 * Edge constructor
+	 * @param v1 Vertex connected by the edge
+	 * @param v2 Vertex connected by the edge
+	 * @param time to transit through 
+	 * @param cost to transit through 
+	 * @param transport able to use to travel by the edge
+	 */
 	public Edge(Vertex v1, Vertex v2, int time, int cost, int [] transport) {
 		this.v1 = v1;
 		this.v2 = v2;

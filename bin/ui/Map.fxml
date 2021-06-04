@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="map" layoutX="-979.0" layoutY="-241.0" prefHeight="1200.0" prefWidth="1500.0">
+         <children>
+            <ImageView fx:id="caliMap" fitHeight="1687.0" fitWidth="2939.0" layoutX="156.0" layoutY="126.0" />
+            <Circle fx:id="parquedelasaludV" fill="DODGERBLUE" layoutX="1489.0" layoutY="1513.0" onMouseClicked="#clickOnParquedelasalud" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1484.0" layoutY="1488.0" text="28">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="platillosVoladoresV" fill="DODGERBLUE" layoutX="1462.0" layoutY="1399.0" onMouseClicked="#clickOnPlatillosVoladores" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1458.0" layoutY="1374.0" text="39">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="unicentroV" fill="DODGERBLUE" layoutX="1378.0" layoutY="1297.0" onMouseClicked="#clickOnUnicentro" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1372.0" layoutY="1272.0" text="41">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="jardinPlazaV" fill="DODGERBLUE" layoutX="1537.0" layoutY="1337.0" onMouseClicked="#clickOnJardinPlaza" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1532.0" layoutY="1307.0" prefHeight="20.0" prefWidth="13.0" text="42">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="monumentoALaAviacionV" fill="DODGERBLUE" layoutX="1217.0" layoutY="959.0" onMouseClicked="#clickOnMonumentoALaAviacion" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="pascualGuerreroV" fill="DODGERBLUE" layoutX="1333.0" layoutY="877.0" onMouseClicked="#clickOnPascualGuerrero" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="unidaddeportivaV" fill="DODGERBLUE" layoutX="1384.0" layoutY="907.0" onMouseClicked="#clickOnUnidadDeportiva" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="plazadetoroscañaveralejoV" fill="DODGERBLUE" layoutX="1304.0" layoutY="1053.0" onMouseClicked="#clickOnPlazadeToros" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1378.0" layoutY="917.0" text="10">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1299.0" layoutY="1028.0" text="31">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1328.0" layoutY="888.0" text="11">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="hospitaluniversitarioV" fill="DODGERBLUE" layoutX="1282.0" layoutY="877.0" onMouseClicked="#clickOnHospitalUniversitario" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1277.0" layoutY="888.0" text="13">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1212.0" layoutY="934.0" text="20">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="iglesiaSanfranciscoV" fill="DODGERBLUE" layoutX="1496.0" layoutY="721.0" onMouseClicked="#clickOnSanFrancisco" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="catedralsanpedroV" fill="DODGERBLUE" layoutX="1513.0" layoutY="701.0" onMouseClicked="#catedralsanpedro" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="elbochincheV" fill="DODGERBLUE" layoutX="1547.0" layoutY="774.0" onMouseClicked="#clickOnElBochinche" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="museocienciasnaturalesV" fill="DODGERBLUE" layoutX="1422.0" layoutY="782.0" onMouseClicked="#clickOnMuseoCienciasNaturales" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="lomadelacruzV" fill="DODGERBLUE" layoutX="1412.0" layoutY="752.0" onMouseClicked="#clickOnLomaDeLaCruz" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="gobernaciondelValleV" fill="DODGERBLUE" layoutX="1472.0" layoutY="731.0" onMouseClicked="#clickOnGobernaciondelValle" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="bibliotecaJoseGarcesV" fill="DODGERBLUE" layoutX="1368.0" layoutY="791.0" onMouseClicked="#clickOnBibliotecaJoseGarces" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1365.0" layoutY="767.0" text="2">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1418.0" layoutY="760.0" text="27">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1543.0" layoutY="753.0" text="36">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1407.0" layoutY="725.0" text="18">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1467.0" layoutY="709.0" text="12">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1494.0" layoutY="732.0" text="17">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1510.0" layoutY="679.0" text="5">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="museolamercedV" fill="DODGERBLUE" layoutX="1436.0" layoutY="682.0" onMouseClicked="#clickOnMuseoLaMerced" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="centroculturadecaliV" fill="DODGERBLUE" layoutX="1423.0" layoutY="702.0" onMouseClicked="#clickOnCentroculturaldecali" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="museodelorocalimaV" fill="DODGERBLUE" layoutX="1462.0" layoutY="702.0" onMouseClicked="#clickOnMuseoDelOroCalima" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="parquedelospoetasV" fill="DODGERBLUE" layoutX="1580.0" layoutY="664.0" onMouseClicked="#clickOnParquedelospoetas" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="bulevardelrioV" fill="DODGERBLUE" layoutX="1507.0" layoutY="671.0" onMouseClicked="#clickOnBulevarDelRio" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="teatromunicipalV" fill="DODGERBLUE" layoutX="1442.0" layoutY="716.0" onMouseClicked="#clickOnTeatroMunicipal" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="iglesialaermitaV" fill="DODGERBLUE" layoutX="1600.0" layoutY="644.0" onMouseClicked="#clickOnIglesiaLaErmita" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="plazaCaycedoV" fill="DODGERBLUE" layoutX="1538.0" layoutY="681.0" onMouseClicked="#clickOnPlazaCaycedo" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1503.0" layoutY="649.0" text="3">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1533.0" layoutY="657.0" text="30">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1595.0" layoutY="619.0" text="15">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1575.0" layoutY="642.0" text="29">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1457.0" layoutY="679.0" text="26">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1437.0" layoutY="724.0" text="34">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1431.0" layoutY="657.0" text="24">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1415.0" layoutY="679.0" text="6">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="monumentoamariamulataV" fill="DODGERBLUE" layoutX="1237.0" layoutY="645.0" onMouseClicked="#clickOnMariaMulata" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="zoologicodecaliV" fill="DODGERBLUE" layoutX="1124.0" layoutY="716.0" onMouseClicked="#clickOnZoologicodeCali" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="museodelatertuliaV" fill="DODGERBLUE" layoutX="1292.0" layoutY="682.0" onMouseClicked="#clickOnmuseodelatertulia" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="sebastiandebelalczararV" fill="DODGERBLUE" layoutX="1261.0" layoutY="706.0" onMouseClicked="#clickOnSebastiandebelalcazaar" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="hoteldanncarlton" fill="DODGERBLUE" layoutX="1358.0" layoutY="683.0" onMouseClicked="#clickOnhotelDarnnCarlton" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="elgatodelrioV" fill="DODGERBLUE" layoutX="1333.0" layoutY="653.0" onMouseClicked="#clickOnElGatodelRio" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="hotelintercontinentalV" fill="DODGERBLUE" layoutX="1378.0" layoutY="694.0" onMouseClicked="#clickOnHotelIntercontinental" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1353.0" layoutY="657.0" text="38">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1372.0" layoutY="672.0" text="37">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1119.0" layoutY="690.0" text="35">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1232.0" layoutY="619.0" text="22">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1255.0" layoutY="684.0" prefHeight="10.0" prefWidth="13.0" text="33">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1287.0" layoutY="657.0" text="25">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1330.0" layoutY="629.0" text="8" />
+            <Circle fx:id="cristoReyV" fill="DODGERBLUE" layoutX="1002.0" layoutY="811.0" onMouseClicked="#clickOnCristoRey" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="999.0" layoutY="785.0" text="7">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="monumentoAlDeporteV" fill="DODGERBLUE" layoutX="2064.0" layoutY="429.0" onMouseClicked="#clickOnMonumentoAlDeporte" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="monumentoalasolidaridadempresarialV" fill="DODGERBLUE" layoutX="1751.0" layoutY="439.0" onMouseClicked="#clickOnMonumentoALaSolidaridadEmpresarial" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="chipichapeV" fill="DODGERBLUE" layoutX="1668.0" layoutY="419.0" onMouseClicked="#clickOnChipichape" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="acuaparquedelacañaV" fill="DODGERBLUE" layoutX="2084.0" layoutY="625.0" onMouseClicked="#clickOnAcuaparquedelaCaña" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="elplanetarioV" fill="DODGERBLUE" layoutX="2386.0" layoutY="593.0" onMouseClicked="#clickOnElPlanetario" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="hoteltorredecaliV" fill="DODGERBLUE" layoutX="1668.0" layoutY="573.0" onMouseClicked="#clickOnHotelTorredeCali" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1662.0" layoutY="548.0" text="14">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="2383.0" layoutY="566.0" text="9">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="2081.0" layoutY="603.0" text="1">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="2059.0" layoutY="402.0" text="23">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1746.0" layoutY="449.0" text="21">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1663.0" layoutY="431.0" text="40">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="miradortrescrucesV" fill="DODGERBLUE" layoutX="1496.0" layoutY="470.0" onMouseClicked="#clickOnMiradorTresCruces" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1490.0" layoutY="441.0" text="19">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="jairoVarelaV" fill="DODGERBLUE" layoutX="1463.0" layoutY="615.0" onMouseClicked="#clickOnJairoVarela" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="camV" fill="DODGERBLUE" layoutX="1490.0" layoutY="634.0" onMouseClicked="#clickOnCam" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1486.0" layoutY="610.0" text="4">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label layoutX="1458.0" layoutY="593.0" text="32">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Circle fx:id="iglesiaSanAntonioV" fill="DODGERBLUE" layoutX="1330.0" layoutY="706.0" onMouseClicked="#clickOnSanAntonio" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1323.0" layoutY="682.0" text="16">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="1000.0" layoutY="357.0" prefHeight="743.0" prefWidth="700.0">
+         <children>
+            <TableView fx:id="PlacesTable" layoutX="18.0" layoutY="163.0" onMouseClicked="#clickOnPlace" prefHeight="220.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="Fr" prefWidth="199.0" text="Places To Choose" />
+              </columns>
+            </TableView>
+            <Button layoutX="234.0" layoutY="361.0" mnemonicParsing="false" onAction="#showRoute" text="Show Route">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="14.0" layoutY="404.0" text="From Place Selected:">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="488.0" prefHeight="44.0" prefWidth="137.0" text="To Place Selected:">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="fromplacelabel" layoutX="14.0" layoutY="430.0" prefHeight="58.0" prefWidth="297.0" text="From Place selected">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="toplacelabel" layoutX="14.0" layoutY="532.0" prefHeight="72.0" prefWidth="471.0" text="To Place Selected">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <Button layoutX="239.0" layoutY="262.0" mnemonicParsing="false" onAction="#switchPlace" text="Switch">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Button>
+            <ComboBox fx:id="searchOptionComboBox" layoutX="28.0" layoutY="66.0" onAction="#searchOption" prefWidth="150.0" />
+            <Label fx:id="youcanlabel" layoutX="213.0" layoutY="107.0" prefHeight="14.0" prefWidth="274.0" text="You can go with that limit">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="restrictionComboBox" layoutX="225.0" layoutY="66.0" onAction="#restrictionOption" prefWidth="150.0" />
+            <Label fx:id="restrictionOptionLabel" layoutX="234.0" layoutY="52.0" text="Restriction Option">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="limittxt" layoutX="29.0" layoutY="121.0" />
+            <Label fx:id="limitlabel" layoutX="68.0" layoutY="107.0" text="Limit">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="39.0" layoutY="52.0" text="Search Option">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="youcantlabel" layoutX="212.0" layoutY="129.0" prefHeight="34.0" prefWidth="203.0" text="You can't go with that limit">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+            <ColorPicker fx:id="routecolor" layoutX="314.0" layoutY="185.0" prefHeight="25.0" prefWidth="95.0" />
+            <Label layoutX="231.0" layoutY="190.0" prefHeight="14.0" prefWidth="95.0" text="Route color">
+               <font>
+                  <Font name="OCR A Extended" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

@@ -340,7 +340,7 @@ public class Graph {
 	 * @return a matrix showing the route.
 	 */
 	public int[][] primForTime(){
-		initializePrimRoutes();
+		resetPrimRoutes();
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
 		for (String v : vertices.keySet()) {
 			vertices.get(v).setColor("White");
@@ -367,9 +367,12 @@ public class Graph {
 		}
 		return m;
 	}
-
+	/**
+	 * This method passes by all the vertices, using the most cheap edges in cost terms.
+	 * @return a matrix showing the route.
+	 */
 	public int[][] primForCost(){
-		initializePrimRoutes();
+		resetPrimRoutes();
 		PriorityQueue<Vertex> q = new PriorityQueue<>();
 		for (String v : vertices.keySet()) {
 			vertices.get(v).setColor("White");
@@ -396,7 +399,11 @@ public class Graph {
 		}	
 		return m;
 	}
-
+	/**
+	 * This method obtains the times summary for use all the edges 
+	 * @param route indicating the edges used
+	 * @return the time total value
+	 */
 	public int minimumTimePrim(int [][] route) {
 		int minimumTime = 0;
 		for (ArrayList<ArrayList<Edge>> row : primRoutes) {
@@ -408,7 +415,11 @@ public class Graph {
 		}
 		return minimumTime;
 	}
-
+	/**
+	 * This method obtains the price to transit through the indicated route, considering the transport enabled
+	 * @param route indicating the edges used
+	 * @return the price to transit through
+	 */
 	public int priceToPayPrim(int [][] route) {
 		int totalPrice = 0, i = 0;
 		boolean mioTaked = false, minimumPaid = false;
@@ -555,7 +566,9 @@ public class Graph {
 			}
 		}
 	}
-
+	/**
+	 * This method create a matrix with ArrayList of the edges used for traveling through a couple of vertices
+	 */
 	public void initializeRoutes() {
 		for (int i = 0; i < vertices.size(); i++) {	
 			routes.add(new ArrayList<ArrayList<Edge>>());	
@@ -566,6 +579,9 @@ public class Graph {
 			}
 		}
 	}
+	/**
+	 * This method create a matrix with ArrayList of the edges used for traveling using Prim algorithm 
+	 */
 	public void initializePrimRoutes() {
 		for (int i = 0; i < vertices.size(); i++) {	
 			primRoutes.add(new ArrayList<ArrayList<Edge>>());	
@@ -624,24 +640,33 @@ public class Graph {
 		name = verticesv2.get(indicatorToFind).getName();
 		return name;
 	}
-
+	/**
+	 * This method resets the mark of the edge which indicates if was used in the travel or not
+	 */
 	public void resetEdgesMark() {
 		for (Integer v: edges.keySet()) {	
 			edges.get(v).setUseThisWay(false);
 		}
 	}
-
-
+	/**
+	 * This method resets the routes matrix for prim algorithm 
+	 */
+	public void resetPrimRoutes() {
+		for (ArrayList<ArrayList<Edge>> row : primRoutes) {
+			for (ArrayList<Edge> column : row) {
+				column.removeAll(column);
+			}
+		}
+	}
 	/**
 	 * This method search the vertex by the vertex name
 	 * @param name String as vertex name
 	 * @return Vertex as the vertex found on vertices hashmap
 	 */
-
 	public Vertex searchVertex(String name) {
 		return vertices.get(name);
 	}
-
+	
 	public HashMap<Integer, Edge> getEdges() {
 		return edges;
 	}

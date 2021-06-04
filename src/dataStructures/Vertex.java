@@ -11,6 +11,11 @@ public class Vertex implements Comparable<Vertex>{
 	private ArrayList<Vertex> neighbours;
 	private ArrayList<Edge> edges;
 
+	/**
+	 * Vertex constructor
+	 * @param name of the vertex
+	 * @param indicator to control the vertex's adding order 
+	 */
 	public Vertex(String name, int indicator) {
 		this.name = name;
 		this.indicator = indicator;
@@ -18,7 +23,12 @@ public class Vertex implements Comparable<Vertex>{
 		neighbours = new ArrayList<>();
 		edges = new ArrayList<>();
 	}
-	//tested
+	/**
+	 * This method find a edge in vertex's edges ArrayList 
+	 * @param v1 Vertex connected by the edge
+	 * @param v2 Vertex connected by the edge
+	 * @return the edge
+	 */
 	public Edge searchEdge(Vertex v1, Vertex v2) {
 		Edge e = null;
 		for (int i = 0; i < edges.size(); i++) {
@@ -29,18 +39,11 @@ public class Vertex implements Comparable<Vertex>{
 		}
 		return e;
 	}
-	//tested
-	//	public Edge searchEdgeName(String v1, String v2) {
-	//		Edge e = null;
-	//		for (int i = 0; i < edges.size(); i++) {
-	//			if ((edges.get(i).getV1().getName().equals(v1) && edges.get(i).getV2().getName().equals(v2)) ||
-	//					(edges.get(i).getV1().getName().equals(v2) && edges.get(i).getV2().getName().equals(v1))){
-	//				e = edges.get(i);
-	//			}
-	//		}
-	//		return e;
-	//	}
-
+	/**
+	 * This method add a vertex to the vertex's adjacency list 
+	 * @param v the vertex
+	 * @return if was added or not
+	 */
 	public boolean addNeighbour(Vertex v) {
 		if (v == this) {
             return false;
@@ -48,7 +51,13 @@ public class Vertex implements Comparable<Vertex>{
         else
             return (!neighbours.contains(v)) ? neighbours.add(v) : false;
 	}
-	//tested
+	/**
+	 * This method use the methods above to create connections among vertices
+	 * @param v1 Vertex to create relations
+	 * @param v2 Vertex to create relations
+	 * @param e Edge between vertices
+	 * @return if the process was done or not
+	 */
 	public boolean addConnection(Vertex v1, Vertex v2, Edge e) {
 		if (v1.equals(v2)) {
 			return false;

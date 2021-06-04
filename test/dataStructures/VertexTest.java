@@ -26,13 +26,6 @@ public class VertexTest {
 		assertEquals(18, tg.getCali().getVertices().get("El Bochinche").searchEdge(tg.getCali().getVertices().get("El Bochinche"), tg.getCali().getVertices().get("Torre de Cali")).getTime(), "Fail test");	
 	}
 	
-//	@Test
-//	public void testSearchEdgeName() throws EmptyQueueException {
-//		setupScenary1();
-//		tg.initialize();	
-//		assertEquals(18, tg.getCali().getVertices().get("El Bochinche").searchEdgeName("El Bochinche", "Torre de Cali").getTime(), "Fail test");	
-//	}
-	
 	@Test
 	public void testAddNeighbour() {
 		setupScenary1();

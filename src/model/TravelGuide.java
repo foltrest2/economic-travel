@@ -13,8 +13,6 @@ import exceptions.EmptyQueueException;
 public class TravelGuide {
 
 	private final static String SEPARATOR = ",";
-//	public final static String SAVE_PATH_FILE = "data/TestData.csv"; 
-//	public final static String SAVE_PATH_FILE = "data/TestDataV2.csv"; 
 	public final static String SAVE_PATH_FILE = "data/CaliGraphMap.csv";
 	public final static String SAVE_PATH_FILE_TEST = "data/TestDataV2.csv";
 
@@ -77,15 +75,6 @@ public class TravelGuide {
 			}
 		}
 		br.close();
-	}
-	public void prim() {
-		int [][] m = cali.primForTime();
-		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m.length; j++) {
-				System.out.print(m[i][j] + " ");
-			}
-			System.out.println();
-		}
 	}
 	/**
 	 * This method returns a String with the best times route between a path due indicator
